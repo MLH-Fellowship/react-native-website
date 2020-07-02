@@ -58,8 +58,8 @@ function generateProp(propName, prop) {
     {
       Type: prop.flowType ? maybeLinkifyType(prop.flowType) : '',
       Required: prop.required ? 'Yes' : 'No',
-      ...(prop.rnTags && prop.rnTags.platform
-        ? {Platform: formatPlatformName(prop.rnTags.platform)}
+      ...(prop.rnTags && prop.rnTags.default
+        ? {Default: prop.rnTags.default}
         : {}),
     },
   ]);
@@ -68,6 +68,9 @@ function generateProp(propName, prop) {
     '### `' +
     propName +
     '`' +
+    (prop.rnTags && prop.rnTags.platform
+      ? formatPlatformName(prop.rnTags.platform)
+      : '') +
     '\n' +
     '\n' +
     (prop.description ? prop.description + '\n\n' : '') +

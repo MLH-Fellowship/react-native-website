@@ -12,7 +12,8 @@
 const fs = require('fs-extra');
 const glob = require('glob');
 const path = require('path');
-const reactDocs = require('@motiz88/react-native-docgen');
+// const reactDocs = require('@motiz88/react-native-docgen');
+const reactDocs = require('../../../../react-docgen'); //TODO
 
 const GENERATE_ANNOTATION = '@' + 'generate-docs';
 

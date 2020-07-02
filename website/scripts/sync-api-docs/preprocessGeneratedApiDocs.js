@@ -11,7 +11,8 @@
 // This file may end up in the React Native repo, as part of the
 // `generate-api-docs` script.
 
-const tokenizeComment = require('tokenize-comment');
+// const tokenizeComment = require('tokenize-comment');
+const tokenizeComment = require('../../../../../jonschlinkert/tokenize-comment'); //TODO
 
 function joinDescriptionAndExamples(tokenized) {
   let sections = [];
@@ -37,6 +38,13 @@ function preprocessTagsInDescription(obj) {
     );
     if (platformTag) {
       obj.rnTags.platform = platformTag.value;
+    }
+
+    const defaultTag = descriptionTokenized.tags.find(
+      ({key}) => key === 'default'
+    );
+    if (defaultTag) {
+      obj.rnTags.default = defaultTag.value;
     }
   }
 }
