@@ -3,7 +3,9 @@ id: activityindicator
 title: ActivityIndicator
 ---
 
-Displays a circular loading indicator.
+---
+
+# Reference
 
 ## Example
 
@@ -84,9 +86,83 @@ export default App;
 
 <block class="endBlock syntax" />
 
-# Reference
+### `accessibilityElementsHidden`
 
-## Props
+A value indicating whether the accessibility elements contained within this accessibility element are hidden.
+
+| Type      | Required | Platform |
+| --------- | -------- | -------- |
+| `boolean` | No       | ios      |
+
+See http://facebook.github.io/react-native/docs/view.html#accessibilityElementsHidden |
+
+---
+
+### `accessibilityHint`
+
+An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
+
+See http://facebook.github.io/react-native/docs/view.html#accessibilityHint
+
+| Type        | Required |
+| ----------- | -------- |
+| `Stringish` | No       |
+
+---
+
+### `accessibilityIgnoresInvertColors`
+
+Prevents view from being inverted if set to true and color inversion is turned on.
+
+| Type      | Required | Platform |
+| --------- | -------- | -------- |
+| `boolean` | No       | iOS      |
+
+---
+
+### `accessibilityLabel`
+
+Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
+
+See http://facebook.github.io/react-native/docs/view.html#accessibilitylabel
+
+| Type        | Required |
+| ----------- | -------- |
+| `Stringish` | No       |
+
+---
+
+### `accessibilityLiveRegion`
+
+Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only.
+
+| Type                                                                                 | Required | Platform |
+| ------------------------------------------------------------------------------------ | -------- | -------- |
+| <code>&#x27;none&#x27; &#124; &#x27;polite&#x27; &#124; &#x27;assertive&#x27;</code> | No       | android  |
+
+See http://facebook.github.io/react-native/docs/view.html#accessibilityliveregion |
+
+---
+
+### `accessibilityRole`
+
+Indicates to accessibility services to treat UI component like a specific role.
+
+| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Required |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| <code>&#124; &#x27;none&#x27; &#124; &#x27;button&#x27; &#124; &#x27;link&#x27; &#124; &#x27;search&#x27; &#124; &#x27;image&#x27; &#124; &#x27;keyboardkey&#x27; &#124; &#x27;text&#x27; &#124; &#x27;adjustable&#x27; &#124; &#x27;imagebutton&#x27; &#124; &#x27;header&#x27; &#124; &#x27;summary&#x27; &#124; &#x27;alert&#x27; &#124; &#x27;checkbox&#x27; &#124; &#x27;combobox&#x27; &#124; &#x27;menu&#x27; &#124; &#x27;menubar&#x27; &#124; &#x27;menuitem&#x27; &#124; &#x27;progressbar&#x27; &#124; &#x27;radio&#x27; &#124; &#x27;radiogroup&#x27; &#124; &#x27;scrollbar&#x27; &#124; &#x27;spinbutton&#x27; &#124; &#x27;switch&#x27; &#124; &#x27;tab&#x27; &#124; &#x27;tablist&#x27; &#124; &#x27;timer&#x27; &#124; &#x27;toolbar&#x27;</code> | No       |
+
+---
+
+### `accessibilityState`
+
+Indicates to accessibility services that UI Component is in a specific State.
+
+| Type                                                                                                                                          | Required |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| <code>{ disabled?: boolean, selected?: boolean, checked?: ?boolean &#124; &#x27;mixed&#x27;, busy?: boolean, expanded?: boolean, ... }</code> | No       |
+
+---
 
 Inherits [View Props](view#props).
 
@@ -122,7 +198,7 @@ Whether the indicator should hide when not animating.
 
 ---
 
-### `size`
+### `hitSlop`
 
 Size of the indicator.
 
