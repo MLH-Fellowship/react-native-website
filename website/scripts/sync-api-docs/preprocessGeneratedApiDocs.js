@@ -40,6 +40,7 @@ function preprocessTagsInDescription(obj) {
     const defaultTag = descriptionTokenized.tags.find(
       ({key}) => key === 'default'
     );
+    
     if (platformTag) {
       obj.rnTags.platform = platformTag.value;
     }
