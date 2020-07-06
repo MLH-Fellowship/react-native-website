@@ -20,13 +20,12 @@ function formatPlatformName(platform) {
 }
 
 function formatDefaultPlatformProp(defaultProps) {
-  // console.log("formatDefaultPlatformProp -> defaultProps",defaultProps)
-
-  const platformDefaultProps = JSON.parse(defaultProps);
-  console.log(
-    'formatDefaultPlatformProp -> platformDefaultProps',
-    platformDefaultProps
-  );
+  const platformDefaultProps = Object.entries(JSON.parse(defaultProps));
+  const formattedProps = [];
+  for (const [platform, value] of platformDefaultProps) {
+    formattedProps.push('`' + value + '`' + formatPlatformName(platform));
+  }
+  return formattedProps;
 }
 
 module.exports = {

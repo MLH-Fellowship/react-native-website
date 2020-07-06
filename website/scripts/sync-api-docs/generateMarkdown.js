@@ -60,7 +60,7 @@ function generateProp(propName, prop) {
       Type: prop.flowType ? maybeLinkifyType(prop.flowType) : '',
       Required: prop.required ? 'Yes' : 'No',
       Default: prop.defaultValue.value.includes('Platform.OS')
-        ? formatDefaultPlatformProp(prop.rnTags.default)
+        ? formatDefaultPlatformProp(prop.rnTags.default).map(item => item)
         : '`' + prop.defaultValue.value + '`',
     },
   ]);
