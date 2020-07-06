@@ -12,6 +12,7 @@
 // `generate-api-docs` script.
 
 const tokenizeComment = require('tokenize-comment');
+const {typeOf} = require('tokenize-comment/lib/utils');
 
 function joinDescriptionAndExamples(tokenized) {
   let sections = [];
@@ -29,14 +30,21 @@ function joinDescriptionAndExamples(tokenized) {
 
 function preprocessTagsInDescription(obj) {
   if (obj && obj.description) {
+    obj.description = obj.description.split('    ').join('');
     const descriptionTokenized = tokenizeComment(obj.description);
     obj.description = joinDescriptionAndExamples(descriptionTokenized);
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'
     );
+    const defaultTag = descriptionTokenized.tags.find(
+      ({key}) => key === 'default'
+    );
     if (platformTag) {
       obj.rnTags.platform = platformTag.value;
+    }
+    if (defaultTag) {
+      obj.rnTags.default = defaultTag.value;
     }
   }
 }

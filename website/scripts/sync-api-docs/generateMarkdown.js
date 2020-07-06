@@ -7,7 +7,7 @@
 
 const he = require('he');
 const magic = require('./magic');
-const {formatPlatformName} = require('./platforms');
+const {formatPlatformName, formatDefaultPlatformProp} = require('./formatProp');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -54,13 +54,14 @@ function stringToInlineCodeForTable(str) {
 
 // Formats information about a prop
 function generateProp(propName, prop) {
+  // console.log(propName, prop);
   const infoTable = generateTable([
     {
       Type: prop.flowType ? maybeLinkifyType(prop.flowType) : '',
       Required: prop.required ? 'Yes' : 'No',
-      ...(prop.rnTags && prop.rnTags.platform
-        ? {Platform: formatPlatformName(prop.rnTags.platform)}
-        : {}),
+      Default: prop.defaultValue.value.includes('Platform.OS')
+        ? formatDefaultPlatformProp(prop.rnTags.default)
+        : '`' + prop.defaultValue.value + '`',
     },
   ]);
 
@@ -68,6 +69,9 @@ function generateProp(propName, prop) {
     '### `' +
     propName +
     '`' +
+    (prop.rnTags && prop.rnTags.platform
+      ? formatPlatformName(prop.rnTags.platform)
+      : '') +
     '\n' +
     '\n' +
     (prop.description ? prop.description + '\n\n' : '') +
