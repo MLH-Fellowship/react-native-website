@@ -30,7 +30,9 @@ function joinDescriptionAndExamples(tokenized) {
 function preprocessTagsInDescription(obj) {
   if (obj && obj.description) {
     obj.description = obj.description.split('    ').join('');
+    // console.log("preprocessTagsInDescription -> obj.description", obj.description)
     const descriptionTokenized = tokenizeComment(obj.description);
+    // console.log("preprocessTagsInDescription -> obj.description", descriptionTokenized)
     obj.description = joinDescriptionAndExamples(descriptionTokenized);
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
@@ -40,11 +42,25 @@ function preprocessTagsInDescription(obj) {
       ({key}) => key === 'default'
     );
 
+    let typeTag = descriptionTokenized.tags.filter(tag => {
+      return tag.key === 'type';
+    });
+    // let typeTag = descriptionTokenized.tags.find(
+    //   ({key}) => key === 'type'
+    // );
+    // console.log("preprocessTagsInDescription -> typeTag", typeTag)
+
     if (platformTag) {
       obj.rnTags.platform = platformTag.value;
     }
     if (defaultTag) {
       obj.rnTags.default = defaultTag.value;
+    }
+    if (typeTag.length) {
+      obj.rnTags.type = [];
+      typeTag.forEach(tag => {
+        obj.rnTags.type.push(tag.value);
+      });
     }
   }
 }
