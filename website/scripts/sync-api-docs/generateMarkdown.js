@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const he = require('he');
-const magic = require('./magic');
-const {formatPlatformName, formatDefaultPlatformProp} = require('./formatProp');
+const {
+  formatPlatformName,
+  formatDefaultPlatformProp,
+  formatTypePlatformProp,
+  maybeLinkifyType,
+  maybeLinkifyTypeName,
+} = require('./propFormatter');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -41,26 +45,15 @@ function generateTable(rows) {
   return result;
 }
 
-// Wraps a string in an inline code block in a way that is safe to include in a
-// table cell, by wrapping it as HTML <code> if necessary.
-function stringToInlineCodeForTable(str) {
-  let useHtml = /[`|]/.test(str);
-  str = str.replace(/\n/g, ' ');
-  if (useHtml) {
-    return '<code>' + he.encode(str).replace(/\|/g, '&#124;') + '</code>';
-  }
-  return '`' + str + '`';
-}
-
 // Formats information about a prop
 function generateProp(propName, prop) {
   // console.log(propName, prop);
   const infoTable = generateTable([
     {
-      Type: prop.flowType ? maybeLinkifyType(prop.flowType) : '',
+      Type: formatTypePlatformProp(prop, prop.rnTags.type),
       Required: prop.required ? 'Yes' : 'No',
       Default: prop.defaultValue.value.includes('Platform.OS')
-        ? formatDefaultPlatformProp(prop.rnTags.default).map(item => item)
+        ? formatTypePlatformProp(prop, prop.rnTags.default)
         : '`' + prop.defaultValue.value + '`',
     },
   ]);
@@ -138,34 +131,6 @@ function generateMethodSignatureTable(method, component) {
       }))
     )
   );
-}
-
-function maybeLinkifyType(flowType) {
-  let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, flowType.name)) {
-    ({url, text} = magic.linkableTypeAliases[flowType.name]);
-  }
-  if (!text) {
-    text = stringToInlineCodeForTable(flowType.raw || flowType.name);
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
-}
-
-function maybeLinkifyTypeName(name) {
-  let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, name)) {
-    ({url, text} = magic.linkableTypeAliases[name]);
-  }
-  if (!text) {
-    text = stringToInlineCodeForTable(name);
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
 }
 
 // Formats information about props

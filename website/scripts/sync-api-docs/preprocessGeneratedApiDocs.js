@@ -37,15 +37,25 @@ function preprocessTagsInDescription(obj) {
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'
     );
-    const defaultTag = descriptionTokenized.tags.find(
-      ({key}) => key === 'default'
+    const defaultTag = descriptionTokenized.tags.filter(
+      tag => tag.key === 'default'
     );
-    
+    const typeTag = descriptionTokenized.tags.filter(tag => tag.key === 'type');
+
     if (platformTag) {
       obj.rnTags.platform = platformTag.value;
     }
-    if (defaultTag) {
-      obj.rnTags.default = defaultTag.value;
+    if (defaultTag.length) {
+      obj.rnTags.default = [];
+      defaultTag.forEach(tag => {
+        obj.rnTags.default.push(tag.value);
+      });
+    }
+    if (typeTag.length) {
+      obj.rnTags.type = [];
+      typeTag.forEach(tag => {
+        obj.rnTags.type.push(tag.value);
+      });
     }
   }
 }
