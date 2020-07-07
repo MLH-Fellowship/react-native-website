@@ -17,6 +17,8 @@ function formatPlatformName(platform) {
       return '<div class="label ios">' + 'iOS' + '</div>';
     case 'android':
       return '<div class="label android">' + 'Android' + '</div>';
+    case 'tv':
+      return '<div class="label tv">' + 'TV' + '</div>';
   }
   return platform;
 }
@@ -30,10 +32,10 @@ function formatDefaultPlatformProp(defaultProps, propName) {
   return formattedProps;
 }
 
-// Generates rows for type prop
-function formatTypePlatformProp(prop, item) {
+// Generates rows for different platform dependent prop
+function formatMultiPlatformProp(propName, prop, item) {
   let tableRows = '';
-
+  // console.log(propName)
   if (prop.rnTags && item) {
     if (item.length) {
       item.forEach(tag => {
@@ -41,7 +43,11 @@ function formatTypePlatformProp(prop, item) {
         if (isMatch) {
           const platform = isMatch[0].match(/ [a-z]*/);
           tag = tag.replace(/{@platform [a-z]*}/g, '');
-          tag = tag + formatPlatformName(platform[0].trim());
+          const colorBlock =
+            propName === 'color' && prop.rnTags.default && !tag.includes('null')
+              ? '<ins style="background:' + tag + '" class="color-box"></ins>'
+              : '';
+          tag = tag + colorBlock + formatPlatformName(platform[0].trim());
         }
         tableRows = tableRows + tag + '<hr/>';
       });
@@ -97,7 +103,7 @@ function maybeLinkifyTypeName(name) {
 module.exports = {
   formatPlatformName,
   formatDefaultPlatformProp,
-  formatTypePlatformProp,
+  formatMultiPlatformProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
 };

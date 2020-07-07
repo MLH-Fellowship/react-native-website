@@ -8,7 +8,7 @@
 const {
   formatPlatformName,
   formatDefaultPlatformProp,
-  formatTypePlatformProp,
+  formatMultiPlatformProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
 } = require('./propFormatter');
@@ -50,11 +50,16 @@ function generateProp(propName, prop) {
   // console.log(propName, prop);
   const infoTable = generateTable([
     {
-      Type: formatTypePlatformProp(prop, prop.rnTags.type),
+      Type:
+        prop.rnTags && prop.rnTags.type
+          ? formatMultiPlatformProp(propName, prop, prop.rnTags.type)
+          : maybeLinkifyType(prop.flowType),
       Required: prop.required ? 'Yes' : 'No',
-      Default: prop.defaultValue.value.includes('Platform.OS')
-        ? formatTypePlatformProp(prop, prop.rnTags.default)
-        : '`' + prop.defaultValue.value + '`',
+      Default: prop.defaultValue
+        ? prop.defaultValue.value.includes('Platform.OS')
+          ? formatMultiPlatformProp(propName, prop, prop.rnTags.default)
+          : '`' + prop.defaultValue.value + '`'
+        : '',
     },
   ]);
 
