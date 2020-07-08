@@ -54,12 +54,37 @@ function stringToInlineCodeForTable(str) {
 
 // Formats information about a prop
 function generateProp(propName, prop) {
+  let tableRows = '';
+
+  if (prop.rnTags && prop.rnTags.type) {
+    if (prop.rnTags.type.length) {
+      prop.rnTags.type.forEach(tag => {
+        const isMatch = tag.match(/{@platform [a-z]*}/);
+        if (isMatch) {
+          const platform = isMatch[0].match(/ [a-z]*/);
+          tag = tag.replace(/{@platform [a-z]*}/g, '');
+          tag =
+            tag +
+            '<div class="label ' +
+            platform[0].trim() +
+            '">' +
+            platform[0].trim() +
+            '</div>';
+        }
+        tableRows = tableRows + tag + '<hr/>';
+      });
+      tableRows = tableRows.replace(/<hr\/>$/, '');
+    } else {
+      tableRows = prop.rnTags.type.join('<hr/>');
+    }
+  } else tableRows = prop.flowType ? maybeLinkifyType(prop.flowType) : '';
+
   const infoTable = generateTable([
     {
-      Type: prop.flowType ? maybeLinkifyType(prop.flowType) : '',
+      Type: tableRows,
       Required: prop.required ? 'Yes' : 'No',
-      ...(prop.rnTags && prop.rnTags.platform
-        ? {Platform: formatPlatformName(prop.rnTags.platform)}
+      ...(prop.rnTags && prop.rnTags.default
+        ? {Default: prop.rnTags.default}
         : {}),
     },
   ]);
@@ -68,6 +93,9 @@ function generateProp(propName, prop) {
     '### `' +
     propName +
     '`' +
+    (prop.rnTags && prop.rnTags.platform
+      ? formatPlatformName(prop.rnTags.platform)
+      : '') +
     '\n' +
     '\n' +
     (prop.description ? prop.description + '\n\n' : '') +
