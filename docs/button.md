@@ -5,7 +5,10 @@ title: Button
 
 A basic button component that should render nicely on any platform. Supports a minimal level of customization.
 
-If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component](https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js). Or, take a look at the [wide variety of button components built by the community](https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button).
+If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component][button:source]. Or, take a look at the [wide variety of button components built by the community][button:examples].
+
+[button:source]: https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js
+[button:examples]: https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button
 
 ```jsx
 <Button
@@ -15,8 +18,6 @@ If this button doesn't look right for your app, you can build your own button us
   accessibilityLabel="Learn more about this purple button"
 />
 ```
-
-## Example
 
 ```SnackPlayer name=Button%20Example
 import React from 'react';
@@ -108,113 +109,113 @@ export default App;
 
 ## Props
 
-### **`onPress`**
+### `accessibilityLabel`
 
-Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
+Text to display for blindness accessibility features.
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `string` | No       |         |
 
 ---
 
-### **`title`**
+### `color`
 
-Text to display inside the button. On Android the given title will be converted to the uppercased form.
+Color of the text (iOS), or background color of the button (Android).
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type                                                    | Required | Default |
+| ------------------------------------------------------- | -------- | ------- |
+| <code>null &#124; string &#124; NativeColorValue</code> | No       |         |
 
 ---
 
 ### `disabled`
 
-Text to display for blindness accessibility features.
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
-
----
-
-### `hasTVPreferredFocus`
-
-Color of the text (iOS), or background color of the button (Android).
-
-| Type            | Required | Default                                                                                                                                                                                                                 |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors) | No       | <ins style="background: #2196F3" class="color-box"></ins>`'#2196F3'` <div class="label android">Android</div><hr/><ins style="background: #007AFF" class="color-box"></ins>`'#007AFF'` <div class="label ios">iOS</div> |
-
----
-
-### `nextFocusDown`
-
 If `true`, disable all interactions for this component.
 
-| Type | Required | Default |
-| ---- | -------- | ------- |
-| bool | No       | `false` |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       |         |
 
 ---
 
-### `hasTVPreferredFocus` <div class="label tv">TV</div>
+### `hasTVPreferredFocus`<div class="label tv">TV</div>
 
 TV preferred focus.
 
-| Type | Required | Default |
-| ---- | -------- | ------- |
-| bool | No       | `false` |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       |         |
 
 ---
 
-### `nextFocusDown` <div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusDown`android, tv
 
-### `nextFocusRight`
+Designates the next view to receive focus when the user navigates down. See the [Android documentation][android:nextfocusdown].
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+[android:nextfocusdown]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown
 
----
-
-### `nextFocusForward` <div class="label android">Android</div><div class="label tv">TV</div>
-
-TV next focus up (see documentation for the View component).
-
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `number` | No       |         |
 
 ---
 
-### `nextFocusLeft` <div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusForward`android, tv
 
-Handler to be called when the user taps the button
+Designates the next view to receive focus when the user navigates forward. See the [Android documentation][android:nextfocusforward].
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+[android:nextfocusforward]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward
 
----
-
-### `nextFocusRight` <div class="label android">Android</div><div class="label tv">TV</div>
-
-Used to locate this view in end-to-end tests.
-
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `number` | No       |         |
 
 ---
 
-### `nextFocusUp` <div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusLeft`android, tv
 
-Text to display inside the button
+Designates the next view to receive focus when the user navigates left. See the [Android documentation][android:nextfocusleft].
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+[android:nextfocusleft]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft
+
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `number` | No       |         |
+
+---
+
+### `nextFocusRight`android, tv
+
+Designates the next view to receive focus when the user navigates right. See the [Android documentation][android:nextfocusright].
+
+[android:nextfocusright]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight
+
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `number` | No       |         |
+
+---
+
+### `nextFocusUp`android, tv
+
+Designates the next view to receive focus when the user navigates up. See the [Android documentation][android:nextfocusup].
+
+[android:nextfocusup]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp
+
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `number` | No       |         |
+
+---
+
+### `onPress`
+
+Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
+
+| Type                            | Required | Default |
+| ------------------------------- | -------- | ------- |
+| `(event?: PressEvent) => mixed` | Yes      |         |
 
 ---
 
@@ -222,16 +223,26 @@ Text to display inside the button
 
 Used to locate this view in end-to-end tests.
 
-| Type   | Required |
-| ------ | -------- |
-| string | No       |
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `string` | No       |         |
 
 ---
 
-### `touchSoundDisabled` <div class="label android">Android</div>
+### `title`
+
+Text to display inside the button. On Android the given title will be converted to the uppercased form.
+
+| Type     | Required | Default |
+| -------- | -------- | ------- |
+| `string` | Yes      |         |
+
+---
+
+### `touchSoundDisabled`<div class="label android">Android</div>
 
 If `true`, doesn't play system sound on touch.
 
-| Type    | Required | Default |
-| ------- | -------- | ------- |
-| boolean | No       | `false` |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       |         |

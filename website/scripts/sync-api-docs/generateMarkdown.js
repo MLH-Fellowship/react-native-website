@@ -206,19 +206,27 @@ function preprocessDescription(desc) {
     </ul>
   </div>`;
 
+  //Blocks for different syntax sections
   const functionalBlock = `<block class='functional syntax' />`;
   const classBlock = `<block class='classical syntax' />`;
   const endBlock = `<block class='endBlock syntax' />`;
 
   const descriptionTokenized = tokenizeComment(desc);
-
-  if (descriptionTokenized.examples.length > 0) {
+  // Tabs counter for examples
+  let tabs = 0;
+  descriptionTokenized.examples.map(item =>
+    item.language.includes('SnackPlayer') ? tabs++ : tabs
+  );
+  if (descriptionTokenized.examples.length > 0 && tabs === 2) {
     const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
       descriptionTokenized.examples[0].raw
     }\n\n${classBlock}\n\n${
       descriptionTokenized.examples[1].raw
     }\n\n${endBlock}`;
-    return wrapper;
+    return descriptionTokenized.description + wrapper;
+  }
+  if (descriptionTokenized.examples.length > 0 && tabs === 1) {
+    return desc;
   } else {
     return descriptionTokenized.description;
   }

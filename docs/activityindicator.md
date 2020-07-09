@@ -3,15 +3,8 @@ id: activityindicator
 title: ActivityIndicator
 ---
 
-<div class="toggler">
-    <ul role="tablist" class="toggle-syntax">
-      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-        Function Component Example
-      </li>
-      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-        Class Component Example
-      </li>
-    </ul>
+Displays a circular loading indicator.<div class="toggler"> <ul role="tablist" class="toggle-syntax"> <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')"> Function Component Example </li> <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')"> Class Component Example </li> </ul>
+
   </div>
 
 <block class='functional syntax' />
@@ -106,7 +99,7 @@ The foreground color of the spinner.
 
 ### `hidesWhenStopped`<div class="label ios">iOS</div>
 
-whether the indicator should hide when not animating.
+Whether the indicator should hide when not animating.
 
 | Type      | Required | Default |
 | --------- | -------- | ------- |
