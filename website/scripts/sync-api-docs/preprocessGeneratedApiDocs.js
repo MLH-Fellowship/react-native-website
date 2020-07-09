@@ -12,6 +12,7 @@
 // `generate-api-docs` script.
 
 const tokenizeComment = require('tokenize-comment');
+const {typeOf} = require('tokenize-comment/lib/utils');
 
 function joinDescriptionAndExamples(tokenized) {
   let sections = [];
@@ -32,23 +33,23 @@ function preprocessTagsInDescription(obj) {
     obj.description = obj.description.split('    ').join('');
     const descriptionTokenized = tokenizeComment(obj.description);
     obj.description = joinDescriptionAndExamples(descriptionTokenized);
-
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'
     );
-    const defaultTag = descriptionTokenized.tags.find(
-      ({key}) => key === 'default'
+    const defaultTag = descriptionTokenized.tags.filter(
+      tag => tag.key === 'default'
     );
-    const typeTag = descriptionTokenized.tags.filter(tag => {
-      return tag.key === 'type';
-    });
+    const typeTag = descriptionTokenized.tags.filter(tag => tag.key === 'type');
 
     if (platformTag) {
-      obj.rnTags.platform = platformTag.value;
+      obj.rnTags.platform = platformTag.value.split(',');
     }
-    if (defaultTag) {
-      obj.rnTags.default = defaultTag.value;
+    if (defaultTag.length) {
+      obj.rnTags.default = [];
+      defaultTag.forEach(tag => {
+        obj.rnTags.default.push(tag.value);
+      });
     }
     if (typeTag.length) {
       obj.rnTags.type = [];
@@ -62,7 +63,7 @@ function preprocessTagsInDescription(obj) {
 // NOTE: This function mutates `docs`.
 function preprocessGeneratedApiDocs(docs) {
   for (const {component} of docs) {
-    if (component.props) {
+    if (component.props && component.description) {
       for (const prop of Object.values(component.props)) {
         preprocessTagsInDescription(prop);
       }

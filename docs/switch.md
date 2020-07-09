@@ -7,40 +7,6 @@ A visual toggle between two mutually exclusive states.
 
 This is a controlled component that requires an `onValueChange` callback that updates the `value` prop in order for the component to reflect user actions. If the `value` prop is not updated, the component will continue to render the supplied `value` prop instead of the expected result of any user actions.
 
-## Example
-
-```SnackPlayer name=Switch
-import React, { useState } from "react";
-import { View, Switch, StyleSheet } from "react-native";
-
-const App = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
-  return (
-    <View style={styles.container}>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
-
-export default App;
-```
-
 ---
 
 # Reference
@@ -57,15 +23,15 @@ Provides an array of custom actions available for accessibility.
 
 ---
 
-### `accessibilityElementsHidden`
+### `accessibilityElementsHidden`ios
+
+See https://reactnative.dev/docs/view.html#accessibilityElementsHidden
 
 A value indicating whether the accessibility elements contained within this accessibility element are hidden.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
-
-See http://facebook.github.io/react-native/docs/view.html#accessibilityElementsHidden |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -73,7 +39,7 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityElementsH
 
 An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilityHint
+See https://reactnative.dev/docs/view.html#accessibilityHint
 
 | Type        | Required |
 | ----------- | -------- |
@@ -81,13 +47,13 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityHint
 
 ---
 
-### `accessibilityIgnoresInvertColors`
+### `accessibilityIgnoresInvertColors`iOS
 
 Prevents view from being inverted if set to true and color inversion is turned on.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | iOS      |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -95,7 +61,7 @@ Prevents view from being inverted if set to true and color inversion is turned o
 
 Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilitylabel
+See https://reactnative.dev/docs/view.html#accessibilitylabel
 
 | Type        | Required |
 | ----------- | -------- |
@@ -103,15 +69,15 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilitylabel
 
 ---
 
-### `accessibilityLiveRegion`
+### `accessibilityLiveRegion`android
+
+See https://reactnative.dev/docs/view.html#accessibilityliveregion
 
 Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only.
 
-| Type                                                                                 | Required | Platform |
-| ------------------------------------------------------------------------------------ | -------- | -------- |
-| <code>&#x27;none&#x27; &#124; &#x27;polite&#x27; &#124; &#x27;assertive&#x27;</code> | No       | android  |
-
-See http://facebook.github.io/react-native/docs/view.html#accessibilityliveregion |
+| Type                                                                                 | Required |
+| ------------------------------------------------------------------------------------ | -------- |
+| <code>&#x27;none&#x27; &#124; &#x27;polite&#x27; &#124; &#x27;assertive&#x27;</code> | No       |
 
 ---
 
@@ -143,15 +109,15 @@ Indicates to accessibility services that UI Component is in a specific State.
 
 ---
 
-### `accessibilityViewIsModal`
+### `accessibilityViewIsModal`ios
+
+See https://reactnative.dev/docs/view.html#accessibilityviewismodal
 
 A value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Default is `false`.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
-
-See http://facebook.github.io/react-native/docs/view.html#accessibilityviewismodal |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -159,7 +125,7 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityviewismod
 
 When `true`, indicates that the view is an accessibility element. By default, all the touchable elements are accessible.
 
-See http://facebook.github.io/react-native/docs/view.html#accessible
+See https://reactnative.dev/docs/view.html#accessible
 
 | Type      | Required |
 | --------- | -------- |
@@ -175,15 +141,17 @@ See http://facebook.github.io/react-native/docs/view.html#accessible
 
 ---
 
-### `collapsable`
+### `collapsable`android
+
+In Fabric, this prop is used in ios as well.
+
+See https://reactnative.dev/docs/view.html#collapsable
 
 Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization. Set this property to `false` to disable this optimization and ensure that this `View` exists in the native view hierarchy.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
-
-See http://facebook.github.io/react-native/docs/view.html#collapsable |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -197,23 +165,23 @@ Whether the switch is disabled. Defaults to false.
 
 ---
 
-### `focusable`
+### `focusable`Android
 
 Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | Android  |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
-### `hasTVPreferredFocus`
+### `hasTVPreferredFocus`Android
 
 Whether to force the Android TV focus engine to move focus to this view.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | Android  |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -223,7 +191,7 @@ This defines how far a touch event can start away from the view. Typical interfa
 
 > The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
 
-See http://facebook.github.io/react-native/docs/view.html#hitslop
+See https://reactnative.dev/docs/view.html#hitslop
 
 | Type                                                                                                                 | Required |
 | -------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -231,15 +199,15 @@ See http://facebook.github.io/react-native/docs/view.html#hitslop
 
 ---
 
-### `importantForAccessibility`
+### `importantForAccessibility`android
+
+See https://reactnative.dev/docs/view.html#importantforaccessibility
 
 Controls how view is important for accessibility which is if it fires accessibility events and if it is reported to accessibility services that query the screen. Works for Android only.
 
-| Type                                                                                                              | Required | Platform |
-| ----------------------------------------------------------------------------------------------------------------- | -------- | -------- |
-| <code>&#x27;auto&#x27; &#124; &#x27;yes&#x27; &#124; &#x27;no&#x27; &#124; &#x27;no-hide-descendants&#x27;</code> | No       | android  |
-
-See http://facebook.github.io/react-native/docs/view.html#importantforaccessibility |
+| Type                                                                                                              | Required |
+| ----------------------------------------------------------------------------------------------------------------- | -------- |
+| <code>&#x27;auto&#x27; &#124; &#x27;yes&#x27; &#124; &#x27;no&#x27; &#124; &#x27;no-hide-descendants&#x27;</code> | No       |
 
 ---
 
@@ -247,9 +215,9 @@ See http://facebook.github.io/react-native/docs/view.html#importantforaccessibil
 
 On iOS, custom color for the background. This background color can be seen either when the switch value is false or when the switch is disabled (and the switch is translucent).
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| <code>null &#124; string</code> | No       |
+| Type                                                    | Required |
+| ------------------------------------------------------- | -------- |
+| <code>null &#124; string &#124; NativeColorValue</code> | No       |
 
 ---
 
@@ -275,7 +243,7 @@ Used to locate this view from native classes.
 
 > This disables the 'layout-only view removal' optimization for this view!
 
-See http://facebook.github.io/react-native/docs/view.html#nativeid
+See https://reactnative.dev/docs/view.html#nativeid
 
 | Type     | Required |
 | -------- | -------- |
@@ -283,65 +251,65 @@ See http://facebook.github.io/react-native/docs/view.html#nativeid
 
 ---
 
-### `needsOffscreenAlphaCompositing`
+### `needsOffscreenAlphaCompositing`android
+
+See https://reactnative.dev/docs/view.html#needsoffscreenalphacompositing
 
 Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
-
-See http://facebook.github.io/react-native/docs/view.html#needsoffscreenalphacompositing |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
-### `nextFocusDown`
+### `nextFocusDown`Android
 
 TV next focus down (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusForward`
+### `nextFocusForward`Android
 
 TV next focus forward (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusLeft`
+### `nextFocusLeft`Android
 
 TV next focus left (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusRight`
+### `nextFocusRight`Android
 
 TV next focus right (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusUp`
+### `nextFocusUp`Android
 
 TV next focus up (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
@@ -359,7 +327,7 @@ When `accessible` is true, the system will try to invoke this function when the 
 
 When `accessible` is `true`, the system will invoke this function when the user performs the escape gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onaccessibilityescape
+See https://reactnative.dev/docs/view.html#onaccessibilityescape
 
 | Type          | Required |
 | ------------- | -------- |
@@ -371,7 +339,7 @@ See http://facebook.github.io/react-native/docs/view.html#onaccessibilityescape
 
 When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onaccessibilitytap
+See https://reactnative.dev/docs/view.html#onaccessibilitytap
 
 | Type          | Required |
 | ------------- | -------- |
@@ -399,13 +367,13 @@ Receives the change event as an argument. If you want to only receive the new va
 
 ---
 
-### `onClick`
+### `onClick`Android
 
 The action to perform when this `View` is clicked on by a non-touch click, eg. enter key on a hardware keyboard.
 
-| Type                           | Required | Platform |
-| ------------------------------ | -------- | -------- |
-| `(event: PressEvent) => mixed` | No       | Android  |
+| Type                           | Required |
+| ------------------------------ | -------- |
+| `(event: PressEvent) => mixed` | No       |
 
 ---
 
@@ -425,7 +393,7 @@ Invoked on mount and layout changes with:
 
 This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.
 
-See http://facebook.github.io/react-native/docs/view.html#onlayout
+See https://reactnative.dev/docs/view.html#onlayout
 
 | Type                            | Required |
 | ------------------------------- | -------- |
@@ -437,7 +405,7 @@ See http://facebook.github.io/react-native/docs/view.html#onlayout
 
 When `accessible` is `true`, the system will invoke this function when the user performs the magic tap gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onmagictap
+See https://reactnative.dev/docs/view.html#onmagictap
 
 | Type          | Required |
 | ------------- | -------- |
@@ -467,7 +435,7 @@ Does this view want to "claim" touch responsiveness? This is called for every to
 
 `View.props.onMoveShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onmoveshouldsetresponder
+See https://reactnative.dev/docs/view.html#onmoveshouldsetresponder
 
 | Type                         | Required |
 | ---------------------------- | -------- |
@@ -481,7 +449,7 @@ If a parent `View` wants to prevent a child `View` from becoming responder on a 
 
 `View.props.onMoveShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onMoveShouldsetrespondercapture
+See https://reactnative.dev/docs/view.html#onMoveShouldsetrespondercapture
 
 | Type                         | Required |
 | ---------------------------- | -------- |
@@ -505,7 +473,7 @@ The View is now responding for touch events. This is the time to highlight and s
 
 PanResponder includes a note `// TODO: t7467124 investigate if this can be removed` that should help fixing this return type.
 
-See http://facebook.github.io/react-native/docs/view.html#onrespondergrant
+See https://reactnative.dev/docs/view.html#onrespondergrant
 
 | Type                                                     | Required |
 | -------------------------------------------------------- | -------- |
@@ -519,7 +487,7 @@ The user is moving their finger.
 
 `View.props.onResponderMove: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onrespondermove
+See https://reactnative.dev/docs/view.html#onrespondermove
 
 | Type                      | Required |
 | ------------------------- | -------- |
@@ -533,7 +501,7 @@ Another responder is already active and will not release it to that `View` askin
 
 `View.props.onResponderReject: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderreject
+See https://reactnative.dev/docs/view.html#onresponderreject
 
 | Type                      | Required |
 | ------------------------- | -------- |
@@ -547,7 +515,7 @@ Fired at the end of the touch.
 
 `View.props.onResponderRelease: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderrelease
+See https://reactnative.dev/docs/view.html#onresponderrelease
 
 | Type                      | Required |
 | ------------------------- | -------- |
@@ -569,7 +537,7 @@ The responder has been taken from the `View`. Might be taken by other views afte
 
 `View.props.onResponderTerminate: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderterminate
+See https://reactnative.dev/docs/view.html#onresponderterminate
 
 | Type                      | Required |
 | ------------------------- | -------- |
@@ -583,7 +551,7 @@ Some other `View` wants to become responder and is asking this `View` to release
 
 `View.props.onResponderTerminationRequest: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderterminationrequest
+See https://reactnative.dev/docs/view.html#onresponderterminationrequest
 
 | Type                         | Required |
 | ---------------------------- | -------- |
@@ -597,7 +565,7 @@ Does this view want to become responder on the start of a touch?
 
 `View.props.onStartShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onstartshouldsetresponder
+See https://reactnative.dev/docs/view.html#onstartshouldsetresponder
 
 | Type                         | Required |
 | ---------------------------- | -------- |
@@ -611,7 +579,7 @@ If a parent `View` wants to prevent a child `View` from becoming responder on a 
 
 `View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onstartshouldsetrespondercapture
+See https://reactnative.dev/docs/view.html#onstartshouldsetrespondercapture
 
 | Type                         | Required |
 | ---------------------------- | -------- |
@@ -699,7 +667,7 @@ Receives the new value as an argument. If you want to instead receive an event, 
 
 Controls whether the `View` can be the target of touch events.
 
-See http://facebook.github.io/react-native/docs/view.html#pointerevents
+See https://reactnative.dev/docs/view.html#pointerevents
 
 | Type                                                                                                          | Required |
 | ------------------------------------------------------------------------------------------------------------- | -------- |
@@ -711,7 +679,7 @@ See http://facebook.github.io/react-native/docs/view.html#pointerevents
 
 This is a special performance property exposed by `RCTView` and is useful for scrolling content when there are many subviews, most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound. The subviews must also have `overflow: hidden`, as should the containing view (or one of its superviews).
 
-See http://facebook.github.io/react-native/docs/view.html#removeclippedsubviews
+See https://reactnative.dev/docs/view.html#removeclippedsubviews
 
 | Type      | Required |
 | --------- | -------- |
@@ -719,27 +687,27 @@ See http://facebook.github.io/react-native/docs/view.html#removeclippedsubviews
 
 ---
 
-### `renderToHardwareTextureAndroid`
+### `renderToHardwareTextureAndroid`android
+
+See https://reactnative.dev/docs/view.html#rendertohardwaretextureandroid
 
 Whether this `View` should render itself (and all of its children) into a single hardware texture on the GPU.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
-
-See http://facebook.github.io/react-native/docs/view.html#rendertohardwaretextureandroid |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
-### `shouldRasterizeIOS`
+### `shouldRasterizeIOS`ios
+
+See https://reactnative.dev/docs/view.html#shouldrasterizeios
 
 Whether this `View` should be rendered as a bitmap before compositing.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
-
-See http://facebook.github.io/react-native/docs/view.html#shouldrasterizeios |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -757,7 +725,7 @@ Used to locate this view in end-to-end tests.
 
 > This disables the 'layout-only view removal' optimization for this view!
 
-See http://facebook.github.io/react-native/docs/view.html#testid
+See https://reactnative.dev/docs/view.html#testid
 
 | Type     | Required |
 | -------- | -------- |
@@ -769,9 +737,9 @@ See http://facebook.github.io/react-native/docs/view.html#testid
 
 Custom color for the switch thumb.
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| <code>null &#124; string</code> | No       |
+| Type                                                    | Required |
+| ------------------------------------------------------- | -------- |
+| <code>null &#124; string &#124; NativeColorValue</code> | No       |
 
 ---
 
