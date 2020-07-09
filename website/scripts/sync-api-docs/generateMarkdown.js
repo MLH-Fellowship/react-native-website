@@ -4,10 +4,14 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-const he = require('he');
-const magic = require('./magic');
-const {formatPlatformName} = require('./platforms');
+const tokenizeComment = require('tokenize-comment');
+const {
+  formatPlatformName,
+  formatDefaultPlatformProp,
+  formatMultiPlatformProp,
+  maybeLinkifyType,
+  maybeLinkifyTypeName,
+} = require('./propFormatter');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -41,51 +45,21 @@ function generateTable(rows) {
   return result;
 }
 
-// Wraps a string in an inline code block in a way that is safe to include in a
-// table cell, by wrapping it as HTML <code> if necessary.
-function stringToInlineCodeForTable(str) {
-  let useHtml = /[`|]/.test(str);
-  str = str.replace(/\n/g, ' ');
-  if (useHtml) {
-    return '<code>' + he.encode(str).replace(/\|/g, '&#124;') + '</code>';
-  }
-  return '`' + str + '`';
-}
-
 // Formats information about a prop
 function generateProp(propName, prop) {
-  let tableRows = '';
-
-  if (prop.rnTags && prop.rnTags.type) {
-    if (prop.rnTags.type.length) {
-      prop.rnTags.type.forEach(tag => {
-        const isMatch = tag.match(/{@platform [a-z]*}/);
-        if (isMatch) {
-          const platform = isMatch[0].match(/ [a-z]*/);
-          tag = tag.replace(/{@platform [a-z]*}/g, '');
-          tag =
-            tag +
-            '<div class="label ' +
-            platform[0].trim() +
-            '">' +
-            platform[0].trim() +
-            '</div>';
-        }
-        tableRows = tableRows + tag + '<hr/>';
-      });
-      tableRows = tableRows.replace(/<hr\/>$/, '');
-    } else {
-      tableRows = prop.rnTags.type.join('<hr/>');
-    }
-  } else tableRows = prop.flowType ? maybeLinkifyType(prop.flowType) : '';
-
+  // console.log(propName, prop);
   const infoTable = generateTable([
     {
-      Type: tableRows,
+      Type:
+        prop.rnTags && prop.rnTags.type
+          ? formatMultiPlatformProp(propName, prop, prop.rnTags.type)
+          : maybeLinkifyType(prop.flowType),
       Required: prop.required ? 'Yes' : 'No',
-      ...(prop.rnTags && prop.rnTags.default
-        ? {Default: prop.rnTags.default}
-        : {}),
+      Default: prop.defaultValue
+        ? prop.defaultValue.value.includes('Platform.OS')
+          ? formatMultiPlatformProp(propName, prop, prop.rnTags.default)
+          : '`' + prop.defaultValue.value + '`'
+        : '',
     },
   ]);
 
@@ -164,34 +138,6 @@ function generateMethodSignatureTable(method, component) {
   );
 }
 
-function maybeLinkifyType(flowType) {
-  let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, flowType.name)) {
-    ({url, text} = magic.linkableTypeAliases[flowType.name]);
-  }
-  if (!text) {
-    text = stringToInlineCodeForTable(flowType.raw || flowType.name);
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
-}
-
-function maybeLinkifyTypeName(name) {
-  let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, name)) {
-    ({url, text} = magic.linkableTypeAliases[name]);
-  }
-  if (!text) {
-    text = stringToInlineCodeForTable(name);
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
-}
-
 // Formats information about props
 function generateProps({props, composes}) {
   if (!props || !Object.keys(props).length) {
@@ -246,11 +192,51 @@ function generateHeader({id, title}) {
   );
 }
 
+// Function to process example contained description
+function preprocessDescription(desc) {
+  // Playground tabs for the class and functional components
+  const playgroundTab = `<div class="toggler">
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>`;
+
+  //Blocks for different syntax sections
+  const functionalBlock = `<block class='functional syntax' />`;
+  const classBlock = `<block class='classical syntax' />`;
+  const endBlock = `<block class='endBlock syntax' />`;
+
+  const descriptionTokenized = tokenizeComment(desc);
+  // Tabs counter for examples
+  let tabs = 0;
+  descriptionTokenized.examples.map(item =>
+    item.language.includes('SnackPlayer') ? tabs++ : tabs
+  );
+  if (descriptionTokenized.examples.length > 0 && tabs === 2) {
+    const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
+      descriptionTokenized.examples[0].raw
+    }\n\n${classBlock}\n\n${
+      descriptionTokenized.examples[1].raw
+    }\n\n${endBlock}`;
+    return descriptionTokenized.description + wrapper;
+  }
+  if (descriptionTokenized.examples.length > 0 && tabs === 1) {
+    return desc;
+  } else {
+    return descriptionTokenized.description;
+  }
+}
+
 function generateMarkdown({id, title}, component) {
   const markdownString =
     generateHeader({id, title}) +
     '\n' +
-    component.description +
+    preprocessDescription(component.description) +
     '\n\n' +
     '---\n\n' +
     '# Reference\n\n' +
