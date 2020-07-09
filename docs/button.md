@@ -5,10 +5,7 @@ title: Button
 
 A basic button component that should render nicely on any platform. Supports a minimal level of customization.
 
-If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component][button:source]. Or, take a look at the [wide variety of button components built by the community][button:examples].
-
-[button:source]: https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js
-[button:examples]: https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button
+If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component](https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js). Or, take a look at the [wide variety of button components built by the community](https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button).
 
 ```jsx
 <Button
@@ -113,9 +110,9 @@ export default App;
 
 Text to display for blindness accessibility features.
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `string` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `string` | No       |
 
 ---
 
@@ -123,9 +120,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type                                                    | Required | Default |
-| ------------------------------------------------------- | -------- | ------- |
-| <code>null &#124; string &#124; NativeColorValue</code> | No       |         |
+| Type                                                    | Required |
+| ------------------------------------------------------- | -------- |
+| <code>null &#124; string &#124; NativeColorValue</code> | No       |
 
 ---
 
@@ -133,9 +130,9 @@ Color of the text (iOS), or background color of the button (Android).
 
 If `true`, disable all interactions for this component.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       |         |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
@@ -143,69 +140,69 @@ If `true`, disable all interactions for this component.
 
 TV preferred focus.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       |         |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |
 
 ---
 
-### `nextFocusDown`android, tv
+### `nextFocusDown`<div class="label android">Android</div><div class="label tv">TV</div>
 
 Designates the next view to receive focus when the user navigates down. See the [Android documentation][android:nextfocusdown].
 
 [android:nextfocusdown]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `number` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusForward`android, tv
+### `nextFocusForward`<div class="label android">Android</div><div class="label tv">TV</div>
 
 Designates the next view to receive focus when the user navigates forward. See the [Android documentation][android:nextfocusforward].
 
 [android:nextfocusforward]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `number` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusLeft`android, tv
+### `nextFocusLeft`<div class="label android">Android</div><div class="label tv">TV</div>
 
 Designates the next view to receive focus when the user navigates left. See the [Android documentation][android:nextfocusleft].
 
 [android:nextfocusleft]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `number` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusRight`android, tv
+### `nextFocusRight`<div class="label android">Android</div><div class="label tv">TV</div>
 
 Designates the next view to receive focus when the user navigates right. See the [Android documentation][android:nextfocusright].
 
 [android:nextfocusright]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `number` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
-### `nextFocusUp`android, tv
+### `nextFocusUp`<div class="label android">Android</div><div class="label tv">TV</div>
 
 Designates the next view to receive focus when the user navigates up. See the [Android documentation][android:nextfocusup].
 
 [android:nextfocusup]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `number` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `number` | No       |
 
 ---
 
@@ -213,9 +210,9 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
 
-| Type                            | Required | Default |
-| ------------------------------- | -------- | ------- |
-| `(event?: PressEvent) => mixed` | Yes      |         |
+| Type                            | Required |
+| ------------------------------- | -------- |
+| `(event?: PressEvent) => mixed` | Yes      |
 
 ---
 
@@ -223,9 +220,9 @@ Handler to be called when the user taps the button. The first function argument 
 
 Used to locate this view in end-to-end tests.
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `string` | No       |         |
+| Type     | Required |
+| -------- | -------- |
+| `string` | No       |
 
 ---
 
@@ -233,16 +230,16 @@ Used to locate this view in end-to-end tests.
 
 Text to display inside the button. On Android the given title will be converted to the uppercased form.
 
-| Type     | Required | Default |
-| -------- | -------- | ------- |
-| `string` | Yes      |         |
+| Type     | Required |
+| -------- | -------- |
+| `string` | Yes      |
 
 ---
 
-### `touchSoundDisabled`<div class="label android">Android</div>
+### `touchSoundDisabled`<div class="label android">Android</div><div class="label tv">TV</div>
 
 If `true`, doesn't play system sound on touch.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       |         |
+| Type      | Required |
+| --------- | -------- |
+| `boolean` | No       |

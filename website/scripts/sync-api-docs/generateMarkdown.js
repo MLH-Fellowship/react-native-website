@@ -7,8 +7,9 @@
 const tokenizeComment = require('tokenize-comment');
 const {
   formatPlatformName,
+  formatMultiplePlatform,
   formatDefaultPlatformProp,
-  formatMultiPlatformProp,
+  formatMultipleRowProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
 } = require('./propFormatter');
@@ -47,19 +48,24 @@ function generateTable(rows) {
 
 // Formats information about a prop
 function generateProp(propName, prop) {
-  // console.log(propName, prop);
   const infoTable = generateTable([
     {
       Type:
         prop.rnTags && prop.rnTags.type
-          ? formatMultiPlatformProp(propName, prop, prop.rnTags.type)
+          ? formatMultipleRowProp(propName, prop, prop.rnTags.type)
           : maybeLinkifyType(prop.flowType),
       Required: prop.required ? 'Yes' : 'No',
-      Default: prop.defaultValue
-        ? prop.defaultValue.value.includes('Platform.OS')
-          ? formatMultiPlatformProp(propName, prop, prop.rnTags.default)
-          : '`' + prop.defaultValue.value + '`'
-        : '',
+      ...(prop.defaultValue &&
+        prop.defaultValue.value &&
+        (prop.defaultValue.value.includes('Platform.OS')
+          ? {
+              Default: formatMultipleRowProp(
+                propName,
+                prop,
+                prop.rnTags.default
+              ),
+            }
+          : {Default: '' + prop.defaultValue.value + ''})),
     },
   ]);
 
@@ -68,7 +74,7 @@ function generateProp(propName, prop) {
     propName +
     '`' +
     (prop.rnTags && prop.rnTags.platform
-      ? formatPlatformName(prop.rnTags.platform)
+      ? formatMultiplePlatform(prop.rnTags.platform)
       : '') +
     '\n' +
     '\n' +

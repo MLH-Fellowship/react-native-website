@@ -33,7 +33,6 @@ function preprocessTagsInDescription(obj) {
     obj.description = obj.description.split('    ').join('');
     const descriptionTokenized = tokenizeComment(obj.description);
     obj.description = joinDescriptionAndExamples(descriptionTokenized);
-
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'
@@ -44,7 +43,7 @@ function preprocessTagsInDescription(obj) {
     const typeTag = descriptionTokenized.tags.filter(tag => tag.key === 'type');
 
     if (platformTag) {
-      obj.rnTags.platform = platformTag.value;
+      obj.rnTags.platform = platformTag.value.split(',');
     }
     if (defaultTag.length) {
       obj.rnTags.default = [];

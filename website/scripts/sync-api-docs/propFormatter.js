@@ -11,18 +11,35 @@ const {typeOf} = require('tokenize-comment/lib/utils');
 const he = require('he');
 const magic = require('./magic');
 
+// Adds platform tags on props
 function formatPlatformName(platform) {
   switch (platform.toLowerCase()) {
     case 'ios':
-      return '<div class="label ios">' + 'iOS' + '</div>';
+      return '<div class="label ios">' + 'iOS' + '</div> ';
     case 'android':
       return '<div class="label android">' + 'Android' + '</div>';
     case 'tv':
       return '<div class="label tv">' + 'TV' + '</div>';
   }
-  return platform;
 }
 
+// Adds multiple platform tags for prop name
+function formatMultiplePlatform(platforms) {
+  let platformString = '';
+  platforms.forEach(platform => {
+    switch (platform) {
+      case 'ios':
+        platformString += '<div class="label ios">' + 'iOS' + '</div> ';
+      case 'android':
+        platformString += '<div class="label android">' + 'Android' + '</div>';
+      case 'tv':
+        platformString += '<div class="label tv">' + 'TV' + '</div>';
+    }
+  });
+  return platformString;
+}
+
+// Adds platform tag inside default value of props
 function formatDefaultPlatformProp(defaultProps, propName) {
   const platformDefaultProps = Object.entries(JSON.parse(defaultProps));
   const formattedProps = [];
@@ -32,10 +49,9 @@ function formatDefaultPlatformProp(defaultProps, propName) {
   return formattedProps;
 }
 
-// Generates rows for different platform dependent prop
-function formatMultiPlatformProp(propName, prop, item) {
+// Generates rows for different platform dependent props
+function formatMultipleRowProp(propName, prop, item) {
   let tableRows = '';
-  // console.log(propName)
   if (prop.rnTags && item) {
     if (item.length) {
       item.forEach(tag => {
@@ -102,8 +118,9 @@ function maybeLinkifyTypeName(name) {
 
 module.exports = {
   formatPlatformName,
+  formatMultiplePlatform,
   formatDefaultPlatformProp,
-  formatMultiPlatformProp,
+  formatMultipleRowProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
 };
