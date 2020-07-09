@@ -120,9 +120,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type                                                    | Required |
-| ------------------------------------------------------- | -------- |
-| <code>null &#124; string &#124; NativeColorValue</code> | No       |
+| Type                                              | Required | Default                                                                                                                                                                                                            |
+| ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [color](https://reactnative.dev/docs/next/colors) | No       | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
@@ -130,9 +130,9 @@ Color of the text (iOS), or background color of the button (Android).
 
 If `true`, disable all interactions for this component.
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       | false   |
 
 ---
 
@@ -140,9 +140,9 @@ If `true`, disable all interactions for this component.
 
 TV preferred focus.
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       | false   |
 
 ---
 
@@ -236,10 +236,10 @@ Text to display inside the button. On Android the given title will be converted 
 
 ---
 
-### `touchSoundDisabled`<div class="label android">Android</div><div class="label tv">TV</div>
+### `touchSoundDisabled`<div class="label android">Android</div>
 
 If `true`, doesn't play system sound on touch.
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type      | Required | Default |
+| --------- | -------- | ------- |
+| `boolean` | No       | false   |

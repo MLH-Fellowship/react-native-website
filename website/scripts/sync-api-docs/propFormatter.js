@@ -27,11 +27,13 @@ function formatPlatformName(platform) {
 function formatMultiplePlatform(platforms) {
   let platformString = '';
   platforms.forEach(platform => {
-    switch (platform) {
+    switch (platform.trim()) {
       case 'ios':
         platformString += '<div class="label ios">' + 'iOS' + '</div> ';
+        break;
       case 'android':
         platformString += '<div class="label android">' + 'Android' + '</div>';
+        break;
       case 'tv':
         platformString += '<div class="label tv">' + 'TV' + '</div>';
     }
@@ -61,7 +63,9 @@ function formatMultipleRowProp(propName, prop, item) {
           tag = tag.replace(/{@platform [a-z]*}/g, '');
           const colorBlock =
             propName === 'color' && prop.rnTags.default && !tag.includes('null')
-              ? '<ins style="background:' + tag + '" class="color-box"></ins>'
+              ? '<ins style="background:' +
+                tag.replace(/'/g, '') +
+                '" class="color-box"></ins>'
               : '';
           tag = tag + colorBlock + formatPlatformName(platform[0].trim());
         }

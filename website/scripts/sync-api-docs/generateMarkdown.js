@@ -55,17 +55,21 @@ function generateProp(propName, prop) {
           ? formatMultipleRowProp(propName, prop, prop.rnTags.type)
           : maybeLinkifyType(prop.flowType),
       Required: prop.required ? 'Yes' : 'No',
-      ...(prop.defaultValue &&
-        prop.defaultValue.value &&
-        (prop.defaultValue.value.includes('Platform.OS')
-          ? {
-              Default: formatMultipleRowProp(
-                propName,
-                prop,
-                prop.rnTags.default
-              ),
-            }
-          : {Default: '' + prop.defaultValue.value + ''})),
+      ...(prop.rnTags && prop.rnTags.default
+        ? {
+            Default: formatMultipleRowProp(propName, prop, prop.rnTags.default),
+          }
+        : prop.defaultValue &&
+          prop.defaultValue.value &&
+          (prop.defaultValue.value.includes('Platform.OS')
+            ? {
+                Default: formatMultipleRowProp(
+                  propName,
+                  prop,
+                  prop.defaultValue.value
+                ),
+              }
+            : {Default: '`' + prop.defaultValue.value + '`'})),
     },
   ]);
 
