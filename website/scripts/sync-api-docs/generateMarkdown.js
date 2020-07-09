@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+const tokenizeComment = require('tokenize-comment');
 const {
   formatPlatformName,
   formatDefaultPlatformProp,
@@ -192,11 +192,43 @@ function generateHeader({id, title}) {
   );
 }
 
+// Function to process example contained description
+function preprocessDescription(desc) {
+  // Playground tabs for the class and functional components
+  const playgroundTab = `<div class="toggler">
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>`;
+
+  const functionalBlock = `<block class='functional syntax' />`;
+  const classBlock = `<block class='classical syntax' />`;
+  const endBlock = `<block class='endBlock syntax' />`;
+
+  const descriptionTokenized = tokenizeComment(desc);
+
+  if (descriptionTokenized.examples.length > 0) {
+    const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
+      descriptionTokenized.examples[0].raw
+    }\n\n${classBlock}\n\n${
+      descriptionTokenized.examples[1].raw
+    }\n\n${endBlock}`;
+    return wrapper;
+  } else {
+    return descriptionTokenized.description;
+  }
+}
+
 function generateMarkdown({id, title}, component) {
   const markdownString =
     generateHeader({id, title}) +
     '\n' +
-    component.description +
+    preprocessDescription(component.description) +
     '\n\n' +
     '---\n\n' +
     '# Reference\n\n' +
