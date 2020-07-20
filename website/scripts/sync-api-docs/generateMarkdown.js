@@ -54,7 +54,6 @@ function generateProp(propName, prop) {
         prop.rnTags && prop.rnTags.type
           ? formatMultipleRowProp(propName, prop, prop.rnTags.type)
           : maybeLinkifyType(prop.flowType),
-      Required: prop.required ? 'Yes' : 'No',
       ...(prop.rnTags && prop.rnTags.default
         ? {
             Default: formatMultipleRowProp(propName, prop, prop.rnTags.default),
@@ -74,7 +73,9 @@ function generateProp(propName, prop) {
   ]);
 
   return (
-    '### `' +
+    '### ' +
+    (prop.required ? '<div class="label required basic">Required</div>' : '') +
+    '`' +
     propName +
     '`' +
     (prop.rnTags && prop.rnTags.platform
@@ -232,7 +233,7 @@ function preprocessDescription(desc) {
     }\n\n${classBlock}\n\n${
       descriptionTokenized.examples[1].raw
     }\n\n${endBlock}`;
-    return descriptionTokenized.description + wrapper;
+    return descriptionTokenized.description + `\n## Example\n` + wrapper;
   }
   if (descriptionTokenized.examples.length === 1 && tabs === 1) {
     return (
