@@ -109,7 +109,7 @@ See https://reactnative.dev/docs/view.html#accessibilityHint
 
 ---
 
-### `accessibilityIgnoresInvertColors`<div class="label ios">iOS</div> <div class="label android">Android</div><div class="label tv">TV</div>
+### `accessibilityIgnoresInvertColors`<div class="label ios">iOS</div>
 
 Prevents view from being inverted if set to true and color inversion is turned on.
 
@@ -197,7 +197,7 @@ Whether to show the indicator (`true`) or hide it (`false`).
 
 | Type      | Required | Default |
 | --------- | -------- | ------- |
-| `boolean` | No       | true    |
+| `boolean` | No       | `true`  |
 
 ---
 
@@ -223,13 +223,13 @@ Views that are only used to layout their children or otherwise don't draw anythi
 
 The foreground color of the spinner.
 
-| Type                                              | Required | Default                                                                                                                                                                            |
-| ------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](https://reactnative.dev/docs/next/colors) | No       | `null` (system accent default color)<div class="label android">Android</div><hr/> #999999<ins style="background: #999999" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type                                              | Required | Default                                                                                                                                                                              |
+| ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [color](https://reactnative.dev/docs/next/colors) | No       | `null` (system accent default color)<div class="label android">Android</div><hr/> '#999999'<ins style="background: #999999" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
-### `focusable`<div class="label android">Android</div><div class="label tv">TV</div>
+### `focusable`<div class="label android">Android</div>
 
 Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.
 
@@ -239,7 +239,7 @@ Whether this `View` should be focusable with a non-touch input device, eg. recei
 
 ---
 
-### `hasTVPreferredFocus`<div class="label android">Android</div><div class="label tv">TV</div>
+### `hasTVPreferredFocus`<div class="label android">Android</div>
 
 Whether to force the Android TV focus engine to move focus to this view.
 
@@ -249,13 +249,13 @@ Whether to force the Android TV focus engine to move focus to this view.
 
 ---
 
-### `hidesWhenStopped`<div class="label ios">iOS</div> <div class="label android">Android</div><div class="label tv">TV</div>
+### `hidesWhenStopped`<div class="label ios">iOS</div>
 
 Whether the indicator should hide when not animating.
 
 | Type      | Required | Default |
 | --------- | -------- | ------- |
-| `boolean` | No       | true    |
+| `boolean` | No       | `true`  |
 
 ---
 
@@ -323,7 +323,7 @@ Whether this `View` needs to rendered offscreen and composited with an alpha in 
 
 ---
 
-### `nextFocusDown`<div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusDown`<div class="label android">Android</div>
 
 TV next focus down (see documentation for the View component).
 
@@ -333,7 +333,7 @@ TV next focus down (see documentation for the View component).
 
 ---
 
-### `nextFocusForward`<div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusForward`<div class="label android">Android</div>
 
 TV next focus forward (see documentation for the View component).
 
@@ -343,7 +343,7 @@ TV next focus forward (see documentation for the View component).
 
 ---
 
-### `nextFocusLeft`<div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusLeft`<div class="label android">Android</div>
 
 TV next focus left (see documentation for the View component).
 
@@ -353,7 +353,7 @@ TV next focus left (see documentation for the View component).
 
 ---
 
-### `nextFocusRight`<div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusRight`<div class="label android">Android</div>
 
 TV next focus right (see documentation for the View component).
 
@@ -363,7 +363,7 @@ TV next focus right (see documentation for the View component).
 
 ---
 
-### `nextFocusUp`<div class="label android">Android</div><div class="label tv">TV</div>
+### `nextFocusUp`<div class="label android">Android</div>
 
 TV next focus up (see documentation for the View component).
 
@@ -415,7 +415,7 @@ See https://reactnative.dev/docs/view.html#onaccessibilitytap
 
 ---
 
-### `onClick`<div class="label android">Android</div><div class="label tv">TV</div>
+### `onClick`<div class="label android">Android</div>
 
 The action to perform when this `View` is clicked on by a non-touch click, eg. enter key on a hardware keyboard.
 
@@ -747,9 +747,9 @@ Whether this `View` should be rendered as a bitmap before compositing.
 
 Size of the indicator.
 
-| Type                                                                           | Required | Default |
-| ------------------------------------------------------------------------------ | -------- | ------- |
-| enum(`'small'`, `'large'`)<hr/> number<div class="label android">Android</div> | No       | 'small' |
+| Type                                                                           | Required | Default   |
+| ------------------------------------------------------------------------------ | -------- | --------- |
+| enum(`'small'`, `'large'`)<hr/> number<div class="label android">Android</div> | No       | `'small'` |
 
 ---
 
