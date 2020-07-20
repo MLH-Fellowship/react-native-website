@@ -9,7 +9,9 @@ This is a controlled component that requires an `onValueChange` callback that up
 
 ---
 
-# Reference
+```SnackPlayer name=Switch&supportedPlatforms=android,ios
+import React, { useState } from "react";
+import { View, Switch, StyleSheet } from "react-native";
 
 ## Props
 
@@ -762,3 +764,4 @@ Boolean value of the switch. Defaults to false.
 | Type      | Required |
 | --------- | -------- |
 | `boolean` | No       |
+```

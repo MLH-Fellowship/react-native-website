@@ -609,7 +609,17 @@ See https://facebook.github.io/react-native/docs/text.html#testid
 
 Set text break strategy on Android.
 
-See https://facebook.github.io/react-native/docs/text.html#textbreakstrategy
+---
+
+### `android_hyphenationFrequency`
+
+Sets the frequency of automatic hyphenation to use when determining word breaks on Android API Level 23+, possible values are `none`, `full`, `balanced`, `high`, `normal`. The default value is `none`.
+
+| Type                                     | Required | Platform |
+| ---------------------------------------- | -------- | -------- |
+| enum('none', 'full', 'balanced', 'high') | No       | Android  |
+
+# Known issues
 
 | Type                                                                                       | Required |
 | ------------------------------------------------------------------------------------------ | -------- |
