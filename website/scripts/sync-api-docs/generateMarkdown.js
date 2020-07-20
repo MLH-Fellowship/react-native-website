@@ -54,7 +54,6 @@ function generateProp(propName, prop) {
         prop.rnTags && prop.rnTags.type
           ? formatMultipleRowProp(propName, prop, prop.rnTags.type)
           : maybeLinkifyType(prop.flowType),
-      Required: prop.required ? 'Yes' : 'No',
       ...(prop.rnTags && prop.rnTags.default
         ? {
             Default: formatMultipleRowProp(propName, prop, prop.rnTags.default),
@@ -74,7 +73,9 @@ function generateProp(propName, prop) {
   ]);
 
   return (
-    '### `' +
+    '### ' +
+    (prop.required ? '<div class="label required basic">Required</div>' : '') +
+    '`' +
     propName +
     '`' +
     (prop.rnTags && prop.rnTags.platform
@@ -220,7 +221,7 @@ function preprocessDescription(desc) {
   const functionalBlock = `<block class='functional syntax' />`;
   const classBlock = `<block class='classical syntax' />`;
   const endBlock = `<block class='endBlock syntax' />`;
-
+  desc = desc.split('  ').join('');
   const descriptionTokenized = tokenizeComment(desc);
   // Tabs counter for examples
   let tabs = 0;
@@ -233,9 +234,11 @@ function preprocessDescription(desc) {
     }\n\n${classBlock}\n\n${
       descriptionTokenized.examples[1].raw
     }\n\n${endBlock}`;
-    return descriptionTokenized.description + wrapper;
+    return descriptionTokenized.description + `\n## Example\n` + wrapper;
   }
   if (descriptionTokenized.examples.length > 0 && tabs === 1) {
+    // console.log(descriptionTokenized)
+    // return descriptionTokenized.description + `\n` + descriptionTokenized.examples[0].raw + `\n## Example\n` + descriptionTokenized.examples[1].raw;
     return desc;
   } else {
     return descriptionTokenized.description;
