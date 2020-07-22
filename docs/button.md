@@ -5,7 +5,10 @@ title: Button
 
 A basic button component that should render nicely on any platform. Supports a minimal level of customization.
 
-If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component](https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js). Or, take a look at the [wide variety of button components built by the community](https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button).
+If this button doesn't look right for your app, you can build your own button using [TouchableOpacity](touchableopacity) or [TouchableWithoutFeedback](touchablewithoutfeedback). For inspiration, look at the [source code for this button component][button:source]. Or, take a look at the [wide variety of button components built by the community][button:examples].
+
+[button:source]: https://github.com/facebook/react-native/blob/master/Libraries/Components/Button.js
+[button:examples]: https://js.coach/?menu%5Bcollections%5D=React%20Native&page=1&query=button
 
 ```jsx
 <Button
@@ -15,6 +18,8 @@ If this button doesn't look right for your app, you can build your own button us
   accessibilityLabel="Learn more about this purple button"
 />
 ```
+
+## Example
 
 ```SnackPlayer name=Button%20Example
 import React from 'react';
@@ -110,9 +115,9 @@ export default App;
 
 Text to display for blindness accessibility features.
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type     |
+| -------- |
+| `string` |
 
 ---
 
@@ -120,9 +125,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type                                              | Required | Default                                                                                                                                                                                                            |
-| ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [color](https://reactnative.dev/docs/next/colors) | No       | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type                                                    | Default                                                                                                                                                                                                            |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <code>null &#124; string &#124; NativeColorValue</code> | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
@@ -130,9 +135,9 @@ Color of the text (iOS), or background color of the button (Android).
 
 If `true`, disable all interactions for this component.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       | false   |
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | false   |
 
 ---
 
@@ -140,9 +145,9 @@ If `true`, disable all interactions for this component.
 
 TV preferred focus.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       | false   |
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | false   |
 
 ---
 
@@ -152,9 +157,9 @@ Designates the next view to receive focus when the user navigates down. See the 
 
 [android:nextfocusdown]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type     |
+| -------- |
+| `number` |
 
 ---
 
@@ -164,9 +169,9 @@ Designates the next view to receive focus when the user navigates forward. See t
 
 [android:nextfocusforward]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type     |
+| -------- |
+| `number` |
 
 ---
 
@@ -176,9 +181,9 @@ Designates the next view to receive focus when the user navigates left. See the 
 
 [android:nextfocusleft]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type     |
+| -------- |
+| `number` |
 
 ---
 
@@ -188,9 +193,9 @@ Designates the next view to receive focus when the user navigates right. See the
 
 [android:nextfocusright]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type     |
+| -------- |
+| `number` |
 
 ---
 
@@ -200,19 +205,19 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 [android:nextfocusup]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type     |
+| -------- |
+| `number` |
 
 ---
 
-### `onPress`
+### <div class="label required basic">Required</div>`onPress`
 
 Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| `(event?: PressEvent) => mixed` | Yes      |
+| Type                            |
+| ------------------------------- |
+| `(event?: PressEvent) => mixed` |
 
 ---
 
@@ -220,19 +225,19 @@ Handler to be called when the user taps the button. The first function argument 
 
 Used to locate this view in end-to-end tests.
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type     |
+| -------- |
+| `string` |
 
 ---
 
-### `title`
+### <div class="label required basic">Required</div>`title`
 
 Text to display inside the button. On Android the given title will be converted to the uppercased form.
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | Yes      |
+| Type     |
+| -------- |
+| `string` |
 
 ---
 
@@ -240,6 +245,6 @@ Text to display inside the button. On Android the given title will be converted 
 
 If `true`, doesn't play system sound on touch.
 
-| Type      | Required | Default |
-| --------- | -------- | ------- |
-| `boolean` | No       | false   |
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | false   |
