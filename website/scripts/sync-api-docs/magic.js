@@ -13,7 +13,7 @@
 
 module.exports = {
   linkableTypeAliases: {
-    ColorValue: {
+    NativeColorValue: {
       text: 'color',
       url: 'colors.md',
     },

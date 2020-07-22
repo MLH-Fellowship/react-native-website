@@ -115,9 +115,9 @@ export default App;
 
 Text to display for blindness accessibility features.
 
-| Type     |
-| -------- |
-| `string` |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -125,9 +125,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type                                                    | Default                                                                                                                                                                                                            |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <code>null &#124; string &#124; NativeColorValue</code> | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type               | Default                                                                                                                                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [color](colors.md) | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
@@ -135,9 +135,9 @@ Color of the text (iOS), or background color of the button (Android).
 
 If `true`, disable all interactions for this component.
 
-| Type      | Default |
-| --------- | ------- |
-| `boolean` | false   |
+| Type | Default |
+| ---- | ------- |
+| bool | false   |
 
 ---
 
@@ -145,9 +145,9 @@ If `true`, disable all interactions for this component.
 
 TV preferred focus.
 
-| Type      | Default |
-| --------- | ------- |
-| `boolean` | false   |
+| Type | Default |
+| ---- | ------- |
+| bool | false   |
 
 ---
 
@@ -157,9 +157,9 @@ Designates the next view to receive focus when the user navigates down. See the 
 
 [android:nextfocusdown]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown
 
-| Type     |
-| -------- |
-| `number` |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -169,9 +169,9 @@ Designates the next view to receive focus when the user navigates forward. See t
 
 [android:nextfocusforward]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward
 
-| Type     |
-| -------- |
-| `number` |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -181,9 +181,9 @@ Designates the next view to receive focus when the user navigates left. See the 
 
 [android:nextfocusleft]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft
 
-| Type     |
-| -------- |
-| `number` |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -193,9 +193,9 @@ Designates the next view to receive focus when the user navigates right. See the
 
 [android:nextfocusright]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight
 
-| Type     |
-| -------- |
-| `number` |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -205,9 +205,9 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 [android:nextfocusup]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp
 
-| Type     |
-| -------- |
-| `number` |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -215,9 +215,9 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
 
-| Type                            |
-| ------------------------------- |
-| `(event?: PressEvent) => mixed` |
+| Type                          |
+| ----------------------------- |
+| (event?: PressEvent) => mixed |
 
 ---
 
@@ -225,9 +225,9 @@ Handler to be called when the user taps the button. The first function argument 
 
 Used to locate this view in end-to-end tests.
 
-| Type     |
-| -------- |
-| `string` |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -235,9 +235,9 @@ Used to locate this view in end-to-end tests.
 
 Text to display inside the button. On Android the given title will be converted to the uppercased form.
 
-| Type     |
-| -------- |
-| `string` |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -245,6 +245,6 @@ Text to display inside the button. On Android the given title will be converted 
 
 If `true`, doesn't play system sound on touch.
 
-| Type      | Default |
-| --------- | ------- |
-| `boolean` | false   |
+| Type | Default |
+| ---- | ------- |
+| bool | false   |
