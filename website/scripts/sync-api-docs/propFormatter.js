@@ -67,8 +67,13 @@ function formatMultipleRowProp(propName, prop, item) {
                 tag.replace(/'/g, '') +
                 '" class="color-box"></ins>'
               : '';
-          tag = tag + colorBlock + formatPlatformName(platform[0].trim());
-        }
+          tag =
+            '`' +
+            tag +
+            '`' +
+            colorBlock +
+            formatPlatformName(platform[0].trim());
+        } else tag = '`' + tag + '`';
         tableRows = tableRows + tag + '<hr/>';
       });
       tableRows = tableRows.replace(/<hr\/>$/, '');
