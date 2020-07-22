@@ -234,6 +234,13 @@ function preprocessDescription(desc) {
     }\n\n${endBlock}`;
     return descriptionTokenized.description + wrapper;
   }
+  if (descriptionTokenized.examples.length === 1 && tabs === 1) {
+    return (
+      descriptionTokenized.description +
+      '\n## Example\n' +
+      descriptionTokenized?.examples[0]?.raw
+    );
+  }
   if (descriptionTokenized.examples.length > 0 && tabs === 1) {
     return (
       descriptionTokenized.description +
@@ -245,7 +252,7 @@ function preprocessDescription(desc) {
       descriptionTokenized?.examples[1]?.raw
     );
   } else {
-    return descriptionTokenized.description;
+    return desc;
   }
 }
 
