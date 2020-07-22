@@ -125,9 +125,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type               | Default                                                                                                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [color](colors.md) | '#2196F3'<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/> '#007AFF'<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type               | Default                                                                                                                                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [color](colors.md) | `'#2196F3'`<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/>`'#007AFF'`<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
@@ -137,7 +137,7 @@ If `true`, disable all interactions for this component.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
 
 ---
 
@@ -147,7 +147,7 @@ TV preferred focus.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
 
 ---
 
@@ -247,4 +247,4 @@ If `true`, doesn't play system sound on touch.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
