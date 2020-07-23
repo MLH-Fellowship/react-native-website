@@ -67,8 +67,13 @@ function formatMultipleRowProp(propName, prop, item) {
                 tag.replace(/'/g, '') +
                 '" class="color-box"></ins>'
               : '';
-          tag = tag + colorBlock + formatPlatformName(platform[0].trim());
-        }
+          tag =
+            '`' +
+            tag +
+            '`' +
+            colorBlock +
+            formatPlatformName(platform[0].trim());
+        } else tag = '`' + tag + '`';
         tableRows = tableRows + tag + '<hr/>';
       });
       tableRows = tableRows.replace(/<hr\/>$/, '');
@@ -89,21 +94,32 @@ function stringToInlineCodeForTable(str) {
   if (useHtml) {
     return '<code>' + he.encode(str).replace(/\|/g, '&#124;') + '</code>';
   }
-  return '`' + str + '`';
+  return str;
 }
 
 function maybeLinkifyType(flowType) {
   let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, flowType.name)) {
-    ({url, text} = magic.linkableTypeAliases[flowType.name]);
-  }
+  flowType.elements?.forEach(elem => {
+    if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
+      ({url, text} = magic.linkableTypeAliases[elem.name]);
+    }
+  });
   if (!text) {
-    text = stringToInlineCodeForTable(flowType.raw || flowType.name);
+    text = stringToInlineCodeForTable(
+      flowType.raw || formatType(flowType.name)
+    );
   }
   if (url) {
     return `[${text}](${url})`;
   }
   return text;
+}
+
+function formatType(name) {
+  if (name.toLowerCase() === 'boolean') return 'bool';
+  if (name.toLowerCase() === 'stringish') return 'string';
+  if (name === '$ReadOnlyArray') return 'array';
+  return name;
 }
 
 function maybeLinkifyTypeName(name) {
