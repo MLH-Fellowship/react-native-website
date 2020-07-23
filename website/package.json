@@ -30,7 +30,8 @@
     "sync-guides": "node sync-guides.js",
     "test": "yarn build",
     "lint": "cd ../ && alex .",
-    "lintv": "cd ../ && alex"
+    "lintv": "cd ../ && alex",
+    "docgen": "node scripts/sync-api-docs/sync-api-docs ../../react-native"
   },
   "husky": {
     "hooks": {
