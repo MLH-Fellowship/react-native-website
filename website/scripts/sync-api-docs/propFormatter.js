@@ -92,7 +92,7 @@ function stringToInlineCodeForTable(str) {
   if (useHtml) {
     return '<code>' + he.encode(str).replace(/\|/g, '&#124;') + '</code>';
   }
-  return str;
+  return '`' + str + '`';
 }
 
 function maybeLinkifyType(flowType) {
@@ -134,6 +134,81 @@ function maybeLinkifyTypeName(name) {
   return text;
 }
 
+// Add proper markdown formatting to component's prop type.
+function formatTypeColumn(prop) {
+  // Checks for @type pragma comment
+  if (prop.rnTags && prop.rnTags.type) {
+    let tableRows = '';
+    const typeTags = prop.rnTags.type;
+
+    typeTags.forEach(tag => {
+      // Checks for @platform pragma in @type string
+      const isMatch = tag.match(/{@platform [a-z ,]*}/);
+      if (isMatch) {
+        // Extracts platforms from matched regex
+        const platform = isMatch[0].match(/ [a-z ,]*/);
+
+        // Replaces @platform strings with empty string
+        // and appends type with formatted platform
+        tag = tag.replace(/{@platform [a-z ,]*}/g, '');
+        tag = tag + formatMultiplePlatform(platform[0].split(','));
+      }
+      tableRows = tableRows + tag + '<hr/>';
+    });
+    return tableRows;
+  }
+
+  // To extract type from prop flowType
+  else if (prop.flowType && Object.keys(prop.flowType).length >= 1) {
+    // console.log("formatTypeColumn -> prop.flowType", prop.flowType)
+    let text, url;
+
+    // Handles flowtype name for signatures
+    if (prop.flowType.name === 'signature') {
+      // Handles flowtype for function signature
+      if (prop.flowType.type === 'function') {
+        // Extracts EventType from the raw value
+        const isMatch = prop.flowType.raw.match(/: [a-zA-Z]*/);
+        if (isMatch) {
+          // Formats EventType
+          const eventType = isMatch[0].substr(2);
+          // Checks for aliases in magic and generates md url
+          if (
+            Object.hasOwnProperty.call(magic.linkableTypeAliases, eventType)
+          ) {
+            ({url, text} = magic.linkableTypeAliases[eventType]);
+            return `${prop.flowType.type}([${text}](${url}))`;
+          }
+          // TODO: Handling unknown function params
+          return `${prop.flowType.type}(${eventType})`;
+        } else {
+          return prop.flowType.type;
+        }
+      }
+    } else {
+      // Get text and url from magic aliases
+      prop?.flowType?.elements?.forEach(elem => {
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
+          ({url, text} = magic.linkableTypeAliases[elem.name]);
+        }
+      });
+    }
+
+    // If no text is found, get raw values as text
+    if (!text) {
+      // TO BE FIXED
+      text = prop.flowType.raw || formatType(prop.flowType.name);
+    }
+
+    // If URL is found, return text and link in markdown format
+    if (url) {
+      return `[${text}](${url})`;
+    }
+
+    return text;
+  }
+}
+
 module.exports = {
   formatPlatformName,
   formatMultiplePlatform,
@@ -141,4 +216,5 @@ module.exports = {
   formatMultipleRowProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
+  formatTypeColumn,
 };
