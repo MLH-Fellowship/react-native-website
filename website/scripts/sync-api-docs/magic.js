@@ -21,5 +21,9 @@ module.exports = {
       text: 'View Props',
       url: 'view.md#props',
     },
+    PressEvent: {
+      text: 'PressEvent',
+      url: 'pressevent.md',
+    },
   },
 };

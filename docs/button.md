@@ -215,9 +215,9 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
 
-| Type                          |
-| ----------------------------- |
-| (event?: PressEvent) => mixed |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
