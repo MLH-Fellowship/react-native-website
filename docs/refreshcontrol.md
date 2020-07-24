@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-**Note:** `refreshing` is a controlled prop, this is why it needs to be set to true in the `onRefresh` function otherwise the refresh indicator will stop immediately.
-
 ---
 
 # Reference
@@ -73,33 +71,13 @@ export default App;
 
 Inherits [View Props](view.md#props).
 
-### `refreshing`
-
-Whether the view should be indicating an active refresh.
-
-| Type | Required |
-| ---- | -------- |
-| bool | Yes      |
-
----
-
-### `onRefresh`
-
-Called when the view starts refreshing.
-
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
-
----
-
 ### `colors`
 
 The colors (at least one) that will be used to draw the refresh indicator.
 
-| Type                        | Required | Platform |
-| --------------------------- | -------- | -------- |
-| array of [color](colors.md) | No       | Android  |
+| Type                        |
+| --------------------------- |
+| \$ReadOnlyArray<ColorValue> |
 
 ---
 
@@ -107,9 +85,19 @@ The colors (at least one) that will be used to draw the refresh indicator.
 
 Whether the pull to refresh functionality is enabled.
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type |
+| ---- |
+| bool |
+
+---
+
+### `onRefresh`
+
+Called when the view starts refreshing.
+
+| Type                                                        |
+| ----------------------------------------------------------- |
+| <code>() =&#x3E; void &#124; Promise&#x3C;void&#x3E;</code> |
 
 ---
 
@@ -117,9 +105,9 @@ Whether the pull to refresh functionality is enabled.
 
 The background color of the refresh indicator.
 
-| Type               | Required | Platform |
-| ------------------ | -------- | -------- |
-| [color](colors.md) | No       | Android  |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -127,9 +115,19 @@ The background color of the refresh indicator.
 
 Progress view top offset
 
-| Type   | Required | Platform |
-| ------ | -------- | -------- |
-| number | No       | Android  |
+| Type   |
+| ------ |
+| number |
+
+---
+
+### <div class="label required basic">Required</div>`refreshing`
+
+Whether the view should be indicating an active refresh.
+
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -137,9 +135,9 @@ Progress view top offset
 
 Size of the refresh indicator, see RefreshControl.SIZE.
 
-| Type                                                                   | Required | Platform |
-| ---------------------------------------------------------------------- | -------- | -------- |
-| enum(RefreshLayoutConsts.SIZE.DEFAULT, RefreshLayoutConsts.SIZE.LARGE) | No       | Android  |
+| Type                                                                                                     |
+| -------------------------------------------------------------------------------------------------------- |
+| <code>&#124; typeof RefreshLayoutConsts.SIZE.DEFAULT &#124; typeof RefreshLayoutConsts.SIZE.LARGE</code> |
 
 ---
 
@@ -147,9 +145,9 @@ Size of the refresh indicator, see RefreshControl.SIZE.
 
 The color of the refresh indicator.
 
-| Type               | Required | Platform |
-| ------------------ | -------- | -------- |
-| [color](colors.md) | No       | iOS      |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -157,9 +155,9 @@ The color of the refresh indicator.
 
 The title displayed under the refresh indicator.
 
-| Type   | Required | Platform |
-| ------ | -------- | -------- |
-| string | No       | iOS      |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -167,6 +165,6 @@ The title displayed under the refresh indicator.
 
 Title color.
 
-| Type               | Required | Platform |
-| ------------------ | -------- | -------- |
-| [color](colors.md) | No       | iOS      |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
