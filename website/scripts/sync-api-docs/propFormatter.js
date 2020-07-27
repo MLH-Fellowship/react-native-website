@@ -11,18 +11,6 @@ const {typeOf} = require('tokenize-comment/lib/utils');
 const he = require('he');
 const magic = require('./magic');
 
-// Adds platform tags on props
-function formatPlatformName(platform) {
-  switch (platform.toLowerCase()) {
-    case 'ios':
-      return '<div class="label ios">' + 'iOS' + '</div> ';
-    case 'android':
-      return '<div class="label android">' + 'Android' + '</div>';
-    case 'tv':
-      return '<div class="label tv">' + 'TV' + '</div>';
-  }
-}
-
 // Adds multiple platform tags for prop name
 function formatMultiplePlatform(platforms) {
   let platformString = '';
@@ -39,49 +27,6 @@ function formatMultiplePlatform(platforms) {
     }
   });
   return platformString;
-}
-
-// Adds platform tag inside default value of props
-function formatDefaultPlatformProp(defaultProps, propName) {
-  const platformDefaultProps = Object.entries(JSON.parse(defaultProps));
-  const formattedProps = [];
-  for (const [platform, value] of platformDefaultProps) {
-    formattedProps.push('`' + value + '`' + formatPlatformName(platform));
-  }
-  return formattedProps;
-}
-
-// Generates rows for different platform dependent props
-function formatMultipleRowProp(propName, prop, item) {
-  let tableRows = '';
-  if (prop.rnTags && item) {
-    if (item.length) {
-      item.forEach(tag => {
-        const isMatch = tag.match(/{@platform [a-z]*}/);
-        if (isMatch) {
-          const platform = isMatch[0].match(/ [a-z]*/);
-          tag = tag.replace(/{@platform [a-z]*}/g, '');
-          const colorBlock =
-            propName === 'color' && prop.rnTags.default && !tag.includes('null')
-              ? '<ins style="background:' +
-                tag.replace(/'/g, '') +
-                '" class="color-box"></ins>'
-              : '';
-          tag =
-            (colorBlock ? '`' + tag + '`' : tag) +
-            colorBlock +
-            formatPlatformName(platform[0].trim());
-        }
-        tableRows = tableRows + tag + '<hr/>';
-      });
-      tableRows = tableRows.replace(/<hr\/>$/, '');
-    } else {
-      tableRows = item.join('<hr/>');
-    }
-  } else {
-    tableRows = prop.flowType ? maybeLinkifyType(prop.flowType) : '';
-  }
-  return tableRows;
 }
 
 // Wraps a string in an inline code block in a way that is safe to include in a
@@ -134,7 +79,7 @@ function maybeLinkifyTypeName(name) {
   return text;
 }
 
-// Add proper markdown formatting to component's prop type.
+// Adds proper markdown formatting to component's prop type.
 function formatTypeColumn(prop) {
   // Checks for @type pragma comment
   if (prop.rnTags && prop.rnTags.type) {
@@ -155,12 +100,12 @@ function formatTypeColumn(prop) {
       }
       tableRows = tableRows + tag + '<hr/>';
     });
+    tableRows = tableRows.replace(/<hr\/>$/, '');
     return tableRows;
   }
 
   // To extract type from prop flowType
   else if (prop.flowType && Object.keys(prop.flowType).length >= 1) {
-    // console.log("formatTypeColumn -> prop.flowType", prop.flowType)
     let text, url;
 
     // Handles flowtype name for signatures
@@ -197,7 +142,9 @@ function formatTypeColumn(prop) {
     // If no text is found, get raw values as text
     if (!text) {
       // TO BE FIXED
-      text = prop.flowType.raw || formatType(prop.flowType.name);
+      text =
+        (prop.flowType.raw && stringToInlineCodeForTable(prop.flowType.raw)) ||
+        formatType(prop.flowType.name);
     }
 
     // If URL is found, return text and link in markdown format
@@ -209,12 +156,53 @@ function formatTypeColumn(prop) {
   }
 }
 
+// Adds proper markdown formatting to component's default value.
+function formatDefaultColumn(prop) {
+  if (prop?.rnTags?.default) {
+    // Parse from @default annotation
+    let tableRows = '';
+    prop.rnTags.default.forEach(tag => {
+      const isMatch = tag.match(/{@platform [a-z]*}/);
+
+      if (isMatch) {
+        const platform = isMatch[0].match(/ [a-z]*/);
+        tag = tag.replace(/{@platform [a-z]*}/g, '');
+
+        // Checks component for NativeColorValue in default
+        let colorBlock = '';
+        prop?.flowType?.elements.some(elem => {
+          if (elem.name === 'NativeColorValue' && !tag.includes('null')) {
+            colorBlock =
+              '<ins style="background:' +
+              tag.replace(/'/g, '') +
+              '" class="color-box"></ins>';
+            return true;
+          }
+        });
+
+        tag =
+          (!tag.includes('null') ? '`' + tag + '`' : tag) +
+          colorBlock +
+          formatMultiplePlatform(platform[0].split(','));
+      } else {
+        tag = '`' + tag + '`';
+      }
+      tableRows = tableRows + tag + '<hr/>';
+    });
+    tableRows = tableRows.replace(/<hr\/>$/, '');
+    return {Default: tableRows};
+  } else {
+    // Parse defaultValue if @default annotation not provided
+    return prop?.defaultValue?.value
+      ? {Default: stringToInlineCodeForTable(prop?.defaultValue?.value)}
+      : '';
+  }
+}
+
 module.exports = {
-  formatPlatformName,
   formatMultiplePlatform,
-  formatDefaultPlatformProp,
-  formatMultipleRowProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
   formatTypeColumn,
+  formatDefaultColumn,
 };

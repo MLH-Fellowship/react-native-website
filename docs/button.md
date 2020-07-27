@@ -137,7 +137,7 @@ If `true`, disable all interactions for this component.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
 
 ---
 
@@ -147,7 +147,7 @@ TV preferred focus.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
 
 ---
 
@@ -247,4 +247,4 @@ If `true`, doesn't play system sound on touch.
 
 | Type | Default |
 | ---- | ------- |
-| bool | false   |
+| bool | `false` |
