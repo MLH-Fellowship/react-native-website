@@ -15,6 +15,7 @@ const path = require('path');
 const reactDocs = require('@motiz88/react-native-docgen');
 
 const GENERATE_ANNOTATION = '@' + 'generate-docs';
+const PARSE_INHERITS = '@' + 'parse-inherits';
 
 module.exports = extractDocsFromRN;
 
@@ -33,11 +34,16 @@ async function extractDocsFromRN(rnRoot) {
 
   for (const file of allComponentFiles) {
     const contents = fs.readFileSync(file, {encoding: 'utf-8'});
-    if (!contents.includes(GENERATE_ANNOTATION)) {
+    if (
+      !contents.includes(GENERATE_ANNOTATION) ||
+      (!contents.includes(GENERATE_ANNOTATION) &&
+        !contents.includes(PARSE_INHERITS))
+    ) {
       continue;
     }
 
     console.log(file);
+    const parseInherits = contents.includes(PARSE_INHERITS);
 
     const result = reactDocs.parse(
       contents,
@@ -45,7 +51,8 @@ async function extractDocsFromRN(rnRoot) {
       reactDocs.defaultHandlers.filter(
         handler => handler !== reactDocs.handlers.propTypeCompositionHandler
       ),
-      {filename: file}
+      {filename: file},
+      parseInherits
     );
 
     docs.push({
