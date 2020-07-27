@@ -6,12 +6,11 @@
  */
 const tokenizeComment = require('tokenize-comment');
 const {
-  formatPlatformName,
   formatMultiplePlatform,
-  formatDefaultPlatformProp,
-  formatMultipleRowProp,
   maybeLinkifyType,
   maybeLinkifyTypeName,
+  formatTypeColumn,
+  formatDefaultColumn,
 } = require('./propFormatter');
 
 // Formats an array of rows as a Markdown table
@@ -50,25 +49,8 @@ function generateTable(rows) {
 function generateProp(propName, prop) {
   const infoTable = generateTable([
     {
-      Type:
-        prop.rnTags && prop.rnTags.type
-          ? formatMultipleRowProp(propName, prop, prop.rnTags.type)
-          : maybeLinkifyType(prop.flowType),
-      ...(prop.rnTags && prop.rnTags.default
-        ? {
-            Default: formatMultipleRowProp(propName, prop, prop.rnTags.default),
-          }
-        : prop.defaultValue &&
-          prop.defaultValue.value &&
-          (prop.defaultValue.value.includes('Platform.OS')
-            ? {
-                Default: formatMultipleRowProp(
-                  propName,
-                  prop,
-                  prop.defaultValue.value
-                ),
-              }
-            : {Default: '`' + prop.defaultValue.value + '`'})),
+      Type: formatTypeColumn(prop),
+      ...formatDefaultColumn(prop),
     },
   ]);
 
