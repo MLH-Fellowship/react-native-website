@@ -130,6 +130,32 @@ function formatTypeColumn(prop) {
           return prop.flowType.type;
         }
       }
+    } else if (prop.flowType.name.includes('Array')) {
+      prop?.flowType?.elements[0]?.elements.forEach(elem => {
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
+          ({url, text} = magic.linkableTypeAliases[elem.name]);
+        }
+      });
+      if (url) return `array of [${text}](${url})`;
+    } else if (prop.flowType.name === '$ReadOnly') {
+      // Special Case: switch#trackcolor
+      let markdown = '';
+      if (prop.flowType.elements[0]?.type === 'object') {
+        prop?.flowType?.elements[0]?.signature?.properties.forEach(
+          ({key, value}) => {
+            value.elements.forEach(elem => {
+              if (
+                Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
+              ) {
+                ({url, text} = magic.linkableTypeAliases[elem.name]);
+                markdown += `${key}: [${text}](${url})` + ', ';
+              }
+            });
+          }
+        );
+        if (markdown.match(/, $/)) markdown = markdown.replace(/, $/, '');
+        return `${prop.flowType.elements[0]?.type}: {${markdown}}`;
+      }
     } else {
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {

@@ -215,13 +215,23 @@ function preprocessDescription(desc) {
     }\n\n${classBlock}\n\n${
       descriptionTokenized.examples[1].raw
     }\n\n${endBlock}`;
-    return descriptionTokenized.description + `\n## Example\n` + wrapper;
+    return (
+      descriptionTokenized.description +
+      `\n## Example\n` +
+      wrapper +
+      '\n' +
+      descriptionTokenized?.footer
+    );
   }
   if (descriptionTokenized.examples.length === 1 && tabs === 1) {
     return (
       descriptionTokenized.description +
+      '\n\n' +
+      descriptionTokenized?.examples[0]?.description +
       '\n## Example\n' +
-      descriptionTokenized?.examples[0]?.raw
+      descriptionTokenized?.examples[0]?.raw +
+      '\n' +
+      descriptionTokenized?.footer
     );
   }
   if (descriptionTokenized.examples.length > 0 && tabs === 1) {
@@ -232,7 +242,9 @@ function preprocessDescription(desc) {
       '\n' +
       descriptionTokenized?.examples[0]?.raw +
       '\n## Example\n' +
-      descriptionTokenized?.examples[1]?.raw
+      descriptionTokenized?.examples[1]?.raw +
+      '\n' +
+      descriptionTokenized?.footer
     );
   } else {
     return desc;

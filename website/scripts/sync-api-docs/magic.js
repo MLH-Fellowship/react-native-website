@@ -25,5 +25,9 @@ module.exports = {
       text: 'PressEvent',
       url: 'pressevent.md',
     },
+    'RefreshLayoutConsts.SIZE.DEFAULT': {
+      text: 'RefreshControl.SIZE',
+      url: 'refreshcontrol.md#refreshlayoutconstssize',
+    },
   },
 };
