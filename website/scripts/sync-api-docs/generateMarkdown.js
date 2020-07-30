@@ -226,6 +226,8 @@ function preprocessDescription(desc) {
   if (descriptionTokenized.examples.length === 1 && tabs === 1) {
     return (
       descriptionTokenized.description +
+      '\n\n' +
+      descriptionTokenized?.examples[0]?.description +
       '\n## Example\n' +
       descriptionTokenized?.examples[0]?.raw +
       '\n' +

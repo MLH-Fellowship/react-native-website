@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
+> Note: `refreshing` is a controlled prop, this is why it needs to be set to true in the `onRefresh` function otherwise the refresh indicator will stop immediately.
+
 ---
 
 # Reference
@@ -71,23 +73,23 @@ export default App;
 
 Inherits [View Props](view.md#props).
 
-### `colors`
+### `colors`<div class="label android">Android</div>
 
 The colors (at least one) that will be used to draw the refresh indicator.
 
 | Type                        |
 | --------------------------- |
-| \$ReadOnlyArray<ColorValue> |
+| array of [color](colors.md) |
 
 ---
 
-### `enabled`
+### `enabled`<div class="label android">Android</div>
 
 Whether the pull to refresh functionality is enabled.
 
-| Type |
-| ---- |
-| bool |
+| Type | Default |
+| ---- | ------- |
+| bool | `true`  |
 
 ---
 
@@ -95,13 +97,13 @@ Whether the pull to refresh functionality is enabled.
 
 Called when the view starts refreshing.
 
-| Type                                                        |
-| ----------------------------------------------------------- |
-| <code>() =&#x3E; void &#124; Promise&#x3C;void&#x3E;</code> |
+| Type     |
+| -------- |
+| function |
 
 ---
 
-### `progressBackgroundColor`
+### `progressBackgroundColor`<div class="label android">Android</div>
 
 The background color of the refresh indicator.
 
@@ -111,13 +113,13 @@ The background color of the refresh indicator.
 
 ---
 
-### `progressViewOffset`
+### `progressViewOffset`<div class="label android">Android</div>
 
 Progress view top offset
 
-| Type   |
-| ------ |
-| number |
+| Type   | Default |
+| ------ | ------- |
+| number | `0`     |
 
 ---
 
@@ -131,17 +133,17 @@ Whether the view should be indicating an active refresh.
 
 ---
 
-### `size`
+### `size`<div class="label android">Android</div>
 
-Size of the refresh indicator, see RefreshControl.SIZE.
+Size of the refresh indicator.
 
-| Type                                                                                                     |
-| -------------------------------------------------------------------------------------------------------- |
-| <code>&#124; typeof RefreshLayoutConsts.SIZE.DEFAULT &#124; typeof RefreshLayoutConsts.SIZE.LARGE</code> |
+| Type                                                             | Default                            |
+| ---------------------------------------------------------------- | ---------------------------------- |
+| [RefreshControl.SIZE](refreshcontrol.md#refreshlayoutconstssize) | `RefreshLayoutConsts.SIZE.DEFAULT` |
 
 ---
 
-### `tintColor`
+### `tintColor`<div class="label ios">iOS</div>
 
 The color of the refresh indicator.
 
@@ -151,7 +153,7 @@ The color of the refresh indicator.
 
 ---
 
-### `title`
+### `title`<div class="label ios">iOS</div>
 
 The title displayed under the refresh indicator.
 
@@ -161,9 +163,9 @@ The title displayed under the refresh indicator.
 
 ---
 
-### `titleColor`
+### `titleColor`<div class="label ios">iOS</div>
 
-Title color.
+The color of the refresh indicator title.
 
 | Type               |
 | ------------------ |
