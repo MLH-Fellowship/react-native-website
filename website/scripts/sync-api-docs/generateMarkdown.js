@@ -209,7 +209,12 @@ function preprocessDescription(desc) {
   descriptionTokenized.examples.map(item =>
     item.language.includes('SnackPlayer') ? tabs++ : tabs
   );
-  if (descriptionTokenized.examples.length > 0 && tabs === 2) {
+  if (
+    descriptionTokenized.examples.length > 0 &&
+    tabs === 2 &&
+    descriptionTokenized.examples[0].language ===
+      descriptionTokenized.examples[1].language
+  ) {
     const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
       descriptionTokenized.examples[0].raw
     }\n\n${classBlock}\n\n${
@@ -233,8 +238,7 @@ function preprocessDescription(desc) {
       '\n' +
       descriptionTokenized?.footer
     );
-  }
-  if (descriptionTokenized.examples.length > 0 && tabs === 1) {
+  } else if (descriptionTokenized.examples.length > 0 && tabs === 1) {
     return (
       descriptionTokenized.description +
       '\n' +
@@ -247,11 +251,18 @@ function preprocessDescription(desc) {
       descriptionTokenized?.footer
     );
   } else {
-    return desc;
+    return (
+      desc.substr(0, desc.search('```SnackPlayer')) +
+      '\n' +
+      '\n## Example\n' +
+      '\n' +
+      desc.substr(desc.search('```SnackPlayer'))
+    );
   }
 }
 
 function generateMarkdown({id, title}, component) {
+  // console.log("generateMarkdown -> component", component)
   const markdownString =
     generateHeader({id, title}) +
     '\n' +
