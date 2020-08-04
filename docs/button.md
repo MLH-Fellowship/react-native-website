@@ -111,6 +111,26 @@ export default App;
 
 ## Props
 
+### <div class="label required basic">Required</div>`onPress`
+
+Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
+
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
+
+---
+
+### <div class="label required basic">Required</div>`title`
+
+Text to display inside the button. On Android the given title will be converted to the uppercased form.
+
+| Type   |
+| ------ |
+| string |
+
+---
+
 ### `accessibilityLabel`
 
 Text to display for blindness accessibility features.
@@ -211,29 +231,9 @@ Designates the next view to receive focus when the user navigates up. See the [A
 
 ---
 
-### <div class="label required basic">Required</div>`onPress`
-
-Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
-
-| Type                                  |
-| ------------------------------------- |
-| function([PressEvent](pressevent.md)) |
-
----
-
 ### `testID`
 
 Used to locate this view in end-to-end tests.
-
-| Type   |
-| ------ |
-| string |
-
----
-
-### <div class="label required basic">Required</div>`title`
-
-Text to display inside the button. On Android the given title will be converted to the uppercased form.
 
 | Type   |
 | ------ |

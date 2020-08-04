@@ -73,9 +73,9 @@ On iOS, custom color for the background. This background color can be seen eithe
 
 Invoked when the user tries to change the value of the switch. Receives the change event as an argument. If you want to only receive the new value, use `onValueChange` instead.
 
-| Type                        |
-| --------------------------- |
-| function(SwitchChangeEvent) |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -83,9 +83,9 @@ Invoked when the user tries to change the value of the switch. Receives the chan
 
 Invoked when the user tries to change the value of the switch. Receives the new value as an argument. If you want to instead receive an event, use `onChange`.
 
-| Type              |
-| ----------------- |
-| function(boolean) |
+| Type     |
+| -------- |
+| function |
 
 ---
 

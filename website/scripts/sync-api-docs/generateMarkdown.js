@@ -147,7 +147,8 @@ function generateProps({props, composes}) {
           .join('\n\n') + '\n\n'
       : '') +
     Object.keys(props)
-      .sort()
+      .sort((a, b) => a.localeCompare(b))
+      .sort((a, b) => props[b].required - props[a].required)
       .map(function(propName) {
         return generateProp(propName, props[propName]);
       })
@@ -185,6 +186,36 @@ function generateHeader({id, title}) {
   );
 }
 
+// function newPreprocessDescriptiono(desc) {
+//   const playgroundTab = `<div class="toggler">
+//     <ul role="tablist" class="toggle-syntax">
+//     <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+//       Function Component Example
+//     </li>
+//     <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+//       Class Component Example
+//     </li>
+//     </ul>
+//   </div>`;
+
+//   //Blocks for different syntax sections
+//   const functionalBlock = `<block class='functional syntax' />`;
+//   const classBlock = `<block class='classical syntax' />`;
+//   const endBlock = `<block class='endBlock syntax' />`;
+
+//   let tabs = 0;
+
+//   desc.substr(0, desc.search('```SnackPlayer')) +
+//   '\n' +
+//   '\n## Example\n' +
+
+//   //sdfasdf
+
+//   '\n' +
+//   desc.substr(desc.search('```SnackPlayer'))
+
+// }
+
 // Function to process example contained description
 function preprocessDescription(desc) {
   // Playground tabs for the class and functional components
@@ -203,13 +234,32 @@ function preprocessDescription(desc) {
   const functionalBlock = `<block class='functional syntax' />`;
   const classBlock = `<block class='classical syntax' />`;
   const endBlock = `<block class='endBlock syntax' />`;
+
+  desc = desc
+    .split('\n')
+    .map(line => {
+      return line.replace(/  /, '');
+    })
+    .join('\n');
+
   const descriptionTokenized = tokenizeComment(desc);
+  // console.log("preprocessDescription -> descriptionTokenized", descriptionTokenized)
   // Tabs counter for examples
   let tabs = 0;
-  descriptionTokenized.examples.map(item =>
-    item.language.includes('SnackPlayer') ? tabs++ : tabs
-  );
-  if (descriptionTokenized.examples.length > 0 && tabs === 2) {
+  descriptionTokenized.examples.map(item => {
+    const matchSnackPlayer = item.language.match(/(SnackPlayer name=).*/g);
+    if (matchSnackPlayer) {
+      const matchClassComp = matchSnackPlayer[0].match(
+        /Class%20Component%20Example/
+      );
+      const matchFuncComp = matchSnackPlayer[0].match(
+        /Function%20Component%20Example/
+      );
+      if (matchClassComp || matchFuncComp) tabs++;
+    }
+  });
+
+  if (tabs === 2) {
     const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
       descriptionTokenized.examples[0].raw
     }\n\n${classBlock}\n\n${
@@ -222,32 +272,14 @@ function preprocessDescription(desc) {
       '\n' +
       descriptionTokenized?.footer
     );
-  }
-  if (descriptionTokenized.examples.length === 1 && tabs === 1) {
-    return (
-      descriptionTokenized.description +
-      '\n\n' +
-      descriptionTokenized?.examples[0]?.description +
-      '\n## Example\n' +
-      descriptionTokenized?.examples[0]?.raw +
-      '\n' +
-      descriptionTokenized?.footer
-    );
-  }
-  if (descriptionTokenized.examples.length > 0 && tabs === 1) {
-    return (
-      descriptionTokenized.description +
-      '\n' +
-      descriptionTokenized?.examples[0]?.description +
-      '\n' +
-      descriptionTokenized?.examples[0]?.raw +
-      '\n## Example\n' +
-      descriptionTokenized?.examples[1]?.raw +
-      '\n' +
-      descriptionTokenized?.footer
-    );
   } else {
-    return desc;
+    return (
+      desc.substr(0, desc.search('```SnackPlayer')) +
+      '\n' +
+      '\n## Example\n' +
+      '\n' +
+      desc.substr(desc.search('```SnackPlayer'))
+    );
   }
 }
 
