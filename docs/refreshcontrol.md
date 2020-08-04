@@ -73,6 +73,16 @@ export default App;
 
 Inherits [View Props](view.md#props).
 
+### <div class="label required basic">Required</div>`refreshing`
+
+Whether the view should be indicating an active refresh.
+
+| Type |
+| ---- |
+| bool |
+
+---
+
 ### `colors`<div class="label android">Android</div>
 
 The colors (at least one) that will be used to draw the refresh indicator.
@@ -120,16 +130,6 @@ Progress view top offset
 | Type   | Default |
 | ------ | ------- |
 | number | `0`     |
-
----
-
-### <div class="label required basic">Required</div>`refreshing`
-
-Whether the view should be indicating an active refresh.
-
-| Type |
-| ---- |
-| bool |
 
 ---
 

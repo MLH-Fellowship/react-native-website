@@ -30,9 +30,17 @@ function joinDescriptionAndExamples(tokenized) {
 
 function preprocessTagsInDescription(obj) {
   if (obj && obj.description) {
-    obj.description = obj.description.split('    ').join('');
+    obj.description = obj.description
+      .split('\n')
+      .map(line => {
+        return line.replace(/    /, '');
+      })
+      .join('\n');
     const descriptionTokenized = tokenizeComment(obj.description);
-    obj.description = joinDescriptionAndExamples(descriptionTokenized);
+    obj.description = obj.description.replace(
+      /@platform .*|@default .*|@type .*/g,
+      ''
+    );
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'
