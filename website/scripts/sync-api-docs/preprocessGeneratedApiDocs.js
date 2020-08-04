@@ -37,6 +37,10 @@ function preprocessTagsInDescription(obj) {
       })
       .join('\n');
     const descriptionTokenized = tokenizeComment(obj.description);
+    obj.description = obj.description.replace(
+      /@platform .*|@default .*|@type .*/g,
+      ''
+    );
     obj.rnTags = {};
     const platformTag = descriptionTokenized.tags.find(
       ({key}) => key === 'platform'

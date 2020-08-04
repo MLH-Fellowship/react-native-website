@@ -125,7 +125,7 @@ function formatTypeColumn(prop) {
             return `${prop.flowType.type}([${text}](${url}))`;
           }
           // TODO: Handling unknown function params
-          return `${prop.flowType.type}(${eventType})`;
+          return `${prop.flowType.type}`;
         } else {
           return prop.flowType.type;
         }

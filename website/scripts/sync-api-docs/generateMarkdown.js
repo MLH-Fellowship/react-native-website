@@ -147,7 +147,8 @@ function generateProps({props, composes}) {
           .join('\n\n') + '\n\n'
       : '') +
     Object.keys(props)
-      .sort()
+      .sort((a, b) => a.localeCompare(b))
+      .sort((a, b) => props[b].required - props[a].required)
       .map(function(propName) {
         return generateProp(propName, props[propName]);
       })
@@ -209,12 +210,7 @@ function preprocessDescription(desc) {
   descriptionTokenized.examples.map(item =>
     item.language.includes('SnackPlayer') ? tabs++ : tabs
   );
-  if (
-    descriptionTokenized.examples.length > 0 &&
-    tabs === 2 &&
-    descriptionTokenized.examples[0].language ===
-      descriptionTokenized.examples[1].language
-  ) {
+  if (descriptionTokenized.examples.length > 0 && tabs === 2) {
     const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
       descriptionTokenized.examples[0].raw
     }\n\n${classBlock}\n\n${
