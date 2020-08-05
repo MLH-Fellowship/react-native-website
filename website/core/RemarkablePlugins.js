@@ -1,8 +1,6 @@
 'use strict';
 
 const hljs = require('highlight.js');
-const {utils} = require('remarkable');
-const {escapeHtml} = utils;
 
 // Remove leading "SnackPlayer", "ReactNativeWebPlayer"
 function cleanParams(params) {
@@ -40,15 +38,6 @@ function htmlForCodeBlock(code) {
 }
 
 /**
- * Expo SDKs lag stable React Native versions by a week or two.
- * This mapping informs the SnackPlayer which version of Expo whenever
- * a React Native version param is passed. There's no harm in keeping this
- * list up to date, but in practical terms you will only need to do so
- * whenever an example that uses the SnackPlayer is updated with code
- * that requires a newer Expo SDK release.
- */
-const LatestSDKVersion = '26.0.0';
-/**
  * Use the SnackPlayer by including a ```SnackPlayer``` block in markdown.
  *
  * Optionally, include url parameters directly after the block's language.
@@ -67,13 +56,7 @@ const LatestSDKVersion = '26.0.0';
  * ```
  */
 function SnackPlayer(md) {
-  md.renderer.rules.fence_custom.SnackPlayer = function(
-    tokens,
-    idx,
-    options,
-    env,
-    self
-  ) {
+  md.renderer.rules.fence_custom.SnackPlayer = function(tokens, idx) {
     let params = parseParams(cleanParams(tokens[idx].params));
 
     const name = params.name ? decodeURIComponent(params.name) : 'Example';
@@ -86,7 +69,6 @@ function SnackPlayer(md) {
     const supportedPlatforms = params.supportedPlatforms
       ? params.supportedPlatforms
       : 'ios,android,web';
-    const rnVersion = params.version ? params.version : 'next';
 
     return (
       '<div class="snack-player">' +
@@ -135,14 +117,8 @@ function SnackPlayer(md) {
  * ```
  */
 function ReactNativeWebPlayer(md) {
-  md.renderer.rules.fence_custom.ReactNativeWebPlayer = function(
-    tokens,
-    idx,
-    options,
-    env,
-    self
-  ) {
-    const WEB_PLAYER_VERSION = '1.10.0';
+  md.renderer.rules.fence_custom.ReactNativeWebPlayer = function(tokens, idx) {
+    const WEB_PLAYER_VERSION = '2.0.0-alpha.8';
 
     let sampleCode = tokens[idx].content;
     let hash = `#code=${encodeURIComponent(sampleCode)}`;
@@ -157,7 +133,7 @@ function ReactNativeWebPlayer(md) {
       '<div class="web-player">' +
       htmlForCodeBlock(sampleCode) +
       `<iframe style="margin-top: 4" width="100%" height="${
-        parseParams(paramsString).platform === 'android' ? '425' : '420'
+        params.platform === 'android' ? '425' : '420'
       }" data-src="//cdn.rawgit.com/dabbott/react-native-web-player/gh-v${WEB_PLAYER_VERSION}/index.html${hash}" frame-border="0"></iframe>` +
       `</div>` +
       '\n\n'

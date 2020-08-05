@@ -15,15 +15,16 @@ try {
   // We don't care if there are no repos synced locally
   // We only care if we are on the CI server and about to deploy
 }
-const defaultVersionShown = '0.61';
-const baseUrl = '/react-native/';
+const defaultVersionShown = '0.63';
+const baseUrl = '/';
 const repoUrl = 'https://github.com/facebook/react-native';
 const siteConfig = {
   title: 'React Native',
   tagline: 'A framework for building native apps using React',
-  url: 'https://facebook.github.io',
+  url: 'https://reactnative.dev',
   baseUrl,
   projectName: 'react-native',
+  cname: 'reactnative.dev',
   repoUrl,
   defaultVersionShown,
   users,
@@ -31,7 +32,8 @@ const siteConfig = {
   editUrl: 'https://github.com/facebook/react-native-website/blob/master/docs/',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
-    {doc: 'activityindicator', label: 'API'},
+    {doc: 'components-and-apis', label: 'Components'},
+    {doc: 'accessibilityinfo', label: 'API'},
     {page: 'help', label: 'Community'},
     {blog: true, label: 'Blog'},
     {search: true},
@@ -65,11 +67,22 @@ const siteConfig = {
   },
   facebookAppId: '1677033832619985',
   twitter: 'reactnative',
+  twitterImage: 'img/logo-og.png',
+  ogImage: 'img/logo-og.png',
   markdownPlugins: [
     RemarkablePlugins.SnackPlayer,
     RemarkablePlugins.ReactNativeWebPlayer,
   ],
-  usePrism: ['javascript', 'js', 'jsx', 'java', 'objective-c', 'json'],
+  usePrism: [
+    'javascript',
+    'js',
+    'jsx',
+    'java',
+    'objective-c',
+    'json',
+    'sh',
+    'tsx',
+  ],
   highlight: {
     theme: 'solarized-dark',
   },
@@ -82,6 +95,8 @@ const siteConfig = {
     baseUrl + 'js/codeblocks.js',
     baseUrl + 'js/tabs.js',
     baseUrl + 'js/docs-rating.js',
+    baseUrl + 'js/announcement.js',
+    baseUrl + 'js/survey-banner.js',
   ],
   cleanUrl: true,
   scrollToTop: true,
@@ -90,6 +105,8 @@ const siteConfig = {
   },
   docsSideNavCollapsible: true,
   onPageNav: 'separate',
+  slugPreprocessor: baseSlug =>
+    baseSlug.replace(/<([^>]+?)([^>]*?)>(.*?)<\/\1>/gi, ''),
 };
 
 module.exports = siteConfig;

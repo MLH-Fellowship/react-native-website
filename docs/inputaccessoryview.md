@@ -7,7 +7,7 @@ A component which enables customization of the keyboard input accessory view on 
 
 To use this component wrap your custom toolbar with the InputAccessoryView component, and set a `nativeID`. Then, pass that `nativeID` as the `inputAccessoryViewID` of whatever `TextInput` you desire. A basic example:
 
-```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios,web
+```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios
 import React, { useState } from 'react';
 import { Button, InputAccessoryView, ScrollView, TextInput } from 'react-native';
 
@@ -15,7 +15,7 @@ export default App = () => {
   const inputAccessoryViewID = 'uniqueID';
   const initialText = 'Placeholder Text';
   const [text, setText] = useState(initialText);
-  
+
   return (
     <>
       <ScrollView keyboardDismissMode="interactive">
@@ -74,5 +74,5 @@ An ID which is used to associate this `InputAccessoryView` to specified TextInpu
 
 # Known issues
 
-- [react-native#18997](https://github.com/facebook/react-native/issues/18997): Doesn't support multiline `TextInput`s
+- [react-native#18997](https://github.com/facebook/react-native/issues/18997): Doesn't support multiline `TextInput`
 - [react-native#20157](https://github.com/facebook/react-native/issues/20157): Can't use with a bottom tab bar

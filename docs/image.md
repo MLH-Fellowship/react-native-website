@@ -5,7 +5,218 @@ title: Image
 
 A React component for displaying different types of images, including network images, static resources, temporary local images, and images from local disk, such as the camera roll.
 
-See https://facebook.github.io/react-native/docs/image.html
+This example shows fetching and displaying an image from local storage as well as one from network and even from data provided in the `'data:'` uri scheme.
+
+> Note that for network and data images, you will need to manually specify the dimensions of your image!
+
+## Examples
+
+<div class="toggler">
+  <ul role="tablist" class="toggle-syntax">
+    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+      Function Component Example
+    </li>
+    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+      Class Component Example
+    </li>
+  </ul>
+</div>
+
+<block class="functional syntax" />
+
+```SnackPlayer name=Function%20Component%20Example
+
+import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+  logo: {
+    width: 66,
+    height: 58,
+  },
+});
+
+const DisplayAnImage = () => {
+  return (
+    <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={require('@expo/snack-static/react-native-logo.png')}
+      />
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}
+      />
+      <Image
+        style={styles.logo}
+        source={{
+          uri:
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+        }}
+      />
+    </View>
+  );
+}
+
+export default DisplayAnImage;
+```
+
+<block class="classical syntax" />
+
+```SnackPlayer name=Class%20Component%20Example
+
+import React, { Component } from 'react';
+import { AppRegistry, View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+  },
+  logo: {
+    width: 66,
+    height: 58,
+  },
+});
+
+class DisplayAnImage extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image
+          style={styles.tinyLogo}
+          source={require('@expo/snack-static/react-native-logo.png')}
+        />
+        <Image
+          style={styles.tinyLogo}
+          source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        />
+        <Image
+          style={styles.logo}
+          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+        />
+      </View>
+    );
+  }
+}
+
+export default DisplayAnImage;
+```
+
+<block class="endBlock syntax" />
+
+You can also add `style` to an image:
+
+<div class="toggler">
+  <ul role="tablist" class="toggle-syntax">
+    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+      Function Component Example
+    </li>
+    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+      Class Component Example
+    </li>
+  </ul>
+</div>
+
+<block class="functional syntax" />
+
+```SnackPlayer name=Function%20Component%20Example
+
+import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  stretch: {
+    width: 50,
+    height: 200,
+    resizeMode: 'stretch',
+  },
+});
+
+const DisplayAnImageWithStyle = () => {
+  return (
+    <View style={styles.container}>
+      <Image
+        style={styles.stretch}
+        source={require('@expo/snack-static/react-native-logo.png')}
+      />
+    </View>
+  );
+}
+
+export default DisplayAnImageWithStyle;
+```
+
+<block class="classical syntax" />
+
+```SnackPlayer name=Class%20Component%20Example
+
+import React, { Component } from 'react';
+import { View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  stretch: {
+    width: 50,
+    height: 200,
+    resizeMode: 'stretch'
+  }
+});
+
+class DisplayAnImageWithStyle extends Component {
+  render() {
+    return (
+      <View>
+        <Image
+          style={styles.stretch}
+          source={require('@expo/snack-static/react-native-logo.png')}
+        />
+      </View>
+    );
+  }
+}
+
+export default DisplayAnImageWithStyle;
+```
+
+<block class="endBlock syntax" />
+
+## GIF and WebP support on Android
+
+When building your own native code, GIF and WebP are not supported by default on Android.
+
+You will need to add some optional modules in `android/app/build.gradle`, depending on the needs of your app.
+
+```gradle
+dependencies {
+  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  implementation 'com.facebook.fresco:animated-base-support:1.3.0'
+
+  // For animated GIF support
+  implementation 'com.facebook.fresco:animated-gif:2.0.0'
+
+  // For WebP support, including animated WebP
+  implementation 'com.facebook.fresco:animated-webp:2.1.0'
+  implementation 'com.facebook.fresco:webpsupport:2.0.0'
+
+  // For WebP support, without animations
+  implementation 'com.facebook.fresco:webpsupport:2.0.0'
+}
+```
 
 ---
 
@@ -13,15 +224,21 @@ See https://facebook.github.io/react-native/docs/image.html
 
 ## Props
 
-### `accessibilityLabel`
+### `style`
 
-The text that's read by the screen reader when the user interacts with the image.
+`ImageResizeMode` is an `Enum` for different image resizing modes, set via the `resizeMode` style property on `Image` components. The values are `contain`, `cover`, `stretch`, `center`, `repeat`.
 
-See https://facebook.github.io/react-native/docs/image.html#accessibilitylabel
+| Type  | Required |
+| ----- | -------- |
+| style | No       |
 
-| Type        | Required |
-| ----------- | -------- |
-| `Stringish` | No       |
+- [Image Style Props...](image-style-props#props)
+
+- [Layout Props...](layout-props#props)
+
+- [Shadow Props...](shadow-props#props)
+
+- [Transforms...](transforms#props)
 
 ---
 
@@ -29,41 +246,19 @@ See https://facebook.github.io/react-native/docs/image.html#accessibilitylabel
 
 When true, indicates the image is an accessibility element.
 
-See https://facebook.github.io/react-native/docs/image.html#accessible
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required | Platform |
+| ---- | -------- | -------- |
+| bool | No       | iOS      |
 
 ---
 
-### `blurRadius`
+### `accessibilityLabel`
 
-blurRadius: the blur radius of the blur filter added to the image
+The text that's read by the screen reader when the user interacts with the image.
 
-See https://facebook.github.io/react-native/docs/image.html#blurradius
-
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
-
----
-
-### `capInsets`
-
-See https://facebook.github.io/react-native/docs/image.html#capinsets
-
-| Type                                                                                                                 | Required |
-| -------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>\$ReadOnly&#x3C;{&#124; bottom?: ?number, left?: ?number, right?: ?number, top?: ?number, &#124;}&#x3E;</code> | No       |
-
----
-
-### `children`
-
-| Type      | Required |
-| --------- | -------- |
-| `unknown` | No       |
+| Type   | Required | Platform |
+| ------ | -------- | -------- |
+| string | No       | iOS      |
 
 ---
 
@@ -73,69 +268,50 @@ A static image to display while loading the image source.
 
 See https://facebook.github.io/react-native/docs/image.html#defaultsource
 
-| Type                                                                             | Required |
-| -------------------------------------------------------------------------------- | -------- |
-| <code>ImageURISource &#124; number &#124; Array&#x3C;ImageURISource&#x3E;</code> | No       |
+> Tip : IOS you will need to increase `blurRadius` more than `5`
+
+---
+
+### `capInsets`
+
+When the image is resized, the corners of the size specified by `capInsets` will stay a fixed size, but the center content and borders of the image will be stretched. This is useful for creating resizable rounded buttons, shadows, and other resizable assets. More info in the [official Apple documentation](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIImage_Class/index.html#//apple_ref/occ/instm/UIImage/resizableImageWithCapInsets).
+
+| Type         | Required | Platform |
+| ------------ | -------- | -------- |
+| [Rect](rect) | No       | iOS      |
+
+---
+
+### `defaultSource`
+
+A static image to display while loading the image source.
+
+| Type           | Required | Platform |
+| -------------- | -------- | -------- |
+| object, number | No       | iOS      |
+| number         | No       | Android  |
+
+If passing an object, the general shape is `{uri: string, width: number, height: number, scale: number}`:
+
+- `uri` - a string representing the resource identifier for the image, which should be either a local file path or the name of a static image resource (which should be wrapped in the `require('./path/to/image.png')` function).
+- `width`, `height` - can be specified if known at build time, in which case these will be used to set the default `<Image/>` component dimensions.
+- `scale` - used to indicate the scale factor of the image. Defaults to 1.0 if unspecified, meaning that one image pixel equates to one display point / DIP.
+
+If passing a number:
+
+- `number` - Opaque type returned by something like `require('./image.jpg')`.
+
+> **Note:** On Android, the default source prop is ignored on debug builds.
 
 ---
 
 ### `fadeDuration`
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+Android only. By default, it is 300ms.
 
----
-
-### `height`
-
-| Type                                                              | Required |
-| ----------------------------------------------------------------- | -------- |
-| <code>null &#124; number &#124; string &#124; AnimatedNode</code> | No       |
-
----
-
-### `loadingIndicatorSource`
-
-| Type                                                                       | Required |
-| -------------------------------------------------------------------------- | -------- |
-| <code>number &#124; \$ReadOnly&#x3C;{&#124;uri: string&#124;}&#x3E;</code> | No       |
-
----
-
-### `onError`
-
-Invoked on load error with `{nativeEvent: {error}}`.
-
-See https://facebook.github.io/react-native/docs/image.html#onerror
-
-| Type                                                                                                                    | Required |
-| ----------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>( event: SyntheticEvent&#x3C; \$ReadOnly&#x3C;{&#124; error: string, &#124;}&#x3E;, &#x3E;, ) =&#x3E; void</code> | No       |
-
----
-
-### `onLayout`
-
-Invoked on mount and layout changes with `{nativeEvent: {layout: {x, y, width, height}}}`.
-
-See https://facebook.github.io/react-native/docs/image.html#onlayout
-
-| Type                            | Required |
-| ------------------------------- | -------- |
-| `(event: LayoutEvent) => mixed` | No       |
-
----
-
-### `onLoad`
-
-Invoked when load completes successfully.
-
-See https://facebook.github.io/react-native/docs/image.html#onload
-
-| Type                              | Required |
-| --------------------------------- | -------- |
-| `(event: ImageLoadEvent) => void` | No       |
+| Type   | Required | Platform |
+| ------ | -------- | -------- |
+| number | No       | Android  |
 
 ---
 
@@ -153,25 +329,57 @@ See https://facebook.github.io/react-native/docs/image.html#onloadend
 
 ### `onLoadStart`
 
-Invoked on load start.
+### `onLayout`
 
-See https://facebook.github.io/react-native/docs/image.html#onloadstart
+Invoked on mount and layout changes with `{nativeEvent: {layout: {x, y, width, height}}}`.
 
-| Type         | Required |
-| ------------ | -------- |
-| `() => void` | No       |
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
 
 ---
 
+### `onLoad`
+
+Invoked when load completes successfully.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### `onLoadEnd`
+
+Invoked when load either succeeds or fails.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### `onLoadStart`
+
+Invoked on load start.
+
+e.g., `onLoadStart={(e) => this.setState({loading: true})}`
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+| Type                                                                                                                              | Required |
+| --------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| <code>( event: SyntheticEvent&#x3C;\$ReadOnly&#x3C;{&#124;loaded: number, total: number&#124;}&#x3E;&#x3E;, ) =&#x3E; void</code> | No       |
+
 ### `onPartialLoad`
 
-Invoked when a partial load of the image is complete.
+Invoked when a partial load of the image is complete. The definition of what constitutes a "partial load" is loader specific though this is meant for progressive JPEG loads.
 
-See https://facebook.github.io/react-native/docs/image.html#onpartialload
-
-| Type         | Required |
-| ------------ | -------- |
-| `() => void` | No       |
+| Type     | Required | Platform |
+| -------- | -------- | -------- |
+| function | No       | iOS      |
 
 ---
 
@@ -179,41 +387,59 @@ See https://facebook.github.io/react-native/docs/image.html#onpartialload
 
 Invoked on download progress with `{nativeEvent: {loaded, total}}`.
 
-See https://facebook.github.io/react-native/docs/image.html#onprogress
-
-| Type                                                                                                                              | Required |
-| --------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>( event: SyntheticEvent&#x3C;\$ReadOnly&#x3C;{&#124;loaded: number, total: number&#124;}&#x3E;&#x3E;, ) =&#x3E; void</code> | No       |
+| Type     | Required | Platform |
+| -------- | -------- | -------- |
+| function | No       | iOS      |
 
 ---
 
 ### `progressiveRenderingEnabled`
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+Android only. When true, enables progressive jpeg streaming. https://frescolib.org/docs/progressive-jpegs.html
+
+| Type | Required | Platform |
+| ---- | -------- | -------- |
+| bool | No       | Android  |
 
 ---
 
 ### `resizeMethod`
 
-See https://facebook.github.io/react-native/docs/image.html#resizemethod
+The mechanism that should be used to resize the image when the image's dimensions differ from the image view's dimensions. Defaults to `auto`.
+
+- `auto`: Use heuristics to pick between `resize` and `scale`.
+
+- `resize`: A software operation which changes the encoded image in memory before it gets decoded. This should be used instead of `scale` when the image is much larger than the view.
+
+- `scale`: The image gets drawn downscaled or upscaled. Compared to `resize`, `scale` is faster (usually hardware accelerated) and produces higher quality images. This should be used if the image is smaller than the view. It should also be used if the image is slightly bigger than the view.
+
+More details about `resize` and `scale` can be found at http://frescolib.org/docs/resizing.html.
+
+| Type                            | Required | Platform |
+| ------------------------------- | -------- | -------- |
+| enum('auto', 'resize', 'scale') | No       | Android  |
 
 | Type                                                                             | Required |
 | -------------------------------------------------------------------------------- | -------- |
-| <code>&#x27;auto&#x27; &#124; &#x27;resize&#x27; &#124; &#x27;scale&#x27;</code> | No       |
-
----
+| <code>ImageURISource &#124; number &#124; Array&#x3C;ImageURISource&#x3E;</code> | No       |
 
 ### `resizeMode`
 
-Determines how to resize the image when the frame doesn't match the raw image dimensions.
+Determines how to resize the image when the frame doesn't match the raw image dimensions. Defaults to `cover`.
 
-See https://facebook.github.io/react-native/docs/image.html#resizemode
+- `cover`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the view (minus padding).
 
-| Type                                                                                                                                     | Required |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#x27;cover&#x27; &#124; &#x27;contain&#x27; &#124; &#x27;stretch&#x27; &#124; &#x27;repeat&#x27; &#124; &#x27;center&#x27;</code> | No       |
+- `contain`: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the view (minus padding).
+
+- `stretch`: Scale width and height independently, This may change the aspect ratio of the src.
+
+- `repeat`: Repeat the image to cover the frame of the view. The image will keep its size and aspect ratio, unless it is larger than the view, in which case it will be scaled down uniformly so that it is contained in the view.
+
+- `center`: Center the image in the view along both dimensions. If the image is larger than the view, scale it down uniformly so that it is contained in the view.
+
+| Type                                                    | Required |
+| ------------------------------------------------------- | -------- |
+| enum('cover', 'contain', 'stretch', 'repeat', 'center') | No       |
 
 ---
 
@@ -221,49 +447,25 @@ See https://facebook.github.io/react-native/docs/image.html#resizemode
 
 The image source (either a remote URL or a local file resource).
 
-See https://facebook.github.io/react-native/docs/image.html#source
+This prop can also contain several remote URLs, specified together with their width and height and potentially with scale/other URI arguments. The native side will then choose the best `uri` to display based on the measured size of the image container. A `cache` property can be added to control how networked request interacts with the local cache. (For more information see [Cache Control for Images](images#cache-control-ios-only)).
 
-| Type                                                                             | Required |
-| -------------------------------------------------------------------------------- | -------- |
-| <code>ImageURISource &#124; number &#124; Array&#x3C;ImageURISource&#x3E;</code> | No       |
+The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp` (Android only), `psd` (iOS only). In addition, iOS supports several RAW image formats. Refer to Apple's documentation for the current list of supported camera models (for iOS 12, see https://support.apple.com/en-ca/HT208967).
 
----
-
-### `src`
-
-| Type      | Required |
-| --------- | -------- |
-| `unknown` | No       |
-
----
-
-### `style`
-
-See https://facebook.github.io/react-native/docs/image.html#style
-
-| Type                                                                                                                                           | Required |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#124; null &#124; void &#124; T &#124; false &#124; &#x27;&#x27; &#124; \$ReadOnlyArray&#x3C;GenericStyleProp&#x3C;T&#x3E;&#x3E;</code> | No       |
-
----
-
-### `testID`
-
-A unique identifier for this element to be used in UI Automation testing scripts.
-
-See https://facebook.github.io/react-native/docs/image.html#testid
+| Type                | Required |
+| ------------------- | -------- |
+| ImageSourcePropType | No       |
 
 | Type     | Required |
 | -------- | -------- |
 | `string` | No       |
 
----
+### `testID`
 
-### `width`
+A unique identifier for this element to be used in UI Automation testing scripts.
 
-| Type                                                              | Required |
-| ----------------------------------------------------------------- | -------- |
-| <code>null &#124; number &#124; string &#124; AnimatedNode</code> | No       |
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ## Methods
 

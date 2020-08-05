@@ -10,8 +10,6 @@ const React = require('react');
 const CompLibrary = require('../../core/CompLibrary.js');
 const Container = CompLibrary.Container;
 
-const siteConfig = require(process.cwd() + '/siteConfig.js');
-
 class Help extends React.Component {
   render() {
     return (
@@ -62,8 +60,8 @@ class Help extends React.Component {
             The <a href="https://twitter.com/reactjs">React Twitter account</a>{' '}
             covers both React and React Native. Follow the React Native{' '}
             <a href="https://twitter.com/reactnative">Twitter account</a> and{' '}
-            <a href="/react-native/blog/">blog</a> to find out what's happening
-            in the world of React Native.
+            <a href="/blog/">blog</a> to find out what's happening in the world
+            of React Native.
           </p>
           <h3>Proposals</h3>
           <p>
@@ -86,6 +84,10 @@ class Help extends React.Component {
             React meetups as well. React Native has been covered often in past
             React Conf talks. Videos for these talks can be found online in the
             following playlists:{' '}
+            <a href="https://www.youtube.com/playlist?list=PLPxbbTqCLbGHPxZpw4xj_Wwg8-fdNxJRh">
+              React Conf 2019
+            </a>
+            {', '}
             <a href="https://www.youtube.com/watch?v=WXYPpY_mElQ">
               React Conf 2018
             </a>
@@ -103,26 +105,11 @@ class Help extends React.Component {
               React Conf 2015
             </a>
             {'. '}
-            The next <a href="https://conf.reactjs.org/">React Conf</a> will
-            take place October 24 and 25 in Henderson, Nevada. You can also find
-            a list of dedicated React Native conferences{' '}
+            The next <a href="https://conf.reactjs.org/">React Conf</a> is yet
+            to be announced. You can also find a list of dedicated React Native
+            conferences{' '}
             <a href="http://www.awesome-react-native.com/#conferences">here</a>
             {'.'}
-          </p>
-          <h3>React Native Show</h3>
-          <p>
-            The React Native Show is a video series from the React Native team
-            covering updates to React Native:
-          </p>
-          <p>
-            <iframe
-              width="560"
-              height="315"
-              frameBorder="0"
-              allowFullScreen
-              src="https://www.youtube-nocookie.com/embed/bjwwIqaKSo4"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            />
           </p>
           <h2>Communities</h2>
           <h3>Reactiflux Chat</h3>

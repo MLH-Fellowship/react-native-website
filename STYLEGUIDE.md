@@ -119,6 +119,10 @@ When it comes to describing property values, be definitive in what is and is not
 
 **Good** “Accepts integer values.” Leaves no doubt about what values this takes!
 
+## Other grammar policies
+
+- Capitalize “Hooks.”
+
 ## Empathize with readers
 
 When writing step-by-step instructions (e.g. how to install something), try to forget everything you know about the topic to attain a "beginner's mindset." Imagine follow the instructions you write, one step at time. Often you will discover that there is implicit knowledge that you forgot to mention, or that there are missing or out-of-order steps in the instructions. UX research pro tip: ask _someone else_ to follow your instructions and see where they get stuck!

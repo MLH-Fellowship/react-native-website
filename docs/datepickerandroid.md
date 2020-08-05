@@ -1,25 +1,30 @@
 ---
 id: datepickerandroid
-title: DatePickerAndroid
+title: 🚧 DatePickerAndroid
 ---
 
-Opens the standard Android date picker dialog.
+> **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
 
-> `DatePickerAndroid` has been merged with `DatePickerIOS` and `TimePickerAndroid` into a single component called [DateTimePicker](https://github.com/react-native-community/react-native-datetimepicker#react-native-datetimepicker) and will be removed in a future release.
+Opens the standard Android date picker dialog.
 
 ### Example
 
 ```jsx
 try {
-  const {action, year, month, day} = await DatePickerAndroid.open({
+  const {
+    action,
+    year,
+    month,
+    day
+  } = await DatePickerAndroid.open({
     // Use `new Date()` for current date.
     // May 25 2020. Month 0 is January.
-    date: new Date(2020, 4, 25),
+    date: new Date(2020, 4, 25)
   });
   if (action !== DatePickerAndroid.dismissedAction) {
     // Selected year, month (0-11), day
   }
-} catch ({code, message}) {
+} catch ({ code, message }) {
   console.warn('Cannot open date picker', message);
 }
 ```
