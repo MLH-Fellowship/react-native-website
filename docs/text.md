@@ -254,131 +254,171 @@ We believe that this more constrained way to style text will yield better apps:
 
 ### `accessibilityHint`
 
-| Type        | Required |
-| ----------- | -------- |
-| `Stringish` | No       |
+An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not clear from the accessibility label.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ---
 
 ### `accessibilityLabel`
 
-| Type        | Required |
-| ----------- | -------- |
-| `Stringish` | No       |
+Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ---
 
 ### `accessibilityRole`
 
-| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Required |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#124; &#x27;none&#x27; &#124; &#x27;button&#x27; &#124; &#x27;link&#x27; &#124; &#x27;search&#x27; &#124; &#x27;image&#x27; &#124; &#x27;keyboardkey&#x27; &#124; &#x27;text&#x27; &#124; &#x27;adjustable&#x27; &#124; &#x27;imagebutton&#x27; &#124; &#x27;header&#x27; &#124; &#x27;summary&#x27; &#124; &#x27;alert&#x27; &#124; &#x27;checkbox&#x27; &#124; &#x27;combobox&#x27; &#124; &#x27;menu&#x27; &#124; &#x27;menubar&#x27; &#124; &#x27;menuitem&#x27; &#124; &#x27;progressbar&#x27; &#124; &#x27;radio&#x27; &#124; &#x27;radiogroup&#x27; &#124; &#x27;scrollbar&#x27; &#124; &#x27;spinbutton&#x27; &#124; &#x27;switch&#x27; &#124; &#x27;tab&#x27; &#124; &#x27;tablist&#x27; &#124; &#x27;timer&#x27; &#124; &#x27;toolbar&#x27;</code> | No       |
+Tells the screen reader to treat the currently focused on element as having a specific role.
+
+Possible values for `AccessibilityRole` is one of:
+
+- `'none'` - The element has no role.
+- `'button'` - The element should be treated as a button.
+- `'link'` - The element should be treated as a link.
+- `'header'` - The element is a header that divides content into sections.
+- `'search'` - The element should be treated as a search field.
+- `'image'` - The element should be treated as an image.
+- `'key'` - The element should be treated like a keyboard key.
+- `'text'` - The element should be treated as text.
+- `'summary'` - The element provides app summary information.
+- `'imagebutton'` - The element has the role of both an image and also a button.
+- `'adjustable'` - The element allows adjustment over a range of values.
+
+On iOS, these roles map to corresponding Accessibility Traits. Image button has the same functionality as if the trait was set to both 'image' and 'button'. See the [Accessibility guide](accessibility.md#accessibilitytraits-ios) for more information.
+
+On Android, these roles have similar functionality on TalkBack as adding Accessibility Traits does on Voiceover in iOS
+
+| Type              | Required |
+| ----------------- | -------- |
+| AccessibilityRole | No       |
 
 ---
 
 ### `accessibilityState`
 
-| Type                                                                                                                                          | Required |
-| --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>{ disabled?: boolean, selected?: boolean, checked?: ?boolean &#124; &#x27;mixed&#x27;, busy?: boolean, expanded?: boolean, ... }</code> | No       |
+Tells the screen reader to treat the currently focused on element as being in a specific state.
+
+You can provide one state, no state, or multiple states. The states must be passed in through an object. Ex: `{selected: true, disabled: true}`.
+
+Possible values for `AccessibilityState` are:
+
+- `'selected'` - The element is in a selected state.
+- `'disabled'` - The element is in a disabled state.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
 
 ---
 
 ### `accessible`
 
-Indicates whether the view is an accessibility element.
+When set to `true`, indicates that the view is an accessibility element. The default value for a `Text` element is `true`.
 
-See https://facebook.github.io/react-native/docs/text.html#accessible
+See the [Accessibility guide](accessibility.md#accessible-ios-android) for more information.
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required |
+| ---- | -------- |
+| bool | No       |
 
 ---
 
 ### `adjustsFontSizeToFit`
 
-Whether font should be scaled down automatically.
+Specifies whether fonts should be scaled down automatically to fit given style constraints.
 
-See https://facebook.github.io/react-native/docs/text.html#adjustsfontsizetofit
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required | Platform |
+| ---- | -------- | -------- |
+| bool | No       | iOS      |
 
 ---
 
 ### `allowFontScaling`
 
-Whether fonts should scale to respect Text Size accessibility settings.
+Specifies whether fonts should scale to respect Text Size accessibility settings. The default is `true`.
 
-See https://facebook.github.io/react-native/docs/text.html#allowfontscaling
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
-
----
-
-### `children`
-
-| Type   | Required |
-| ------ | -------- |
-| `Node` | No       |
+| Type | Required |
+| ---- | -------- |
+| bool | No       |
 
 ---
 
 ### `dataDetectorType`
 
-| Type                                                                                                                                 | Required |
-| ------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| <code>&#x27;phoneNumber&#x27; &#124; &#x27;link&#x27; &#124; &#x27;email&#x27; &#124; &#x27;none&#x27; &#124; &#x27;all&#x27;</code> | No       |
+Determines the types of data converted to clickable URLs in the text element. By default no data types are detected.
+
+You can provide only one type.
+
+Possible values for `dataDetectorType` are:
+
+- `'phoneNumber'`
+- `'link'`
+- `'email'`
+- `'none'`
+- `'all'`
+
+| Type                                                | Required | Platform |
+| --------------------------------------------------- | -------- | -------- |
+| enum('phoneNumber', 'link', 'email', 'none', 'all') | No       | Android  |
 
 ---
 
 ### `disabled`
 
-Specifies the disabled state of the text view for testing purposes.
+Specifies the disabled state of the text view for testing purposes
 
-See https://facebook.github.io/react-native/docs/text.html#disabled
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required | Platform |
+| ---- | -------- | -------- |
+| bool | No       | Android  |
 
 ---
 
 ### `ellipsizeMode`
 
-When `numberOfLines` is set, this prop defines how text will be truncated.
+When `numberOfLines` is set, this prop defines how text will be truncated. `numberOfLines` must be set in conjunction with this prop.
 
-See https://facebook.github.io/react-native/docs/text.html#ellipsizemode
+This can be one of the following values:
 
-| Type                                                                                                    | Required |
-| ------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#x27;clip&#x27; &#124; &#x27;head&#x27; &#124; &#x27;middle&#x27; &#124; &#x27;tail&#x27;</code> | No       |
+- `head` - The line is displayed so that the end fits in the container and the missing text at the beginning of the line is indicated by an ellipsis glyph. e.g., "...wxyz"
+- `middle` - The line is displayed so that the beginning and end fit in the container and the missing text in the middle is indicated by an ellipsis glyph. "ab...yz"
+- `tail` - The line is displayed so that the beginning fits in the container and the missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
+- `clip` - Lines are not drawn past the edge of the text container.
+
+The default is `tail`.
+
+| Type                                   | Required |
+| -------------------------------------- | -------- |
+| enum('head', 'middle', 'tail', 'clip') | No       |
 
 ---
 
 ### `maxFontSizeMultiplier`
 
-Specifies largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values: `null/undefined` (default): inherit from the parent node or the global default (0) `0`: no max, ignore parent/global default `>= 1`: sets the maxFontSizeMultiplier of this node to this value
+Specifies largest possible scale a font can reach when `allowFontScaling` is enabled. Possible values:
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+- `null/undefined` (default): inherit from the parent node or the global default (0)
+- `0`: no max, ignore parent/global default
+- `>= 1`: sets the `maxFontSizeMultiplier` of this node to this value
+
+| Type   | Required |
+| ------ | -------- |
+| number | No       |
 
 ---
 
 ### `minimumFontScale`
 
-Smallest possible scale a font can reach.
+Specifies smallest possible scale a font can reach when adjustsFontSizeToFit is enabled. (values 0.01-1.0).
 
-See https://facebook.github.io/react-native/docs/text.html#minimumfontscale
-
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type   | Required | Platform |
+| ------ | -------- | -------- |
+| number | No       | iOS      |
 
 ---
 
@@ -386,35 +426,33 @@ See https://facebook.github.io/react-native/docs/text.html#minimumfontscale
 
 Used to locate this view from native code.
 
-See https://facebook.github.io/react-native/docs/text.html#nativeid
-
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ---
 
 ### `numberOfLines`
 
-Used to truncate the text with an ellipsis.
+Used to truncate the text with an ellipsis after computing the text layout, including line wrapping, such that the total number of lines does not exceed this number.
 
-See https://facebook.github.io/react-native/docs/text.html#numberoflines
+This prop is commonly used with `ellipsizeMode`.
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type   | Required |
+| ------ | -------- |
+| number | No       |
 
 ---
 
 ### `onLayout`
 
-Invoked on mount and layout changes.
+Invoked on mount and layout changes with
 
-See https://facebook.github.io/react-native/docs/text.html#onlayout
+`{nativeEvent: {layout: {x, y, width, height}}}`
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| `(event: LayoutEvent) => mixed` | No       |
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
 
 ---
 
@@ -422,11 +460,11 @@ See https://facebook.github.io/react-native/docs/text.html#onlayout
 
 This function is called on long press.
 
-See https://facebook.github.io/react-native/docs/text.html#onlongpress
+e.g., `onLongPress={this.increaseSize}>`
 
-| Type                           | Required |
-| ------------------------------ | -------- |
-| `(event: PressEvent) => mixed` | No       |
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
 
 ---
 
@@ -446,11 +484,11 @@ Does this view want to "claim" touch responsiveness? This is called for every to
 
 This function is called on press. The first function argument is an event in form of [PressEvent](pressevent).
 
-See https://facebook.github.io/react-native/docs/text.html#onpress
+e.g., `onPress={() => console.log('1st')}`
 
-| Type                           | Required |
-| ------------------------------ | -------- |
-| `(event: PressEvent) => mixed` | No       |
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
 
 ---
 
@@ -514,7 +552,9 @@ Some other `View` wants to become responder and is asking this `View` to release
 
 ---
 
-### `onStartShouldSetResponder`
+### `onStartShouldSetResponderCapture`
+
+If a parent `View` wants to prevent a child `View` from becoming responder on a touch start, it should have this handler which returns `true`.
 
 `View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
 
@@ -539,9 +579,7 @@ Invoked on Text layout
 
 ### `pressRetentionOffset`
 
-Defines how far your touch may move off of the button, before deactivating the button.
-
-See https://facebook.github.io/react-native/docs/text.html#pressretentionoffset
+When the scroll view is disabled, this defines how far your touch may move off of the button, before deactivating the button. Once deactivated, try moving it back and you'll see that the button is once again reactivated! Move it back and forth several times while the scroll view is disabled. Ensure you pass in a constant to reduce memory allocations.
 
 | Type                   | Required |
 | ---------------------- | -------- |
@@ -551,13 +589,11 @@ See https://facebook.github.io/react-native/docs/text.html#pressretentionoffset
 
 ### `selectable`
 
-Lets the user select text.
+Lets the user select text, to use the native copy and paste functionality.
 
-See https://facebook.github.io/react-native/docs/text.html#selectable
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required |
+| ---- | -------- |
+| bool | No       |
 
 ---
 
@@ -565,11 +601,9 @@ See https://facebook.github.io/react-native/docs/text.html#selectable
 
 The highlight color of the text.
 
-See https://facebook.github.io/react-native/docs/text.html#selectioncolor
-
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type               | Required | Platform |
+| ------------------ | -------- | -------- |
+| [color](colors.md) | No       | Android  |
 
 ---
 
@@ -583,13 +617,11 @@ See https://facebook.github.io/react-native/docs/text.html#selectioncolor
 
 ### `suppressHighlighting`
 
-When `true`, no visual change is made when text is pressed down.
+When `true`, no visual change is made when text is pressed down. By default, a gray oval highlights the text on press down.
 
-See https://facebook.github.io/react-native/docs/text.html#supperhighlighting
-
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type | Required | Platform |
+| ---- | -------- | -------- |
+| bool | No       | iOS      |
 
 ---
 
@@ -597,17 +629,19 @@ See https://facebook.github.io/react-native/docs/text.html#supperhighlighting
 
 Used to locate this view in end-to-end tests.
 
-See https://facebook.github.io/react-native/docs/text.html#testid
-
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
 
 ---
 
 ### `textBreakStrategy`
 
-Set text break strategy on Android.
+Set text break strategy on Android API Level 23+, possible values are `simple`, `highQuality`, `balanced` The default value is `highQuality`.
+
+| Type                                      | Required | Platform |
+| ----------------------------------------- | -------- | -------- |
+| enum('simple', 'highQuality', 'balanced') | No       | Android  |
 
 ---
 
@@ -621,6 +655,4 @@ Sets the frequency of automatic hyphenation to use when determining word breaks 
 
 # Known issues
 
-| Type                                                                                       | Required |
-| ------------------------------------------------------------------------------------------ | -------- |
-| <code>&#x27;balanced&#x27; &#124; &#x27;highQuality&#x27; &#124; &#x27;simple&#x27;</code> | No       |
+- [react-native#22811](https://github.com/facebook/react-native/issues/22811): Nested Text elements do not support `numberOfLines` attribute

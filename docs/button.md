@@ -128,7 +128,7 @@ Text to display inside the button. On Android the given title will be converted 
 
 ---
 
-### `disabled`
+### `accessibilityLabel`
 
 Text to display for blindness accessibility features.
 
@@ -138,7 +138,7 @@ Text to display for blindness accessibility features.
 
 ---
 
-### `hasTVPreferredFocus`
+### `color`
 
 Color of the text (iOS), or background color of the button (Android).
 
@@ -148,7 +148,7 @@ Color of the text (iOS), or background color of the button (Android).
 
 ---
 
-### `nextFocusDown`
+### `disabled`
 
 If `true`, disable all interactions for this component.
 
@@ -170,7 +170,7 @@ TV preferred focus.
 
 ### `nextFocusDown` <div class="label android">Android</div><div class="label tv">TV</div>
 
-### `nextFocusRight`
+Designates the next view to receive focus when the user navigates down. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown).
 
 | Type   |
 | ------ |
@@ -180,7 +180,7 @@ TV preferred focus.
 
 ### `nextFocusForward` <div class="label android">Android</div><div class="label tv">TV</div>
 
-TV next focus up (see documentation for the View component).
+Designates the next view to receive focus when the user navigates forward. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward).
 
 | Type   |
 | ------ |
@@ -190,7 +190,7 @@ TV next focus up (see documentation for the View component).
 
 ### `nextFocusLeft` <div class="label android">Android</div><div class="label tv">TV</div>
 
-Handler to be called when the user taps the button
+Designates the next view to receive focus when the user navigates left. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft).
 
 | Type   |
 | ------ |
@@ -200,7 +200,7 @@ Handler to be called when the user taps the button
 
 ### `nextFocusRight` <div class="label android">Android</div><div class="label tv">TV</div>
 
-Used to locate this view in end-to-end tests.
+Designates the next view to receive focus when the user navigates right. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight).
 
 | Type   |
 | ------ |
@@ -210,7 +210,7 @@ Used to locate this view in end-to-end tests.
 
 ### `nextFocusUp` <div class="label android">Android</div><div class="label tv">TV</div>
 
-Text to display inside the button
+Designates the next view to receive focus when the user navigates up. See the [Android documentation](https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp).
 
 | Type   |
 | ------ |

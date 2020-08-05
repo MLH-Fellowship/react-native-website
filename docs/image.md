@@ -262,11 +262,13 @@ The text that's read by the screen reader when the user interacts with the image
 
 ---
 
-### `defaultSource`
+### `blurRadius`
 
-A static image to display while loading the image source.
+blurRadius: the blur radius of the blur filter added to the image
 
-See https://facebook.github.io/react-native/docs/image.html#defaultsource
+| Type   | Required |
+| ------ | -------- |
+| number | No       |
 
 > Tip : IOS you will need to increase `blurRadius` more than `5`
 
@@ -315,19 +317,27 @@ Android only. By default, it is 300ms.
 
 ---
 
-### `onLoadEnd`
+### `loadingIndicatorSource`
 
-Invoked when load either succeeds or fails.
+Similarly to `source`, this property represents the resource used to render the loading indicator for the image, displayed until image is ready to be displayed, typically after when it got downloaded from network.
 
-See https://facebook.github.io/react-native/docs/image.html#onloadend
+| Type                                  | Required |
+| ------------------------------------- | -------- |
+| array of ImageSourcePropTypes, number | No       |
 
-| Type         | Required |
-| ------------ | -------- |
-| `() => void` | No       |
+> Can accept a number as returned by `require('./image.jpg')`
 
 ---
 
-### `onLoadStart`
+### `onError`
+
+Invoked on load error with `{nativeEvent: {error}}`.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
 
 ### `onLayout`
 
@@ -369,9 +379,7 @@ e.g., `onLoadStart={(e) => this.setState({loading: true})}`
 | -------- | -------- |
 | function | No       |
 
-| Type                                                                                                                              | Required |
-| --------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>( event: SyntheticEvent&#x3C;\$ReadOnly&#x3C;{&#124;loaded: number, total: number&#124;}&#x3E;&#x3E;, ) =&#x3E; void</code> | No       |
+---
 
 ### `onPartialLoad`
 
@@ -419,9 +427,7 @@ More details about `resize` and `scale` can be found at http://frescolib.org/doc
 | ------------------------------- | -------- | -------- |
 | enum('auto', 'resize', 'scale') | No       | Android  |
 
-| Type                                                                             | Required |
-| -------------------------------------------------------------------------------- | -------- |
-| <code>ImageURISource &#124; number &#124; Array&#x3C;ImageURISource&#x3E;</code> | No       |
+---
 
 ### `resizeMode`
 
@@ -455,9 +461,7 @@ The currently supported formats are `png`, `jpg`, `jpeg`, `bmp`, `gif`, `webp` (
 | ------------------- | -------- |
 | ImageSourcePropType | No       |
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+---
 
 ### `testID`
 
@@ -475,17 +479,17 @@ A unique identifier for this element to be used in UI Automation testing scripts
 Image.getSize(uri, success, [failure]);
 ```
 
-Retrieve the width and height (in pixels) of an image prior to displaying it.
+Retrieve the width and height (in pixels) of an image prior to displaying it. This method can fail if the image cannot be found, or fails to download.
 
-See https://facebook.github.io/react-native/docs/image.html#getsize
+In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.
 
 **Parameters:**
 
-| Name    | Type                                      | Required | Description |
-| ------- | ----------------------------------------- | -------- | ----------- |
-| uri     | `string`                                  | Yes      |             |
-| success | `(width: number, height: number) => void` | Yes      |             |
-| failure | `(error: any) => void`                    | No       |             |
+| Name    | Type     | Required | Description                                                                                          |
+| ------- | -------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| uri     | string   | Yes      | The location of the image.                                                                           |
+| success | function | Yes      | The function that will be called if the image was successfully found and width and height retrieved. |
+| failure | function | No       | The function that will be called if there was an error, such as failing to retrieve the image.       |
 
 ---
 
@@ -495,18 +499,20 @@ See https://facebook.github.io/react-native/docs/image.html#getsize
 Image.getSizeWithHeaders(uri, headers, success, [failure]);
 ```
 
-Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request.
+Retrieve the width and height (in pixels) of an image prior to displaying it with the ability to provide the headers for the request. This method can fail if the image cannot be found, or fails to download.
 
-See https://facebook.github.io/react-native/docs/image.html#getsizewithheaders
+In order to retrieve the image dimensions, the image may first need to be loaded or downloaded, after which it will be cached. This means that in principle you could use this method to preload images, however it is not optimized for that purpose, and may in future be implemented in a way that does not fully load/download the image data. A proper, supported way to preload images will be provided as a separate API.
+
+Does not work for static image resources.
 
 **Parameters:**
 
-| Name    | Type                                      | Required | Description |
-| ------- | ----------------------------------------- | -------- | ----------- |
-| uri     | `string`                                  | Yes      |             |
-| headers | `{[string]: string, ...}`                 | Yes      |             |
-| success | `(width: number, height: number) => void` | Yes      |             |
-| failure | `(error: any) => void`                    | No       |             |
+| Name    | Type     | Required | Description                                                                                          |
+| ------- | -------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| uri     | string   | Yes      | The location of the image.                                                                           |
+| headers | object   | Yes      | The headers for the request.                                                                         |
+| success | function | Yes      | The function that will be called if the image was successfully found and width and height retrieved. |
+| failure | function | No       | The function that will be called if there was an error, such as failing toto retrieve the image.     |
 
 ---
 
@@ -516,15 +522,29 @@ See https://facebook.github.io/react-native/docs/image.html#getsizewithheaders
 Image.prefetch(url);
 ```
 
-Prefetches a remote image for later use by downloading it to the disk cache.
-
-See https://facebook.github.io/react-native/docs/image.html#prefetch
+Prefetches a remote image for later use by downloading it to the disk cache
 
 **Parameters:**
 
-| Name | Type     | Required | Description |
-| ---- | -------- | -------- | ----------- |
-| url  | `string` | Yes      |             |
+| Name | Type   | Required | Description                       |
+| ---- | ------ | -------- | --------------------------------- |
+| url  | string | Yes      | The remote location of the image. |
+
+---
+
+### `abortPrefetch()`
+
+```jsx
+Image.abortPrefetch(requestId);
+```
+
+Abort prefetch request. Android-only.
+
+**Parameters:**
+
+| Name      | Type   | Required | Description                  |
+| --------- | ------ | -------- | ---------------------------- |
+| requestId | number | Yes      | Id as returned by prefetch() |
 
 ---
 
@@ -534,12 +554,28 @@ See https://facebook.github.io/react-native/docs/image.html#prefetch
 Image.queryCache(urls);
 ```
 
-Performs cache interrogation.
-
-See https://facebook.github.io/react-native/docs/image.html#querycache
+Perform cache interrogation. Returns a mapping from URL to cache status, such as "disk" or "memory". If a requested URL is not in the mapping, it means it's not in the cache.
 
 **Parameters:**
 
-| Name | Type            | Required | Description |
-| ---- | --------------- | -------- | ----------- |
-| urls | `Array<string>` | Yes      |             |
+| Name | Type  | Required | Description                                |
+| ---- | ----- | -------- | ------------------------------------------ |
+| urls | array | Yes      | List of image URLs to check the cache for. |
+
+---
+
+### `resolveAssetSource()`
+
+```jsx
+Image.resolveAssetSource(source);
+```
+
+Resolves an asset reference into an object which has the properties `uri`, `width`, and `height`.
+
+**Parameters:**
+
+| Name   | Type           | Required | Description                                                                  |
+| ------ | -------------- | -------- | ---------------------------------------------------------------------------- |
+| source | number, object | Yes      | A number (opaque type returned by require('./foo.png')) or an `ImageSource`. |
+
+> `ImageSource` is an object like `{ uri: '<http location || file path>' }`
