@@ -113,7 +113,7 @@ export default App;
 
 ### <div class="label required basic">Required</div>`onPress`
 
-Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
+Handler to be called when the user taps the button.
 
 | Type                                  |
 | ------------------------------------- |
@@ -145,9 +145,9 @@ Text to display for blindness accessibility features.
 
 Color of the text (iOS), or background color of the button (Android).
 
-| Type               | Default                                                                                                                                                                                                               |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors.md) | `'#2196F3'`<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/>`'#007AFF'`<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type                                 | Default                                                                                                                                                                                                               |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| enum(null, string, NativeColorValue) | `'#2196F3'`<ins style="background: #2196F3" class="color-box"></ins><div class="label android">Android</div><hr/>`'#007AFF'`<ins style="background: #007AFF" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
