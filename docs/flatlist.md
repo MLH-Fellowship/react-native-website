@@ -236,9 +236,9 @@ Used to extract a unique key for a given item at the specified index. Key is use
 
 Optional custom style for multi-item rows generated when `numColumns > 1`.
 
-| Type                                                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| <code>&#124; null &#124; void &#124; T &#124; false &#124; &#x27;&#x27; &#124; \$ReadOnlyArray&#x3C;GenericStyleProp&#x3C;T&#x3E;&#x3E;</code> |
+| Type                                                                 |
+| -------------------------------------------------------------------- |
+| enum(null, void, T, false, '', \$ReadOnlyArray<GenericStyleProp<T>>) |
 
 ---
 
@@ -384,10 +384,6 @@ Example usage:
 ### `flashScrollIndicators()`
 
 ```jsx
-flatList.flashScrollIndicators();
-```
-
-```jsx
 flashScrollIndicators();
 ```
 
@@ -396,10 +392,6 @@ Displays the scroll indicators momentarily.
 ---
 
 ### `getNativeScrollRef()`
-
-```jsx
-flatList.getNativeScrollRef();
-```
 
 ```jsx
 getNativeScrollRef();
@@ -412,10 +404,6 @@ Provides a reference to the underlying scroll component
 ### `getScrollableNode()`
 
 ```jsx
-flatList.getScrollableNode();
-```
-
-```jsx
 getScrollableNode();
 ```
 
@@ -424,10 +412,6 @@ Provides a handle to the underlying scroll node.
 ---
 
 ### `getScrollResponder()`
-
-```jsx
-flatList.getScrollResponder();
-```
 
 ```jsx
 getScrollResponder();
@@ -440,10 +424,6 @@ Provides a handle to the underlying scroll responder.
 ### `recordInteraction()`
 
 ```jsx
-flatList.recordInteraction();
-```
-
-```jsx
 recordInteraction();
 ```
 
@@ -454,32 +434,24 @@ Tells the list an interaction has occurred, which should trigger viewability cal
 ### `scrollToEnd()`
 
 ```jsx
-flatList.scrollToEnd([params]);
-```
-
-```jsx
 scrollToEnd([params]);
 ```
 
 Scrolls to the end of the content. May be janky without `getItemLayout` prop.
 
+**Parameters:**
+
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| params | object | No       | See below   |
+
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
 
-**Parameters:**
-
-| Name   | Type                         | Required | Description |
-| ------ | ---------------------------- | -------- | ----------- |
-| params | `{animated?: ?boolean, ...}` | No       |             |
-
 ---
 
 ### `scrollToIndex()`
-
-```jsx
-flatList.scrollToIndex(params);
-```
 
 ```jsx
 scrollToIndex(params);
@@ -489,6 +461,12 @@ Scrolls to the item at the specified index such that it is positioned in the vie
 
 > Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
+**Parameters:**
+
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| params | object | Yes      | See below   |
+
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
@@ -496,19 +474,9 @@ Valid `params` keys are:
 - 'viewOffset' (number) - A fixed number of pixels to offset the final target position.
 - 'viewPosition' (number) - A value of `0` places the item specified by index at the top, `1` at the bottom, and `0.5` centered in the middle.
 
-**Parameters:**
-
-| Name   | Type                                                                                      | Required | Description |
-| ------ | ----------------------------------------------------------------------------------------- | -------- | ----------- |
-| params | `{ animated?: ?boolean, index: number, viewOffset?: number, viewPosition?: number, ... }` | Yes      |             |
-
 ---
 
 ### `scrollToItem()`
-
-```jsx
-flatList.scrollToItem(params);
-```
 
 ```jsx
 scrollToItem(params);
@@ -518,25 +486,21 @@ Requires linear scan through data - use `scrollToIndex` instead if possible.
 
 > Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
+**Parameters:**
+
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| params | object | Yes      | See below   |
+
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-- 'item' (object) - The item to scroll to. Required.
-- 'viewPosition' (number)
-
-**Parameters:**
-
-| Name   | Type                                                               | Required | Description |
-| ------ | ------------------------------------------------------------------ | -------- | ----------- |
-| params | `{ animated?: ?boolean, item: ItemT, viewPosition?: number, ... }` | Yes      |             |
+- 'item' (ItemT) - The item to scroll to. Required.
+- 'viewPosition' (number) - Missing desc
 
 ---
 
 ### `scrollToOffset()`
-
-```jsx
-flatList.scrollToOffset(params);
-```
 
 ```jsx
 scrollToOffset(params);
@@ -544,27 +508,23 @@ scrollToOffset(params);
 
 Scroll to a specific content pixel offset in the list.
 
-Valid `params` keys are:
-
-- 'offset' (number) - The offset to scroll to. In case of `horizontal` being true, the offset is the x-value, in any other case the offset is the y-value. Required.
-- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-
 **Parameters:**
 
-| Name   | Type                                         | Required | Description |
-| ------ | -------------------------------------------- | -------- | ----------- |
-| params | `{animated?: ?boolean, offset: number, ...}` | Yes      |             |
+| Name   | Type   | Required | Description |
+| ------ | ------ | -------- | ----------- |
+| params | object | Yes      | See below   |
+
+Valid `params` keys are:
+
+- 'animated' (boolean) - The offset to scroll to. In case of `horizontal` being true, the offset is the x-value, in any other case the offset is the y-value. Required.
+- 'offset' (number) - Whether the list should do an animation while scrolling. Defaults to `true`.
 
 ---
 
 ### `setNativeProps()`
 
-```jsx
-flatList.setNativeProps(props);
-```
-
 **Parameters:**
 
-| Name  | Type                     | Required | Description |
-| ----- | ------------------------ | -------- | ----------- |
-| props | `{[string]: mixed, ...}` | Yes      |             |
+| Name  | Type   | Required |
+| ----- | ------ | -------- |
+| props | object | Yes      |

@@ -63,9 +63,9 @@ If true the user won't be able to toggle the switch.
 
 On iOS, custom color for the background. This background color can be seen either when the switch value is false or when the switch is disabled (and the switch is translucent).
 
-| Type               |
-| ------------------ |
-| [color](colors.md) |
+| Type                                 |
+| ------------------------------------ |
+| enum(null, string, NativeColorValue) |
 
 ---
 
@@ -93,9 +93,9 @@ Invoked when the user tries to change the value of the switch. Receives the new 
 
 Color of the foreground switch grip. If this is set on iOS, the switch grip will lose its drop shadow.
 
-| Type               |
-| ------------------ |
-| [color](colors.md) |
+| Type                                 |
+| ------------------------------------ |
+| enum(null, string, NativeColorValue) |
 
 ---
 
@@ -103,7 +103,7 @@ Color of the foreground switch grip. If this is set on iOS, the switch grip will
 
 Custom colors for the switch track.
 
-_iOS_: When the switch value is false, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use [`ios_backgroundColor`](https://reactnative.dev/docs/switch#ios_backgroundColor).
+_iOS_: When the switch value is false, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use [`ios_backgroundColor`](switch#ios_backgroundColor).
 
 | Type                                                          |
 | ------------------------------------------------------------- |

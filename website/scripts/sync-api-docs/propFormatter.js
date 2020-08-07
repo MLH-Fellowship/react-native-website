@@ -15,7 +15,7 @@ const magic = require('./magic');
 function formatMultiplePlatform(platforms) {
   let platformString = '';
   platforms.forEach(platform => {
-    switch (platform.trim()) {
+    switch (platform.trim().toLowerCase()) {
       case 'ios':
         platformString += '<div class="label ios">' + 'iOS' + '</div> ';
         break;
@@ -140,6 +140,16 @@ function formatTypeColumn(prop) {
           }
         });
       if (url) return `array of [${text}](${url})`;
+      else if (prop?.flowType?.elements[0].name === 'union') {
+        const unionTypes = prop?.flowType?.elements[0]?.elements.reduce(
+          (acc, curr) => {
+            acc.push(curr.value);
+            return acc;
+          },
+          []
+        );
+        return `array of enum(${unionTypes.join(', ')})`;
+      }
     } else if (prop.flowType.name === '$ReadOnly') {
       // Special Case: switch#trackcolor
       let markdown = '';
@@ -159,6 +169,19 @@ function formatTypeColumn(prop) {
         if (markdown.match(/, $/)) markdown = markdown.replace(/, $/, '');
         return `${prop.flowType.elements[0]?.type}: {${markdown}}`;
       }
+    } else if (prop.flowType.name === 'union') {
+      let unionTypes = prop.flowType.raw.split('|');
+
+      // Trim whitespaces and remove any leftover `|` (to avoid table split)
+      unionTypes = unionTypes
+        .map(elem => {
+          return elem.trim().replace(/|/g, '');
+        })
+        .filter(item => {
+          if (item) return item;
+        });
+
+      return `enum(${unionTypes.join(', ')})`;
     } else {
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {

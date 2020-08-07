@@ -8,19 +8,19 @@ The Modal component is a basic way to present content above an enclosing view.
 ## Example
 
 <div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-      Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>
 
-<block class="functional syntax" />
+<block class='functional syntax' />
 
-```SnackPlayer name=Modal&supportedPlatforms=android,ios
+```SnackPlayer name=Modal%20Function%20Component%20Example&supportedPlatforms=android,ios
 import React, { useState } from "react";
 import {
   Alert,
@@ -113,9 +113,9 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-<block class="classical syntax" />
+<block class='classical syntax' />
 
-```SnackPlayer name=Modal&supportedPlatforms=android,ios
+```SnackPlayer name=Modal%20Class%20Component%20Example&supportedPlatforms=android,ios
 import React, { Component } from "react";
 import {
   Alert,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-<block class="endBlock syntax" />
+<block class='endBlock syntax' />
 
 ---
 
@@ -226,11 +226,7 @@ export default App;
 
 ## Props
 
-### `animated`
-
-> **Deprecated.** Use the [`animationType`](modal.md#animationtype) prop instead.
-
----
+Inherits [View Props](view.md#props).
 
 ### `animationType`
 
@@ -240,41 +236,39 @@ The `animationType` prop controls how the modal animates.
 - `fade` fades into view
 - `none` appears without an animation
 
-Default is set to `none`.
-
-| Type                          | Required |
-| ----------------------------- | -------- |
-| enum('none', 'slide', 'fade') | No       |
+| Type                          | Default |
+| ----------------------------- | ------- |
+| enum('none', 'slide', 'fade') | `none`  |
 
 ---
 
-### `hardwareAccelerated`
+### `hardwareAccelerated`<div class="label android">Android</div>
 
 The `hardwareAccelerated` prop controls whether to force hardware acceleration for the underlying window.
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type | Default |
+| ---- | ------- |
+| bool | `false` |
 
 ---
 
-### `onDismiss`
+### `onDismiss`<div class="label ios">iOS</div>
 
 The `onDismiss` prop allows passing a function that will be called once the modal has been dismissed.
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| function | No       | iOS      |
+| Type     |
+| -------- |
+| function |
 
 ---
 
-### `onOrientationChange`
+### `onOrientationChange`<div class="label ios">iOS</div>
 
 The `onOrientationChange` callback is called when the orientation changes while the modal is being displayed. The orientation provided is only 'portrait' or 'landscape'. This callback is also called on initial render, regardless of the current orientation.
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| function | No       | iOS      |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -287,19 +281,23 @@ The `onRequestClose` callback is called when the user taps the hardware back but
 | function | Yes      | Android, Platform.isTVOS |
 | function | No       | (Others)                 |
 
+| Type     |
+| -------- |
+| function |
+
 ---
 
 ### `onShow`
 
 The `onShow` prop allows passing a function that will be called once the modal has been shown.
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
-### `presentationStyle`
+### `presentationStyle`<div class="label ios">iOS</div>
 
 The `presentationStyle` prop controls how the modal appears (generally on larger devices such as iPad or plus-sized iPhones). See https://developer.apple.com/reference/uikit/uimodalpresentationstyle for details.
 
@@ -310,29 +308,29 @@ The `presentationStyle` prop controls how the modal appears (generally on larger
 
 Default is set to `overFullScreen` or `fullScreen` depending on `transparent` property.
 
-| Type                                                           | Required | Platform |
-| -------------------------------------------------------------- | -------- | -------- |
-| enum('fullScreen', 'pageSheet', 'formSheet', 'overFullScreen') | No       | iOS      |
+| Type                                                           |
+| -------------------------------------------------------------- |
+| enum('fullScreen', 'pageSheet', 'formSheet', 'overFullScreen') |
 
 ---
 
-### `statusBarTranslucent`
+### `statusBarTranslucent`<div class="label android">Android</div>
 
 The `statusBarTranslucent` prop determines whether your modal should go under the system statusbar.
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type |
+| ---- |
+| bool |
 
 ---
 
-### `supportedOrientations`
+### `supportedOrientations`<div class="label ios">iOS</div>
 
 The `supportedOrientations` prop allows the modal to be rotated to any of the specified orientations. On iOS, the modal is still restricted by what's specified in your app's Info.plist's UISupportedInterfaceOrientations field. When using `presentationStyle` of `pageSheet` or `formSheet`, this property will be ignored by iOS.
 
-| Type                                                                                                | Required | Platform |
-| --------------------------------------------------------------------------------------------------- | -------- | -------- |
-| array of enum('portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right') | No       | iOS      |
+| Type                                                                                                |
+| --------------------------------------------------------------------------------------------------- |
+| array of enum('portrait', 'portrait-upside-down', 'landscape', 'landscape-left', 'landscape-right') |
 
 ---
 
@@ -340,9 +338,9 @@ The `supportedOrientations` prop allows the modal to be rotated to any of the sp
 
 The `transparent` prop determines whether your modal will fill the entire view. Setting this to `true` will render the modal over a transparent background.
 
-| Type | Required |
-| ---- | -------- |
-| bool | No       |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -350,6 +348,6 @@ The `transparent` prop determines whether your modal will fill the entire view. 
 
 The `visible` prop determines whether your modal is visible.
 
-| Type | Required |
-| ---- | -------- |
-| bool | No       |
+| Type | Default |
+| ---- | ------- |
+| bool | `true`  |

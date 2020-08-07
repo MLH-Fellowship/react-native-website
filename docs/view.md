@@ -3,82 +3,9 @@ id: view
 title: View
 ---
 
-The most fundamental component for building a UI, `View` is a container that supports layout with [flexbox](flexbox.md), [style](style.md), [some touch handling](handling-touches.md), and [accessibility](accessibility.md) controls. `View` maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a `UIView`, `<div>`, `android.view`, etc.
+## Example
 
-`View` is designed to be nested inside other views and can have 0 to many children of any type.
-
-This example creates a `View` that wraps two boxes with color and a text component in a row with padding.
-
-<div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-      Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
-
-<block class="functional syntax" />
-
-```SnackPlayer name=View%20Function%20Component%20Example
-import React from "react";
-import { View, Text } from "react-native";
-
-const ViewBoxesWithColorAndText = () => {
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        height: 100,
-        padding: 20
-      }}
-    >
-      <View style={{ backgroundColor: "blue", flex: 0.3 }} />
-      <View style={{ backgroundColor: "red", flex: 0.5 }} />
-      <Text>Hello World!</Text>
-    </View>
-  );
-};
-
-export default ViewBoxesWithColorAndText;
-```
-
-<block class="classical syntax" />
-
-```SnackPlayer name=View%20Class%20Component%20Example
-import React, { Component } from "react";
-import { View, Text } from "react-native";
-
-class App extends Component {
-  render() {
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-          height: 100,
-          padding: 20
-        }}
-      >
-        <View style={{ backgroundColor: "blue", flex: 0.3 }} />
-        <View style={{ backgroundColor: "red", flex: 0.5 }} />
-        <Text>Hello World!</Text>
-      </View>
-    );
-  }
-}
-
-export default App;
-```
-
-<block class="endBlock syntax" />
-
-> `View`s are designed to be used with [`StyleSheet`](style.md) for clarity and performance, although inline styles are also supported.
-
-### Synthetic Touch Events
-
-For `View` responder props (e.g., `onResponderMove`), the synthetic touch event passed to them are in form of [PressEvent](pressevent).
+l
 
 ---
 
@@ -90,7 +17,9 @@ For `View` responder props (e.g., `onResponderMove`), the synthetic touch event 
 
 Provides an array of custom actions available for accessibility.
 
-`View.props.onStartShouldSetResponder: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
+| Type                                      |
+| ----------------------------------------- |
+| `$ReadOnlyArray<AccessibilityActionInfo>` |
 
 ---
 
@@ -98,11 +27,11 @@ Provides an array of custom actions available for accessibility.
 
 A value indicating whether the accessibility elements contained within this accessibility element are hidden.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
+See https://reactnative.dev/docs/view.html#accessibilityElementsHidden
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilityElementsHidden |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -110,21 +39,21 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityElementsH
 
 An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilityHint
+See https://reactnative.dev/docs/view.html#accessibilityHint
 
-| Type        | Required |
-| ----------- | -------- |
-| `Stringish` | No       |
+| Type   |
+| ------ |
+| string |
 
 ---
 
-### `accessibilityIgnoresInvertColors`
+### `accessibilityIgnoresInvertColors`<div class="label ios">iOS</div>
 
 Prevents view from being inverted if set to true and color inversion is turned on.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | iOS      |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -132,11 +61,11 @@ Prevents view from being inverted if set to true and color inversion is turned o
 
 Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilitylabel
+See https://reactnative.dev/docs/view.html#accessibilitylabel
 
-| Type        | Required |
-| ----------- | -------- |
-| `Stringish` | No       |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -144,11 +73,11 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilitylabel
 
 Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only.
 
-| Type                                                                                 | Required | Platform |
-| ------------------------------------------------------------------------------------ | -------- | -------- |
-| <code>&#x27;none&#x27; &#124; &#x27;polite&#x27; &#124; &#x27;assertive&#x27;</code> | No       | android  |
+See https://reactnative.dev/docs/view.html#accessibilityliveregion
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilityliveregion |
+| Type                                |
+| ----------------------------------- |
+| enum('none', 'polite', 'assertive') |
 
 ---
 
@@ -156,9 +85,9 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityliveregio
 
 Indicates to accessibility services to treat UI component like a specific role.
 
-| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Required |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#124; &#x27;none&#x27; &#124; &#x27;button&#x27; &#124; &#x27;link&#x27; &#124; &#x27;search&#x27; &#124; &#x27;image&#x27; &#124; &#x27;keyboardkey&#x27; &#124; &#x27;text&#x27; &#124; &#x27;adjustable&#x27; &#124; &#x27;imagebutton&#x27; &#124; &#x27;header&#x27; &#124; &#x27;summary&#x27; &#124; &#x27;alert&#x27; &#124; &#x27;checkbox&#x27; &#124; &#x27;combobox&#x27; &#124; &#x27;menu&#x27; &#124; &#x27;menubar&#x27; &#124; &#x27;menuitem&#x27; &#124; &#x27;progressbar&#x27; &#124; &#x27;radio&#x27; &#124; &#x27;radiogroup&#x27; &#124; &#x27;scrollbar&#x27; &#124; &#x27;spinbutton&#x27; &#124; &#x27;switch&#x27; &#124; &#x27;tab&#x27; &#124; &#x27;tablist&#x27; &#124; &#x27;timer&#x27; &#124; &#x27;toolbar&#x27;</code> | No       |
+| Type                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| enum('none', 'button', 'link', 'search', 'image', 'keyboardkey', 'text', 'adjustable', 'imagebutton', 'header', 'summary', 'alert', 'checkbox', 'combobox', 'menu', 'menubar', 'menuitem', 'progressbar', 'radio', 'radiogroup', 'scrollbar', 'spinbutton', 'switch', 'tab', 'tablist', 'timer', 'toolbar') |
 
 ---
 
@@ -166,17 +95,17 @@ Indicates to accessibility services to treat UI component like a specific role.
 
 Indicates to accessibility services that UI Component is in a specific State.
 
-| Type                                                                                                                                          | Required |
-| --------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>{ disabled?: boolean, selected?: boolean, checked?: ?boolean &#124; &#x27;mixed&#x27;, busy?: boolean, expanded?: boolean, ... }</code> | No       |
+| Type                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------- |
+| <code>{ disabled?: boolean, selected?: boolean, checked?: ?boolean &#124; &#x27;mixed&#x27;, busy?: boolean, expanded?: boolean, ... }</code> |
 
 ---
 
 ### `accessibilityValue`
 
-| Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Required |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>\$ReadOnly&#x3C;{&#124; /** _ The minimum value of this component&#x27;s range. (should be an integer) _/ min?: number, /** _ The maximum value of this component&#x27;s range. (should be an integer) _/ max?: number, /** _ The current value of this component&#x27;s range. (should be an integer) _/ now?: number, /** _ A textual description of this component&#x27;s value. (will override minimum, current, and maximum if set) _/ text?: string, &#124;}&#x3E;</code> | No       |
+| Type       |
+| ---------- |
+| object: {} |
 
 ---
 
@@ -184,11 +113,11 @@ Indicates to accessibility services that UI Component is in a specific State.
 
 A value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Default is `false`.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
+See https://reactnative.dev/docs/view.html#accessibilityviewismodal
 
-See http://facebook.github.io/react-native/docs/view.html#accessibilityviewismodal |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -196,19 +125,19 @@ See http://facebook.github.io/react-native/docs/view.html#accessibilityviewismod
 
 When `true`, indicates that the view is an accessibility element. By default, all the touchable elements are accessible.
 
-See http://facebook.github.io/react-native/docs/view.html#accessible
+See https://reactnative.dev/docs/view.html#accessible
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type |
+| ---- |
+| bool |
 
 ---
 
 ### `children`
 
-| Type   | Required |
-| ------ | -------- |
-| `Node` | No       |
+| Type |
+| ---- |
+| Node |
 
 ---
 
@@ -216,31 +145,33 @@ See http://facebook.github.io/react-native/docs/view.html#accessible
 
 Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization. Set this property to `false` to disable this optimization and ensure that this `View` exists in the native view hierarchy.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
+In Fabric, this prop is used in ios as well.
 
-See http://facebook.github.io/react-native/docs/view.html#collapsable |
+See https://reactnative.dev/docs/view.html#collapsable
+
+| Type |
+| ---- |
+| bool |
 
 ---
 
-### `focusable`
+### `focusable`<div class="label android">Android</div>
 
 Whether this `View` should be focusable with a non-touch input device, eg. receive focus with a hardware keyboard.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | Android  |
+| Type |
+| ---- |
+| bool |
 
 ---
 
-### `hasTVPreferredFocus`
+### `hasTVPreferredFocus`<div class="label android">Android</div>
 
 Whether to force the Android TV focus engine to move focus to this view.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | Android  |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -250,11 +181,11 @@ This defines how far a touch event can start away from the view. Typical interfa
 
 > The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
 
-See http://facebook.github.io/react-native/docs/view.html#hitslop
+See https://reactnative.dev/docs/view.html#hitslop
 
-| Type                                                                                                                 | Required |
-| -------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>\$ReadOnly&#x3C;{&#124; bottom?: ?number, left?: ?number, right?: ?number, top?: ?number, &#124;}&#x3E;</code> | No       |
+| Type       |
+| ---------- |
+| object: {} |
 
 ---
 
@@ -262,27 +193,27 @@ See http://facebook.github.io/react-native/docs/view.html#hitslop
 
 Controls how view is important for accessibility which is if it fires accessibility events and if it is reported to accessibility services that query the screen. Works for Android only.
 
-| Type                                                                                                              | Required | Platform |
-| ----------------------------------------------------------------------------------------------------------------- | -------- | -------- |
-| <code>&#x27;auto&#x27; &#124; &#x27;yes&#x27; &#124; &#x27;no&#x27; &#124; &#x27;no-hide-descendants&#x27;</code> | No       | android  |
+See https://reactnative.dev/docs/view.html#importantforaccessibility
 
-See http://facebook.github.io/react-native/docs/view.html#importantforaccessibility |
+| Type                                             |
+| ------------------------------------------------ |
+| enum('auto', 'yes', 'no', 'no-hide-descendants') |
 
 ---
 
 ### `nativeBackgroundAndroid`
 
-| Type                                                               | Required |
-| ------------------------------------------------------------------ | -------- |
-| <code>AndroidDrawableThemeAttr &#124; AndroidDrawableRipple</code> | No       |
+| Type                                                  |
+| ----------------------------------------------------- |
+| enum(AndroidDrawableThemeAttr, AndroidDrawableRipple) |
 
 ---
 
 ### `nativeForegroundAndroid`
 
-| Type                                                               | Required |
-| ------------------------------------------------------------------ | -------- |
-| <code>AndroidDrawableThemeAttr &#124; AndroidDrawableRipple</code> | No       |
+| Type                                                  |
+| ----------------------------------------------------- |
+| enum(AndroidDrawableThemeAttr, AndroidDrawableRipple) |
 
 ---
 
@@ -292,11 +223,11 @@ Used to locate this view from native classes.
 
 > This disables the 'layout-only view removal' optimization for this view!
 
-See http://facebook.github.io/react-native/docs/view.html#nativeid
+See https://reactnative.dev/docs/view.html#nativeid
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type   |
+| ------ |
+| string |
 
 ---
 
@@ -304,61 +235,61 @@ See http://facebook.github.io/react-native/docs/view.html#nativeid
 
 Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
+See https://reactnative.dev/docs/view.html#needsoffscreenalphacompositing
 
-See http://facebook.github.io/react-native/docs/view.html#needsoffscreenalphacompositing |
+| Type |
+| ---- |
+| bool |
 
 ---
 
-### `nextFocusDown`
+### `nextFocusDown`<div class="label android">Android</div>
 
 TV next focus down (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusForward`
+### `nextFocusForward`<div class="label android">Android</div>
 
 TV next focus forward (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusLeft`
+### `nextFocusLeft`<div class="label android">Android</div>
 
 TV next focus left (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusRight`
+### `nextFocusRight`<div class="label android">Android</div>
 
 TV next focus right (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusUp`
+### `nextFocusUp`<div class="label android">Android</div>
 
 TV next focus up (see documentation for the View component).
 
-| Type     | Required | Platform |
-| -------- | -------- | -------- |
-| `number` | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -366,9 +297,9 @@ TV next focus up (see documentation for the View component).
 
 When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
 
-| Type                                         | Required |
-| -------------------------------------------- | -------- |
-| `(event: AccessibilityActionEvent) => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -376,11 +307,11 @@ When `accessible` is true, the system will try to invoke this function when the 
 
 When `accessible` is `true`, the system will invoke this function when the user performs the escape gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onaccessibilityescape
+See https://reactnative.dev/docs/view.html#onaccessibilityescape
 
-| Type          | Required |
-| ------------- | -------- |
-| `() => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -388,37 +319,37 @@ See http://facebook.github.io/react-native/docs/view.html#onaccessibilityescape
 
 When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onaccessibilitytap
+See https://reactnative.dev/docs/view.html#onaccessibilitytap
 
-| Type          | Required |
-| ------------- | -------- |
-| `() => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
 ### `onBlur`
 
-| Type                          | Required |
-| ----------------------------- | -------- |
-| `(event: BlurEvent) => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
-### `onClick`
+### `onClick`<div class="label android">Android</div>
 
 The action to perform when this `View` is clicked on by a non-touch click, eg. enter key on a hardware keyboard.
 
-| Type                           | Required | Platform |
-| ------------------------------ | -------- | -------- |
-| `(event: PressEvent) => mixed` | No       | Android  |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onFocus`
 
-| Type                           | Required |
-| ------------------------------ | -------- |
-| `(event: FocusEvent) => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -430,11 +361,11 @@ Invoked on mount and layout changes with:
 
 This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.
 
-See http://facebook.github.io/react-native/docs/view.html#onlayout
+See https://reactnative.dev/docs/view.html#onlayout
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| `(event: LayoutEvent) => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -442,27 +373,27 @@ See http://facebook.github.io/react-native/docs/view.html#onlayout
 
 When `accessible` is `true`, the system will invoke this function when the user performs the magic tap gesture.
 
-See http://facebook.github.io/react-native/docs/view.html#onmagictap
+See https://reactnative.dev/docs/view.html#onmagictap
 
-| Type          | Required |
-| ------------- | -------- |
-| `() => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
 ### `onMouseEnter`
 
-| Type                          | Required |
-| ----------------------------- | -------- |
-| `(event: MouseEvent) => void` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
 ### `onMouseLeave`
 
-| Type                          | Required |
-| ----------------------------- | -------- |
-| `(event: MouseEvent) => void` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -470,13 +401,13 @@ See http://facebook.github.io/react-native/docs/view.html#onmagictap
 
 Does this view want to "claim" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.
 
-`View.props.onMoveShouldSetResponder: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
+`View.props.onMoveShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onmoveshouldsetresponder
+See https://reactnative.dev/docs/view.html#onmoveshouldsetresponder
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| `(e: PressEvent) => boolean` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -484,21 +415,21 @@ See http://facebook.github.io/react-native/docs/view.html#onmoveshouldsetrespond
 
 If a parent `View` wants to prevent a child `View` from becoming responder on a move, it should have this handler which returns `true`.
 
-`View.props.onMoveShouldSetResponderCapture: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
+`View.props.onMoveShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onMoveShouldsetrespondercapture
+See https://reactnative.dev/docs/view.html#onMoveShouldsetrespondercapture
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| `(e: PressEvent) => boolean` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onResponderEnd`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -506,15 +437,15 @@ See http://facebook.github.io/react-native/docs/view.html#onMoveShouldsetrespond
 
 The View is now responding for touch events. This is the time to highlight and show the user what is happening.
 
-`View.props.onResponderGrant: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderGrant: (event) => {}`, where `event` is a synthetic touch event as described above.
 
 PanResponder includes a note `// TODO: t7467124 investigate if this can be removed` that should help fixing this return type.
 
-See http://facebook.github.io/react-native/docs/view.html#onrespondergrant
+See https://reactnative.dev/docs/view.html#onrespondergrant
 
-| Type                                                     | Required |
-| -------------------------------------------------------- | -------- |
-| <code>(e: PressEvent) =&#x3E; void &#124; boolean</code> | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -522,13 +453,13 @@ See http://facebook.github.io/react-native/docs/view.html#onrespondergrant
 
 The user is moving their finger.
 
-`View.props.onResponderMove: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderMove: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onrespondermove
+See https://reactnative.dev/docs/view.html#onrespondermove
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -536,13 +467,13 @@ See http://facebook.github.io/react-native/docs/view.html#onrespondermove
 
 Another responder is already active and will not release it to that `View` asking to be the responder.
 
-`View.props.onResponderReject: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderReject: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderreject
+See https://reactnative.dev/docs/view.html#onresponderreject
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -550,21 +481,21 @@ See http://facebook.github.io/react-native/docs/view.html#onresponderreject
 
 Fired at the end of the touch.
 
-`View.props.onResponderRelease: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderRelease: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderrelease
+See https://reactnative.dev/docs/view.html#onresponderrelease
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onResponderStart`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -572,13 +503,13 @@ See http://facebook.github.io/react-native/docs/view.html#onresponderrelease
 
 The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)
 
-`View.props.onResponderTerminate: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderTerminate: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderterminate
+See https://reactnative.dev/docs/view.html#onresponderterminate
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -586,13 +517,13 @@ See http://facebook.github.io/react-native/docs/view.html#onresponderterminate
 
 Some other `View` wants to become responder and is asking this `View` to release its responder. Returning `true` allows its release.
 
-`View.props.onResponderTerminationRequest: (event) => {}`, where `event` is a [PressEvent](pressevent).
+`View.props.onResponderTerminationRequest: (event) => {}`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onresponderterminationrequest
+See https://reactnative.dev/docs/view.html#onresponderterminationrequest
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| `(e: PressEvent) => boolean` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -600,13 +531,13 @@ See http://facebook.github.io/react-native/docs/view.html#onrespondertermination
 
 Does this view want to become responder on the start of a touch?
 
-`View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
+`View.props.onStartShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onstartshouldsetresponder
+See https://reactnative.dev/docs/view.html#onstartshouldsetresponder
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| `(e: PressEvent) => boolean` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -616,75 +547,75 @@ If a parent `View` wants to prevent a child `View` from becoming responder on a 
 
 `View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
 
-See http://facebook.github.io/react-native/docs/view.html#onstartshouldsetrespondercapture
+See https://reactnative.dev/docs/view.html#onstartshouldsetrespondercapture
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| `(e: PressEvent) => boolean` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchCancel`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchCancelCapture`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchEnd`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchEndCapture`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchMove`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchMoveCapture`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchStart`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
 ### `onTouchStartCapture`
 
-| Type                      | Required |
-| ------------------------- | -------- |
-| `(e: PressEvent) => void` | No       |
+| Type                                  |
+| ------------------------------------- |
+| function([PressEvent](pressevent.md)) |
 
 ---
 
@@ -692,11 +623,11 @@ See http://facebook.github.io/react-native/docs/view.html#onstartshouldsetrespon
 
 Controls whether the `View` can be the target of touch events.
 
-See http://facebook.github.io/react-native/docs/view.html#pointerevents
+See https://reactnative.dev/docs/view.html#pointerevents
 
-| Type                                                                                                          | Required |
-| ------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#x27;auto&#x27; &#124; &#x27;box-none&#x27; &#124; &#x27;box-only&#x27; &#124; &#x27;none&#x27;</code> | No       |
+| Type                                         |
+| -------------------------------------------- |
+| enum('auto', 'box-none', 'box-only', 'none') |
 
 ---
 
@@ -704,11 +635,11 @@ See http://facebook.github.io/react-native/docs/view.html#pointerevents
 
 This is a special performance property exposed by `RCTView` and is useful for scrolling content when there are many subviews, most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound. The subviews must also have `overflow: hidden`, as should the containing view (or one of its superviews).
 
-See http://facebook.github.io/react-native/docs/view.html#removeclippedsubviews
+See https://reactnative.dev/docs/view.html#removeclippedsubviews
 
-| Type      | Required |
-| --------- | -------- |
-| `boolean` | No       |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -716,11 +647,11 @@ See http://facebook.github.io/react-native/docs/view.html#removeclippedsubviews
 
 Whether this `View` should render itself (and all of its children) into a single hardware texture on the GPU.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | android  |
+See https://reactnative.dev/docs/view.html#rendertohardwaretextureandroid
 
-See http://facebook.github.io/react-native/docs/view.html#rendertohardwaretextureandroid |
+| Type |
+| ---- |
+| bool |
 
 ---
 
@@ -728,19 +659,19 @@ See http://facebook.github.io/react-native/docs/view.html#rendertohardwaretextur
 
 Whether this `View` should be rendered as a bitmap before compositing.
 
-| Type      | Required | Platform |
-| --------- | -------- | -------- |
-| `boolean` | No       | ios      |
+See https://reactnative.dev/docs/view.html#shouldrasterizeios
 
-See http://facebook.github.io/react-native/docs/view.html#shouldrasterizeios |
+| Type |
+| ---- |
+| bool |
 
 ---
 
 ### `style`
 
-| Type                                                                                                                                           | Required |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#124; null &#124; void &#124; T &#124; false &#124; &#x27;&#x27; &#124; \$ReadOnlyArray&#x3C;GenericStyleProp&#x3C;T&#x3E;&#x3E;</code> | No       |
+| Type                                                                 |
+| -------------------------------------------------------------------- |
+| enum(null, void, T, false, '', \$ReadOnlyArray<GenericStyleProp<T>>) |
 
 ---
 
@@ -750,8 +681,8 @@ Used to locate this view in end-to-end tests.
 
 > This disables the 'layout-only view removal' optimization for this view!
 
-See http://facebook.github.io/react-native/docs/view.html#testid
+See https://reactnative.dev/docs/view.html#testid
 
-| Type     | Required |
-| -------- | -------- |
-| `string` | No       |
+| Type   |
+| ------ |
+| string |

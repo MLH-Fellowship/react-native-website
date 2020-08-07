@@ -876,10 +876,10 @@
   resolved "https://registry.npmjs.org/@motiz88/ast-types/-/ast-types-0.13.3.tgz#0630c411325b145a7ad5632adf8d8d40d28e07d0"
   integrity sha512-OzqnfkQv2JjhRqZ0BeuJRuU6rx47LqBYeirDOUfb5C5fFFtpOh0AHTlQRifG4a5kir/OwjWW+x4HlViYxVko/Q==
 
-"@motiz88/react-native-docgen@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/@motiz88/react-native-docgen/-/react-native-docgen-0.0.2.tgz#0da1170dc601bddb28e255194b480e9dc6e7acd5"
-  integrity sha512-5knOlVOnHDUZRx6KCE94yGJYuevnckb+Q/+TL2mG9SEqAlDEh/4bMRyZMxcaoKOi/MIj1ZUQlbXVYoUlDAW5Tw==
+"@motiz88/react-native-docgen@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@motiz88/react-native-docgen/-/react-native-docgen-0.0.3.tgz#7c08566fdc4ab1e5fba55860e7aa5e832025d61f"
+  integrity sha512-mSxa1nLGHmtEA9/EYZqwddYFxDH/F135CEEh2x7OhIGvTJu47E37qcXz83fDWL1KgZnpVHUAvMxAsmH4Npcw/A==
   dependencies:
     "@babel/core" "^7.7.5"
     "@babel/runtime" "^7.7.6"
