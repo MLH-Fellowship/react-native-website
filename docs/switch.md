@@ -3,9 +3,43 @@ id: switch
 title: Switch
 ---
 
+Renders a boolean input.
+
+This is a controlled component that requires an `onValueChange` callback that updates the `value` prop in order for the component to reflect user actions. If the `value` prop is not updated, the component will continue to render the supplied `value` prop instead of the expected result of any user actions.
+
 ## Example
 
-.
+```SnackPlayer name=Switch
+import React, { useState } from "react";
+import { View, Switch, StyleSheet } from "react-native";
+
+const App = () => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  return (
+    <View style={styles.container}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+export default App;
+```
 
 ---
 
@@ -17,11 +51,11 @@ Inherits [View Props](view.md#props).
 
 ### `disabled`
 
-Whether the switch is disabled. Defaults to false.
+If true the user won't be able to toggle the switch.
 
-| Type |
-| ---- |
-| bool |
+| Type | Default |
+| ---- | ------- |
+| bool | `false` |
 
 ---
 
@@ -37,9 +71,7 @@ On iOS, custom color for the background. This background color can be seen eithe
 
 ### `onChange`
 
-Called when the user tries to change the value of the switch.
-
-Receives the change event as an argument. If you want to only receive the new value, use `onValueChange` instead.
+Invoked when the user tries to change the value of the switch. Receives the change event as an argument. If you want to only receive the new value, use `onValueChange` instead.
 
 | Type     |
 | -------- |
@@ -49,9 +81,7 @@ Receives the change event as an argument. If you want to only receive the new va
 
 ### `onValueChange`
 
-Called when the user tries to change the value of the switch.
-
-Receives the new value as an argument. If you want to instead receive an event, use `onChange`.
+Invoked when the user tries to change the value of the switch. Receives the new value as an argument. If you want to instead receive an event, use `onChange`.
 
 | Type     |
 | -------- |
@@ -61,7 +91,7 @@ Receives the new value as an argument. If you want to instead receive an event, 
 
 ### `thumbColor`
 
-Custom color for the switch thumb.
+Color of the foreground switch grip. If this is set on iOS, the switch grip will lose its drop shadow.
 
 | Type                                 |
 | ------------------------------------ |
@@ -73,7 +103,7 @@ Custom color for the switch thumb.
 
 Custom colors for the switch track.
 
-NOTE: On iOS when the switch value is false, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use `ios_backgroundColor`.
+_iOS_: When the switch value is false, the track shrinks into the border. If you want to change the color of the background exposed by the shrunken track, use [`ios_backgroundColor`](switch#ios_backgroundColor).
 
 | Type                                                          |
 | ------------------------------------------------------------- |
@@ -83,8 +113,8 @@ NOTE: On iOS when the switch value is false, the track shrinks into the border. 
 
 ### `value`
 
-Boolean value of the switch. Defaults to false.
+The value of the switch. If true the switch will be turned on.
 
-| Type |
-| ---- |
-| bool |
+| Type | Default |
+| ---- | ------- |
+| bool | `false` |

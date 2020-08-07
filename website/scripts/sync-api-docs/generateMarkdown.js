@@ -72,6 +72,35 @@ function generateProp(propName, prop) {
 
 // Formats information about a prop
 function generateMethod(method, component) {
+  let descriptionTokenized = '';
+  let header = 'Valid `params` keys are:';
+  let mdPoints = '';
+  if (method?.params[0]?.type?.raw) {
+    let desc = method?.params[0]?.type?.raw;
+    let len = method?.params[0]?.type?.signature?.properties?.length;
+    descriptionTokenized = tokenizeComment(desc);
+
+    if (
+      descriptionTokenized?.examples &&
+      descriptionTokenized?.examples.length === len
+    ) {
+      let obj = [];
+      for (let i = 0; i < len; i++) {
+        let newObj = method?.params[0]?.type?.signature?.properties[i];
+        newObj['description'] = descriptionTokenized?.examples[i]?.value;
+        obj.push(newObj);
+      }
+
+      obj.map(item => {
+        mdPoints += `- '${item.key}' (${item.value.name}) - ${
+          item.description
+        }`;
+      });
+
+      method.params[0]['description'] = 'See below';
+    }
+  }
+
   const infoTable = generateTable([
     {
       ...(method.rnTags && method.rnTags.platform
@@ -86,10 +115,11 @@ function generateMethod(method, component) {
     '()`' +
     '\n' +
     '\n' +
-    generateMethodSignatureBlock(method, component) +
+    // generateMethodSignatureBlock(method, component) +
     (method.description ? method.description + '\n\n' : '') +
     generateMethodSignatureTable(method, component) +
-    infoTable
+    infoTable +
+    (mdPoints && header + '\n' + mdPoints)
   ).trim();
 }
 
@@ -123,9 +153,9 @@ function generateMethodSignatureTable(method, component) {
     generateTable(
       method.params.map(param => ({
         Name: param.name,
-        Type: param.type ? maybeLinkifyType(param.type) : '',
+        Type: param.type ? param.type.type : '',
         Required: param.optional ? 'No' : 'Yes',
-        Description: param.description,
+        ...(param.description && {Description: param.description}),
       }))
     )
   );
@@ -186,36 +216,6 @@ function generateHeader({id, title}) {
   );
 }
 
-// function newPreprocessDescriptiono(desc) {
-//   const playgroundTab = `<div class="toggler">
-//     <ul role="tablist" class="toggle-syntax">
-//     <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-//       Function Component Example
-//     </li>
-//     <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-//       Class Component Example
-//     </li>
-//     </ul>
-//   </div>`;
-
-//   //Blocks for different syntax sections
-//   const functionalBlock = `<block class='functional syntax' />`;
-//   const classBlock = `<block class='classical syntax' />`;
-//   const endBlock = `<block class='endBlock syntax' />`;
-
-//   let tabs = 0;
-
-//   desc.substr(0, desc.search('```SnackPlayer')) +
-//   '\n' +
-//   '\n## Example\n' +
-
-//   //sdfasdf
-
-//   '\n' +
-//   desc.substr(desc.search('```SnackPlayer'))
-
-// }
-
 // Function to process example contained description
 function preprocessDescription(desc) {
   // Playground tabs for the class and functional components
@@ -243,7 +243,6 @@ function preprocessDescription(desc) {
     .join('\n');
 
   const descriptionTokenized = tokenizeComment(desc);
-  // console.log("preprocessDescription -> descriptionTokenized", descriptionTokenized)
   // Tabs counter for examples
   let tabs = 0;
   descriptionTokenized.examples.map(item => {

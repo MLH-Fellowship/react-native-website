@@ -113,7 +113,7 @@ export default App;
 
 ### <div class="label required basic">Required</div>`onPress`
 
-Handler to be called when the user taps the button.
+Handler to be called when the user taps the button. The first function argument is an event in form of [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
