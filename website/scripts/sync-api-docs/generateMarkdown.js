@@ -92,9 +92,11 @@ function generateMethod(method, component) {
       }
 
       obj.map(item => {
-        mdPoints += `- '${item.key}' (${item.value.name}) - ${
-          item.description
-        }`;
+        if (item.description.trim() !== 'missing')
+          mdPoints += `- '${item.key}' (${item.value.name}) - ${
+            item.description
+          }`;
+        else mdPoints += `- '${item.key}' (${item.value.name})`;
       });
 
       method.params[0]['description'] = 'See below';
