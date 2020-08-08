@@ -439,15 +439,15 @@ scrollToEnd([params]);
 
 Scrolls to the end of the content. May be janky without `getItemLayout` prop.
 
-**Parameters:**
-
-| Name   | Type   | Required | Description |
-| ------ | ------ | -------- | ----------- |
-| params | object | No       | See below   |
-
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
+
+**Parameters:**
+
+| Name   | Type   | Required |
+| ------ | ------ | -------- |
+| params | object | No       |
 
 ---
 
@@ -461,18 +461,18 @@ Scrolls to the item at the specified index such that it is positioned in the vie
 
 > Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
-**Parameters:**
-
-| Name   | Type   | Required | Description |
-| ------ | ------ | -------- | ----------- |
-| params | object | Yes      | See below   |
-
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
 - 'index' (number) - The index to scroll to. Required.
 - 'viewOffset' (number) - A fixed number of pixels to offset the final target position.
 - 'viewPosition' (number) - A value of `0` places the item specified by index at the top, `1` at the bottom, and `0.5` centered in the middle.
+
+**Parameters:**
+
+| Name   | Type   | Required |
+| ------ | ------ | -------- |
+| params | object | Yes      |
 
 ---
 
@@ -486,17 +486,17 @@ Requires linear scan through data - use `scrollToIndex` instead if possible.
 
 > Note: Cannot scroll to locations outside the render window without specifying the `getItemLayout` prop.
 
-**Parameters:**
-
-| Name   | Type   | Required | Description |
-| ------ | ------ | -------- | ----------- |
-| params | object | Yes      | See below   |
-
 Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
-- 'item' (ItemT) - The item to scroll to. Required.
-- 'viewPosition' (number) - Missing desc
+- 'item' (object) - The item to scroll to. Required.
+- 'viewPosition' (number)
+
+**Parameters:**
+
+| Name   | Type   | Required |
+| ------ | ------ | -------- |
+| params | object | Yes      |
 
 ---
 
@@ -508,16 +508,16 @@ scrollToOffset(params);
 
 Scroll to a specific content pixel offset in the list.
 
-**Parameters:**
-
-| Name   | Type   | Required | Description |
-| ------ | ------ | -------- | ----------- |
-| params | object | Yes      | See below   |
-
 Valid `params` keys are:
 
-- 'animated' (boolean) - The offset to scroll to. In case of `horizontal` being true, the offset is the x-value, in any other case the offset is the y-value. Required.
-- 'offset' (number) - Whether the list should do an animation while scrolling. Defaults to `true`.
+- 'offset' (number) - The offset to scroll to. In case of `horizontal` being true, the offset is the x-value, in any other case the offset is the y-value. Required.
+- 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
+
+**Parameters:**
+
+| Name   | Type   | Required |
+| ------ | ------ | -------- |
+| params | object | Yes      |
 
 ---
 

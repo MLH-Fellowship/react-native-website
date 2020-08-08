@@ -181,6 +181,15 @@ function formatTypeColumn(prop) {
           if (item) return item;
         });
 
+      // Get text and url from magic aliases
+      prop?.flowType?.elements?.forEach(elem => {
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
+          ({url, text} = magic.linkableTypeAliases[elem.name]);
+        }
+      });
+
+      if (url) return `[${text}](${url})`;
+
       return `enum(${unionTypes.join(', ')})`;
     } else {
       // Get text and url from magic aliases
