@@ -281,13 +281,15 @@ function preprocessDescription(desc) {
       secondExample.substr(secondExample.search('```') + 3)
     );
   } else {
-    return (
-      desc.substr(0, desc.search('```SnackPlayer')) +
-      '\n' +
-      '\n## Example\n' +
-      '\n' +
-      desc.substr(desc.search('```SnackPlayer'))
-    );
+    if (desc.search('```SnackPlayer') !== -1) {
+      return (
+        desc.substr(0, desc.search('```SnackPlayer')) +
+        '\n' +
+        '\n## Example\n' +
+        '\n' +
+        desc.substr(desc.search('```SnackPlayer'))
+      );
+    } else return desc;
   }
 }
 

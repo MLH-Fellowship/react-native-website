@@ -52,8 +52,6 @@ async function extractDocsFromRN(rnRoot) {
       if (item.description) return item;
     });
 
-    // console.log(filteredResult)
-
     docs.push({
       file,
       component: cleanComponentResult(...filteredResult),
