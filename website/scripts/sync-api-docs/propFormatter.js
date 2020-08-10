@@ -24,6 +24,10 @@ function formatMultiplePlatform(platforms) {
         break;
       case 'tv':
         platformString += '<div class="label tv">' + 'TV' + '</div>';
+        break;
+      //TODO: Add a new CSS class for VR
+      case 'vr':
+        platformString += '<div class="label tv">' + 'VR' + '</div>';
     }
   });
   return platformString;
@@ -149,6 +153,12 @@ function formatTypeColumn(prop) {
           []
         );
         return `array of enum(${unionTypes.join(', ')})`;
+      } else if (prop?.flowType?.elements[0]?.name) {
+        //array of number
+        if (prop?.flowType?.elements[0]?.name === 'number')
+          return `array of ${prop.flowType.elements[0].name}`;
+        //default array for all other types
+        else return 'array';
       }
     } else if (prop.flowType.name === '$ReadOnly') {
       // Special Case: switch#trackcolor
@@ -164,6 +174,7 @@ function formatTypeColumn(prop) {
                 markdown += `${key}: [${text}](${url})` + ', ';
               }
             });
+            if (!url) markdown += `${key}: ${value.name}` + ', ';
           }
         );
         if (markdown.match(/, $/)) markdown = markdown.replace(/, $/, '');
@@ -191,6 +202,8 @@ function formatTypeColumn(prop) {
       if (url) return `[${text}](${url})`;
 
       return `enum(${unionTypes.join(', ')})`;
+    } else if (prop.flowType.name === 'ReactElement') {
+      return 'element';
     } else {
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {
