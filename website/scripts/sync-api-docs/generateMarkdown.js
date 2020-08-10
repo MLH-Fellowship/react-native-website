@@ -49,8 +49,8 @@ function generateTable(rows) {
 function generateProp(propName, prop) {
   const infoTable = generateTable([
     {
-      Type: formatTypeColumn(prop),
-      ...formatDefaultColumn(prop),
+      Type: formatTypeColumn(propName, prop),
+      ...formatDefaultColumn(propName, prop),
     },
   ]);
 
@@ -153,12 +153,15 @@ function generateMethodSignatureTable(method, component) {
   return (
     '**Parameters:**\n\n' +
     generateTable(
-      method.params.map(param => ({
-        Name: param.name,
-        Type: param.type ? param.type.type : '',
-        Required: param.optional ? 'No' : 'Yes',
-        ...(param.description && {Description: param.description}),
-      }))
+      method.params.map(param => {
+        console.log(method);
+        return {
+          Name: param.name,
+          Type: param.type ? param.type.type : '',
+          Required: param.optional ? 'No' : 'Yes',
+          ...(param.description && {Description: param.description}),
+        };
+      })
     )
   );
 }

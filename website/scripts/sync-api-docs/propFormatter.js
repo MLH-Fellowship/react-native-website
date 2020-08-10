@@ -80,7 +80,8 @@ function maybeLinkifyTypeName(name) {
 }
 
 // Adds proper markdown formatting to component's prop type.
-function formatTypeColumn(prop) {
+function formatTypeColumn(propName, prop) {
+  // console.log(propName, prop);
   // Checks for @type pragma comment
   if (prop.rnTags && prop.rnTags.type) {
     let tableRows = '';
@@ -181,9 +182,17 @@ function formatTypeColumn(prop) {
           if (item) return item;
         });
 
+      // console.log(propName, prop.flowType);
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {
-        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
+        if (elem.name === 'literal') {
+          let val = elem.value.replace(/['"]+/g, '');
+          if (Object.hasOwnProperty.call(magic.linkableTypeAliases, val)) {
+            ({url, text} = magic.linkableTypeAliases[val]);
+          }
+        } else if (
+          Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
+        ) {
           ({url, text} = magic.linkableTypeAliases[elem.name]);
         }
       });
@@ -218,7 +227,8 @@ function formatTypeColumn(prop) {
 }
 
 // Adds proper markdown formatting to component's default value.
-function formatDefaultColumn(prop) {
+function formatDefaultColumn(propName, prop) {
+  // console.log(propName, prop)
   if (prop?.rnTags?.default) {
     // Parse from @default annotation
     let tableRows = '';
@@ -245,7 +255,7 @@ function formatDefaultColumn(prop) {
           (!tag.includes('null') ? '`' + tag + '`' : tag) +
           colorBlock +
           formatMultiplePlatform(platform[0].split(','));
-      } else {
+      } else if (tag.trim().indexOf(' ') === -1) {
         tag = '`' + tag + '`';
       }
       tableRows = tableRows + tag + '<hr/>';

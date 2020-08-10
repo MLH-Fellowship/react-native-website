@@ -29,5 +29,13 @@ module.exports = {
       text: 'RefreshControl.SIZE',
       url: 'refreshcontrol.md#refreshlayoutconstssize',
     },
+    'light-content': {
+      text: 'StatusBarStyle',
+      url: 'statusbar#statusbarstyle',
+    },
+    slide: {
+      text: 'StatusBarAnimation',
+      url: 'statusbar#statusbaranimation',
+    },
   },
 };
