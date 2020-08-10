@@ -261,17 +261,24 @@ function preprocessDescription(desc) {
   });
 
   if (tabs === 2) {
-    const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
-      descriptionTokenized.examples[0].raw
-    }\n\n${classBlock}\n\n${
-      descriptionTokenized.examples[1].raw
-    }\n\n${endBlock}`;
+    const firstExample = desc.substr(desc.search('```SnackPlayer') + 1);
+    const secondExample = firstExample.substr(
+      firstExample.search('```SnackPlayer') + 1
+    );
+
     return (
-      descriptionTokenized.description +
+      desc.substr(0, desc.search('```SnackPlayer')) +
       `\n## Example\n` +
-      wrapper +
-      '\n' +
-      descriptionTokenized?.footer
+      `${playgroundTab}\n\n${functionalBlock}\n\n${'`' +
+        firstExample.substr(
+          0,
+          firstExample.search('```') + 3
+        )}\n\n${classBlock}\n\n${'`' +
+        secondExample.substr(
+          0,
+          secondExample.search('```') + 3
+        )}\n\n${endBlock}` +
+      secondExample.substr(secondExample.search('```') + 3)
     );
   } else {
     return (
