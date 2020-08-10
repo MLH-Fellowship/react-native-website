@@ -13,6 +13,8 @@ const {
   formatDefaultColumn,
 } = require('./propFormatter');
 
+const {formatMethodType} = require('./methodFormatter');
+
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
   const colWidths = new Map();
@@ -78,7 +80,6 @@ function generateMethod(method, component) {
   if (method?.params[0]?.type?.raw) {
     let desc = method?.params[0]?.type?.raw;
     let len = method?.params[0]?.type?.signature?.properties?.length;
-    descriptionTokenized = tokenizeComment(desc);
 
     if (
       descriptionTokenized?.examples &&
@@ -103,24 +104,62 @@ function generateMethod(method, component) {
     }
   }
 
-  const infoTable = generateTable([
-    {
-      ...(method.rnTags && method.rnTags.platform
-        ? {Platform: formatPlatformName(method.rnTags.platform)}
-        : {}),
-    },
-  ]);
+  // const infoTable = generateTable([
+  //   {
+  //     ...(method.rnTags && method.rnTags.platform
+  //       ? {Platform: formatPlatformName(method.rnTags.platform)}
+  //       : {}),
+  //   },
+  // ]);
+
+  if (method?.docblock) {
+    let dblock = method.docblock
+      .split('\n')
+      .map(line => {
+        return line.replace(/  /, '');
+      })
+      .join('\n');
+    const docblockTokenized = tokenizeComment(dblock);
+    dblock = dblock.replace(/@platform .*|@default .*|@type .*/g, '');
+    method.rnTags = {};
+    const platformTag = docblockTokenized.tags.find(
+      ({key}) => key === 'platform'
+    );
+    const defaultTag = docblockTokenized.tags.filter(
+      tag => tag.key === 'default'
+    );
+    const typeTag = docblockTokenized.tags.filter(tag => tag.key === 'type');
+
+    if (platformTag) {
+      method.rnTags.platform = platformTag.value.split(',');
+    }
+    if (defaultTag.length) {
+      method.rnTags.default = [];
+      defaultTag.forEach(tag => {
+        method.rnTags.default.push(tag.value);
+      });
+    }
+    if (typeTag.length) {
+      method.rnTags.type = [];
+      typeTag.forEach(tag => {
+        method.rnTags.type.push(tag.value);
+      });
+    }
+  }
 
   return (
     '### `' +
     method.name +
     '()`' +
+    (method.rnTags && method.rnTags.platform
+      ? formatMultiplePlatform(method.rnTags.platform)
+      : '') +
     '\n' +
     '\n' +
     // generateMethodSignatureBlock(method, component) +
     (method.description ? method.description + '\n\n' : '') +
     generateMethodSignatureTable(method, component) +
-    infoTable +
+    // infoTable +
     (mdPoints && header + '\n' + mdPoints)
   ).trim();
 }
@@ -150,14 +189,14 @@ function generateMethodSignatureTable(method, component) {
   if (!method.params.length) {
     return '';
   }
+
   return (
     '**Parameters:**\n\n' +
     generateTable(
       method.params.map(param => {
-        console.log(method);
         return {
           Name: param.name,
-          Type: param.type ? param.type.type : '',
+          Type: formatMethodType(method, param),
           Required: param.optional ? 'No' : 'Yes',
           ...(param.description && {Description: param.description}),
         };
