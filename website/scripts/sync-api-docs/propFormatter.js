@@ -18,15 +18,14 @@ const {
   formatType,
 } = require('./utils');
 
-// Adds proper markdown formatting to component's prop type.
-function formatTypeColumn(propName, prop) {
-  // console.log(propName, prop);
+function formatTypeColumn(prop) {
   // Checks for @type pragma comment
   if (prop.rnTags && prop.rnTags.type) {
     let tableRows = '';
     const typeTags = prop.rnTags.type;
 
     typeTags.forEach(tag => {
+      let url, text;
       // Checks for @platform pragma in @type string
       const isMatch = tag.match(/{@platform [a-z ,]*}/);
       if (isMatch) {
@@ -36,7 +35,16 @@ function formatTypeColumn(propName, prop) {
         // Replaces @platform strings with empty string
         // and appends type with formatted platform
         tag = tag.replace(/{@platform [a-z ,]*}/g, '');
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, tag)) {
+          ({url, text} = magic.linkableTypeAliases[tag]);
+          if (url) tag = `[${text}](${url})`;
+        }
         tag = tag + formatMultiplePlatform(platform[0].split(','));
+      } else {
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, tag)) {
+          ({url, text} = magic.linkableTypeAliases[tag]);
+          if (url) tag = `[${text}](${url})`;
+        }
       }
       tableRows = tableRows + tag + '<hr/>';
     });
@@ -89,6 +97,12 @@ function formatTypeColumn(propName, prop) {
           []
         );
         return `array of enum(${unionTypes.join(', ')})`;
+      } else if (prop?.flowType?.elements[0]?.name) {
+        //array of number
+        if (prop?.flowType?.elements[0]?.name === 'number')
+          return `array of ${prop.flowType.elements[0].name}`;
+        //default array for all other types
+        else return 'array';
       }
     } else if (prop.flowType.name === '$ReadOnly') {
       // Special Case: switch#trackcolor
@@ -104,6 +118,7 @@ function formatTypeColumn(propName, prop) {
                 markdown += `${key}: [${text}](${url})` + ', ';
               }
             });
+            if (!url) markdown += `${key}: ${value.name}` + ', ';
           }
         );
         if (markdown.match(/, $/)) markdown = markdown.replace(/, $/, '');
@@ -121,17 +136,9 @@ function formatTypeColumn(propName, prop) {
           if (item) return item;
         });
 
-      // console.log(propName, prop.flowType);
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {
-        if (elem.name === 'literal') {
-          let val = elem.value.replace(/['"]+/g, '');
-          if (Object.hasOwnProperty.call(magic.linkableTypeAliases, val)) {
-            ({url, text} = magic.linkableTypeAliases[val]);
-          }
-        } else if (
-          Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
-        ) {
+        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
           ({url, text} = magic.linkableTypeAliases[elem.name]);
         }
       });
@@ -139,6 +146,8 @@ function formatTypeColumn(propName, prop) {
       if (url) return `[${text}](${url})`;
 
       return `enum(${unionTypes.join(', ')})`;
+    } else if (prop.flowType.name === 'ReactElement') {
+      return 'element';
     } else {
       // Get text and url from magic aliases
       prop?.flowType?.elements?.forEach(elem => {
@@ -194,7 +203,7 @@ function formatDefaultColumn(propName, prop) {
           (!tag.includes('null') ? '`' + tag + '`' : tag) +
           colorBlock +
           formatMultiplePlatform(platform[0].split(','));
-      } else if (tag.trim().indexOf(' ') === -1) {
+      } else if (!tag.includes('`')) {
         tag = '`' + tag + '`';
       }
       tableRows = tableRows + tag + '<hr/>';

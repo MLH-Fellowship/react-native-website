@@ -164,19 +164,19 @@ const styles = StyleSheet.create({
 });
 ```
 
-| Type                                                                 |
-| -------------------------------------------------------------------- |
-| enum(null, void, T, false, '', \$ReadOnlyArray<GenericStyleProp<T>>) |
+| Type                                 |
+| ------------------------------------ |
+| StyleSheetPropType(View Style props) |
 
 ---
 
 ### `contentInset`<div class="label ios">iOS</div>
 
-The amount by which the scroll view content is inset from the edges of the scroll view. Defaults to `{top: 0, left: 0, bottom: 0, right: 0}`.
+The amount by which the scroll view content is inset from the edges of the scroll view.
 
-| Type       |
-| ---------- |
-| object: {} |
+| Type                                                               | Default                                  |
+| ------------------------------------------------------------------ | ---------------------------------------- |
+| object: {bottom: number, left: number, right: number, top: number} | `{top: 0, left: 0, bottom: 0, right: 0}` |
 
 ---
 
@@ -192,11 +192,11 @@ This property specifies how the safe area insets are used to modify the content 
 
 ### `contentOffset`<div class="label ios">iOS</div>
 
-Used to manually set the starting scroll offset. The default value is `{x: 0, y: 0}`.
+Used to manually set the starting scroll offset.
 
-| Type       |
-| ---------- |
-| object: {} |
+| Type          | Default        |
+| ------------- | -------------- |
+| PointPropType | `{x: 0, y: 0}` |
 
 ---
 
@@ -247,9 +247,9 @@ When true, the default JS pan responder on the ScrollView is disabled, and full 
 
 Sometimes a scrollview takes up more space than its content fills. When this is the case, this prop will fill the rest of the scrollview with a color to avoid setting a background and creating unnecessary overdraw. This is an advanced optimization that is not needed in the general case.
 
-| Type                                 |
-| ------------------------------------ |
-| enum(null, string, NativeColorValue) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -354,9 +354,9 @@ Caveat 1: Reordering elements in the scrollview with this enabled will probably 
 
 Caveat 2: This uses `contentOffset` and `frame.origin` in native code to compute visibility. Occlusion, transforms, and other complexity won't be taken into account as to whether content is "visible" or not.
 
-| Type       |
-| ---------- |
-| object: {} |
+| Type                                                                   |
+| ---------------------------------------------------------------------- |
+| object: {minIndexForVisible: number, autoscrollToTopThreshold: number} |
 
 ---
 
@@ -538,9 +538,9 @@ A RefreshControl component, used to provide pull-to-refresh functionality for th
 
 See [RefreshControl](refreshcontrol.md).
 
-| Type                 |
-| -------------------- |
-| `React.Element<any>` |
+| Type    |
+| ------- |
+| element |
 
 ---
 
@@ -554,16 +554,16 @@ Experimental: When true, offscreen child views (whose `overflow` value is `hidde
 
 ---
 
-### `scrollBarThumbImage`
+### `scrollBarThumbImage`<div class="label tv">VR</div>
 
 Optionally an image can be used for the scroll bar thumb. This will override the color. While the image is loading or the image fails to load the color will be used instead. Use an alpha of 0 in the color to avoid seeing it while the image is loading.
 
 - `uri` - a string representing the resource identifier for the image, which should be either a local file path or the name of a static image resource
 - `number` - Opaque type returned by something like `import IMAGE from './image.jpg'`.
 
-| Type                           |
-| ------------------------------ |
-| enum(\$ReadOnly<{, }>, number) |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -591,11 +591,11 @@ This controls how often the scroll event will be fired while scrolling (as a tim
 
 ### `scrollIndicatorInsets`<div class="label ios">iOS</div>
 
-The amount by which the scroll view indicators are inset from the edges of the scroll view. This should normally be set to the same value as the `contentInset`. Defaults to `{0, 0, 0, 0}`.
+The amount by which the scroll view indicators are inset from the edges of the scroll view. This should normally be set to the same value as the `contentInset`.
 
-| Type       |
-| ---------- |
-| object: {} |
+| Type                                                               | Default        |
+| ------------------------------------------------------------------ | -------------- |
+| object: {bottom: number, left: number, right: number, top: number} | `{0, 0, 0, 0}` |
 
 ---
 
@@ -697,9 +697,9 @@ When set, causes the scroll view to stop at multiples of the value of `snapToInt
 
 When set, causes the scroll view to stop at the defined offsets. This can be used for paginating through variously sized children that have lengths smaller than the scroll view. Typically used in combination with `decelerationRate="fast"`. Overrides less configurable `pagingEnabled` and `snapToInterval` props.
 
-| Type                     |
-| ------------------------ |
-| `$ReadOnlyArray<number>` |
+| Type            |
+| --------------- |
+| array of number |
 
 ---
 
@@ -727,9 +727,9 @@ A React Component that will be used to render sticky headers. To be used togethe
 
 An array of child indices determining which children get docked to the top of the screen when scrolling. For example, passing `stickyHeaderIndices={[0]}` will cause the first child to be fixed to the top of the scroll view. This property is not supported in conjunction with `horizontal={true}`.
 
-| Type                     |
-| ------------------------ |
-| `$ReadOnlyArray<number>` |
+| Type            |
+| --------------- |
+| array of number |
 
 ---
 
@@ -795,11 +795,11 @@ Note: The weird function signature is due to the fact that, for historical reaso
 
 **Parameters:**
 
-| Name               | Type | Required |
-| ------------------ | ---- | -------- |
-| options            |      | No       |
-| deprecatedX        |      | No       |
-| deprecatedAnimated |      | No       |
+| Name               | Type    | Required |
+| ------------------ | ------- | -------- |
+| options            | union   | No       |
+| deprecatedX        | number  | No       |
+| deprecatedAnimated | boolean | No       |
 
 ---
 

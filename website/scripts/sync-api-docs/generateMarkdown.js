@@ -56,7 +56,7 @@ function generateTable(rows) {
 function generateProp(propName, prop) {
   const infoTable = generateTable([
     {
-      Type: formatTypeColumn(propName, prop),
+      Type: formatTypeColumn(prop),
       ...formatDefaultColumn(propName, prop),
     },
   ]);
@@ -118,37 +118,14 @@ function generateMethod(method, component) {
       })
       .join('\n');
     const docblockTokenized = tokenizeComment(dblock);
-    dblock = dblock.replace(/@platform .*|@default .*|@type .*|@name .*/g, '');
+    dblock = dblock.replace(/@platform .*/g, '');
     method.rnTags = {};
     const platformTag = docblockTokenized.tags.find(
       ({key}) => key === 'platform'
     );
-    const defaultTag = docblockTokenized.tags.filter(
-      tag => tag.key === 'default'
-    );
-    const typeTag = docblockTokenized.tags.filter(tag => tag.key === 'type');
-    const nameTag = docblockTokenized.tags.filter(tag => tag.key === 'name');
 
     if (platformTag) {
       method.rnTags.platform = platformTag.value.split(',');
-    }
-    if (defaultTag.length) {
-      method.rnTags.default = [];
-      defaultTag.forEach(tag => {
-        method.rnTags.default.push(tag.value);
-      });
-    }
-    if (typeTag.length) {
-      method.rnTags.type = [];
-      typeTag.forEach(tag => {
-        method.rnTags.type.push(tag.value);
-      });
-    }
-    if (nameTag.length) {
-      method.rnTags.name = [];
-      nameTag.forEach(tag => {
-        method.rnTags.name.push(tag.value);
-      });
     }
   }
 
