@@ -10,56 +10,13 @@
 const {typeOf} = require('tokenize-comment/lib/utils');
 const he = require('he');
 const magic = require('./magic');
-const {formatMultiplePlatform} = require('./utils');
-// Wraps a string in an inline code block in a way that is safe to include in a
-// table cell, by wrapping it as HTML <code> if necessary.
-function stringToInlineCodeForTable(str) {
-  let useHtml = /[`|]/.test(str);
-  str = str.replace(/\n/g, ' ');
-  if (useHtml) {
-    return '<code>' + he.encode(str).replace(/\|/g, '&#124;') + '</code>';
-  }
-  return '`' + str + '`';
-}
-
-function maybeLinkifyType(flowType) {
-  let url, text;
-  flowType.elements?.forEach(elem => {
-    if (Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)) {
-      ({url, text} = magic.linkableTypeAliases[elem.name]);
-    }
-  });
-  if (!text) {
-    text = stringToInlineCodeForTable(
-      flowType.raw || formatType(flowType.name)
-    );
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
-}
-
-function formatType(name) {
-  if (name.toLowerCase() === 'boolean') return 'bool';
-  if (name.toLowerCase() === 'stringish') return 'string';
-  if (name === '$ReadOnlyArray') return 'array';
-  return name;
-}
-
-function maybeLinkifyTypeName(name) {
-  let url, text;
-  if (Object.hasOwnProperty.call(magic.linkableTypeAliases, name)) {
-    ({url, text} = magic.linkableTypeAliases[name]);
-  }
-  if (!text) {
-    text = stringToInlineCodeForTable(name);
-  }
-  if (url) {
-    return `[${text}](${url})`;
-  }
-  return text;
-}
+const {
+  formatMultiplePlatform,
+  stringToInlineCodeForTable,
+  maybeLinkifyType,
+  maybeLinkifyTypeName,
+  formatType,
+} = require('./utils');
 
 // Adds proper markdown formatting to component's prop type.
 function formatTypeColumn(propName, prop) {
@@ -253,9 +210,6 @@ function formatDefaultColumn(propName, prop) {
 }
 
 module.exports = {
-  formatMultiplePlatform,
-  maybeLinkifyType,
-  maybeLinkifyTypeName,
   formatTypeColumn,
   formatDefaultColumn,
 };

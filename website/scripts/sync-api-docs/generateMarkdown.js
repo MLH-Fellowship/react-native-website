@@ -5,19 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 const tokenizeComment = require('tokenize-comment');
-const {
-  formatMultiplePlatform,
-  maybeLinkifyType,
-  maybeLinkifyTypeName,
-  formatTypeColumn,
-  formatDefaultColumn,
-} = require('./propFormatter');
-
+const {formatTypeColumn, formatDefaultColumn} = require('./propFormatter');
 const {
   formatMethodType,
   formatMethodName,
   formatMethodDescription,
 } = require('./methodFormatter');
+
+const {
+  formatMultiplePlatform,
+  stringToInlineCodeForTable,
+  maybeLinkifyType,
+  maybeLinkifyTypeName,
+  formatType,
+} = require('./utils');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -84,6 +85,7 @@ function generateMethod(method, component) {
   if (method?.params[0]?.type?.raw) {
     let desc = method?.params[0]?.type?.raw;
     let len = method?.params[0]?.type?.signature?.properties?.length;
+    descriptionTokenized = tokenizeComment(desc);
 
     if (
       descriptionTokenized?.examples &&
@@ -107,14 +109,6 @@ function generateMethod(method, component) {
       method.params[0]['description'] = 'See below';
     }
   }
-
-  // const infoTable = generateTable([
-  //   {
-  //     ...(method.rnTags && method.rnTags.platform
-  //       ? {Platform: formatPlatformName(method.rnTags.platform)}
-  //       : {}),
-  //   },
-  // ]);
 
   if (method?.docblock) {
     let dblock = method.docblock
@@ -205,7 +199,6 @@ function generateMethodSignatureTable(method, component) {
     '**Parameters:**\n\n' +
     generateTable(
       method.params.map(param => {
-        // console.log("generateMethodSignatureTable -> param", param)
         return {
           Name: formatMethodName(param),
           Type: formatMethodType(param),
@@ -337,13 +330,15 @@ function preprocessDescription(desc) {
       secondExample.substr(secondExample.search('```') + 3)
     );
   } else {
-    return (
-      desc.substr(0, desc.search('```SnackPlayer')) +
-      '\n' +
-      '\n## Example\n' +
-      '\n' +
-      desc.substr(desc.search('```SnackPlayer'))
-    );
+    if (desc.search('```SnackPlayer') !== -1) {
+      return (
+        desc.substr(0, desc.search('```SnackPlayer')) +
+        '\n' +
+        '\n## Example\n' +
+        '\n' +
+        desc.substr(desc.search('```SnackPlayer'))
+      );
+    } else return desc;
   }
 }
 

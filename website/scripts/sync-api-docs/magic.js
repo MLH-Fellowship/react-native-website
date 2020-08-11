@@ -45,5 +45,9 @@ module.exports = {
       text: 'StatusBarStyle',
       url: 'statusbar#statusbarstyle',
     },
+    ReactNode: {
+      text: 'React.Node',
+      url: 'react-node.md',
+    },
   },
 };
