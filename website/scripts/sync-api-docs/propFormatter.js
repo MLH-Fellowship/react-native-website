@@ -10,25 +10,7 @@
 const {typeOf} = require('tokenize-comment/lib/utils');
 const he = require('he');
 const magic = require('./magic');
-
-// Adds multiple platform tags for prop name
-function formatMultiplePlatform(platforms) {
-  let platformString = '';
-  platforms.forEach(platform => {
-    switch (platform.trim().toLowerCase()) {
-      case 'ios':
-        platformString += '<div class="label ios">' + 'iOS' + '</div> ';
-        break;
-      case 'android':
-        platformString += '<div class="label android">' + 'Android' + '</div>';
-        break;
-      case 'tv':
-        platformString += '<div class="label tv">' + 'TV' + '</div>';
-    }
-  });
-  return platformString;
-}
-
+const {formatMultiplePlatform} = require('./utils');
 // Wraps a string in an inline code block in a way that is safe to include in a
 // table cell, by wrapping it as HTML <code> if necessary.
 function stringToInlineCodeForTable(str) {

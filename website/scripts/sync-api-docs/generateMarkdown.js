@@ -13,7 +13,11 @@ const {
   formatDefaultColumn,
 } = require('./propFormatter');
 
-const {formatMethodType} = require('./methodFormatter');
+const {
+  formatMethodType,
+  formatMethodName,
+  formatMethodDescription,
+} = require('./methodFormatter');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -120,7 +124,7 @@ function generateMethod(method, component) {
       })
       .join('\n');
     const docblockTokenized = tokenizeComment(dblock);
-    dblock = dblock.replace(/@platform .*|@default .*|@type .*/g, '');
+    dblock = dblock.replace(/@platform .*|@default .*|@type .*|@name .*/g, '');
     method.rnTags = {};
     const platformTag = docblockTokenized.tags.find(
       ({key}) => key === 'platform'
@@ -129,6 +133,7 @@ function generateMethod(method, component) {
       tag => tag.key === 'default'
     );
     const typeTag = docblockTokenized.tags.filter(tag => tag.key === 'type');
+    const nameTag = docblockTokenized.tags.filter(tag => tag.key === 'name');
 
     if (platformTag) {
       method.rnTags.platform = platformTag.value.split(',');
@@ -143,6 +148,12 @@ function generateMethod(method, component) {
       method.rnTags.type = [];
       typeTag.forEach(tag => {
         method.rnTags.type.push(tag.value);
+      });
+    }
+    if (nameTag.length) {
+      method.rnTags.name = [];
+      nameTag.forEach(tag => {
+        method.rnTags.name.push(tag.value);
       });
     }
   }
@@ -194,11 +205,14 @@ function generateMethodSignatureTable(method, component) {
     '**Parameters:**\n\n' +
     generateTable(
       method.params.map(param => {
+        // console.log("generateMethodSignatureTable -> param", param)
         return {
-          Name: param.name,
-          Type: formatMethodType(method, param),
+          Name: formatMethodName(param),
+          Type: formatMethodType(param),
           Required: param.optional ? 'No' : 'Yes',
-          ...(param.description && {Description: param.description}),
+          ...(param.description && {
+            Description: formatMethodDescription(param),
+          }),
         };
       })
     )

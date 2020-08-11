@@ -37,5 +37,13 @@ module.exports = {
       text: 'StatusBarAnimation',
       url: 'statusbar#statusbaranimation',
     },
+    StatusBarAnimation: {
+      text: 'StatusBarAnimation',
+      url: 'statusbar#statusbaranimation',
+    },
+    StatusBarStyle: {
+      text: 'StatusBarStyle',
+      url: 'statusbar#statusbarstyle',
+    },
   },
 };
