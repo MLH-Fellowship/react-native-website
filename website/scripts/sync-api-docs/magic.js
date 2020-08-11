@@ -29,5 +29,9 @@ module.exports = {
       text: 'RefreshControl.SIZE',
       url: 'refreshcontrol.md#refreshlayoutconstssize',
     },
+    ReactNode: {
+      text: 'React.Node',
+      url: 'react-node.md',
+    },
   },
 };

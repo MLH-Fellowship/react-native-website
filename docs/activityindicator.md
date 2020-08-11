@@ -104,9 +104,9 @@ Whether to show the indicator (`true`) or hide it (`false`).
 
 The foreground color of the spinner.
 
-| Type                                 | Default                                                                                                                                                                               |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enum(null, string, NativeColorValue) | `null` (system accent default color)<div class="label android">Android</div><hr/>`'#999999'`<ins style="background: #999999" class="color-box"></ins><div class="label ios">iOS</div> |
+| Type               | Default                                                                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [color](colors.md) | `null` (system accent default color)<div class="label android">Android</div><hr/>`'#999999'`<ins style="background: #999999" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 

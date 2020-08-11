@@ -117,9 +117,9 @@ Called when the view starts refreshing.
 
 The background color of the refresh indicator.
 
-| Type                                 |
-| ------------------------------------ |
-| enum(null, string, NativeColorValue) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -137,9 +137,9 @@ Progress view top offset
 
 Size of the refresh indicator.
 
-| Type                                                                                 | Default                            |
-| ------------------------------------------------------------------------------------ | ---------------------------------- |
-| enum(typeof RefreshLayoutConsts.SIZE.DEFAULT, typeof RefreshLayoutConsts.SIZE.LARGE) | `RefreshLayoutConsts.SIZE.DEFAULT` |
+| Type                                                             | Default                            |
+| ---------------------------------------------------------------- | ---------------------------------- |
+| [RefreshControl.SIZE](refreshcontrol.md#refreshlayoutconstssize) | `RefreshLayoutConsts.SIZE.DEFAULT` |
 
 ---
 
@@ -147,9 +147,9 @@ Size of the refresh indicator.
 
 The color of the refresh indicator.
 
-| Type                                 |
-| ------------------------------------ |
-| enum(null, string, NativeColorValue) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -167,6 +167,6 @@ The title displayed under the refresh indicator.
 
 The color of the refresh indicator title.
 
-| Type                                 |
-| ------------------------------------ |
-| enum(null, string, NativeColorValue) |
+| Type               |
+| ------------------ |
+| [color](colors.md) |

@@ -202,9 +202,9 @@ Inherits [ScrollView Props](scrollview.md#props), unless it is nested in another
 
 For simplicity, data is a plain array. If you want to use something else, like an immutable list, use the underlying [`VirtualizedList`](virtualizedlist.md) directly.
 
-| Type                    |
-| ----------------------- |
-| `$ReadOnlyArray<ItemT>` |
+| Type  |
+| ----- |
+| array |
 
 ---
 
@@ -236,9 +236,9 @@ Used to extract a unique key for a given item at the specified index. Key is use
 
 Optional custom style for multi-item rows generated when `numColumns > 1`.
 
-| Type                                                                 |
-| -------------------------------------------------------------------- |
-| enum(null, void, T, false, '', \$ReadOnlyArray<GenericStyleProp<T>>) |
+| Type         |
+| ------------ |
+| style object |
 
 ---
 
@@ -246,9 +246,9 @@ Optional custom style for multi-item rows generated when `numColumns > 1`.
 
 A marker property for telling the list to re-render (since it implements `PureComponent`). If any of your `renderItem`, Header, Footer, etc. functions depend on anything outside of the `data` prop, stick it here and treat it immutably.
 
-| Type |
-| ---- |
-| any  |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -496,7 +496,7 @@ Valid `params` keys are:
 
 - 'animated' (boolean) - Whether the list should do an animation while scrolling. Defaults to `true`.
 - 'item' (ItemT) - The item to scroll to. Required.
-- 'viewPosition' (number) - Missing desc
+- 'viewPosition' (number)
 
 ---
 

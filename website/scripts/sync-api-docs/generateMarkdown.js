@@ -92,9 +92,11 @@ function generateMethod(method, component) {
       }
 
       obj.map(item => {
-        mdPoints += `- '${item.key}' (${item.value.name}) - ${
-          item.description
-        }`;
+        if (item.description.trim() !== 'missing')
+          mdPoints += `- '${item.key}' (${item.value.name}) - ${
+            item.description
+          }`;
+        else mdPoints += `- '${item.key}' (${item.value.name})`;
       });
 
       method.params[0]['description'] = 'See below';
@@ -259,26 +261,35 @@ function preprocessDescription(desc) {
   });
 
   if (tabs === 2) {
-    const wrapper = `${playgroundTab}\n\n${functionalBlock}\n\n${
-      descriptionTokenized.examples[0].raw
-    }\n\n${classBlock}\n\n${
-      descriptionTokenized.examples[1].raw
-    }\n\n${endBlock}`;
-    return (
-      descriptionTokenized.description +
-      `\n## Example\n` +
-      wrapper +
-      '\n' +
-      descriptionTokenized?.footer
+    const firstExample = desc.substr(desc.search('```SnackPlayer') + 1);
+    const secondExample = firstExample.substr(
+      firstExample.search('```SnackPlayer') + 1
     );
-  } else {
+
     return (
       desc.substr(0, desc.search('```SnackPlayer')) +
-      '\n' +
-      '\n## Example\n' +
-      '\n' +
-      desc.substr(desc.search('```SnackPlayer'))
+      `\n## Example\n` +
+      `${playgroundTab}\n\n${functionalBlock}\n\n${'`' +
+        firstExample.substr(
+          0,
+          firstExample.search('```') + 3
+        )}\n\n${classBlock}\n\n${'`' +
+        secondExample.substr(
+          0,
+          secondExample.search('```') + 3
+        )}\n\n${endBlock}` +
+      secondExample.substr(secondExample.search('```') + 3)
     );
+  } else {
+    if (desc.search('```SnackPlayer') !== -1) {
+      return (
+        desc.substr(0, desc.search('```SnackPlayer')) +
+        '\n' +
+        '\n## Example\n' +
+        '\n' +
+        desc.substr(desc.search('```SnackPlayer'))
+      );
+    } else return desc;
   }
 }
 
