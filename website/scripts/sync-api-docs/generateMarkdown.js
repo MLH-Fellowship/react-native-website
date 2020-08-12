@@ -5,13 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 const tokenizeComment = require('tokenize-comment');
+const {formatTypeColumn, formatDefaultColumn} = require('./propFormatter');
+const {
+  formatMethodType,
+  formatMethodName,
+  formatMethodDescription,
+} = require('./methodFormatter');
+
 const {
   formatMultiplePlatform,
+  stringToInlineCodeForTable,
   maybeLinkifyType,
   maybeLinkifyTypeName,
-  formatTypeColumn,
-  formatDefaultColumn,
-} = require('./propFormatter');
+  formatType,
+} = require('./utils');
 
 // Formats an array of rows as a Markdown table
 function generateTable(rows) {
@@ -98,29 +105,41 @@ function generateMethod(method, component) {
           }`;
         else mdPoints += `- '${item.key}' (${item.value.name})`;
       });
-
-      method.params[0]['description'] = 'See below';
     }
   }
 
-  const infoTable = generateTable([
-    {
-      ...(method.rnTags && method.rnTags.platform
-        ? {Platform: formatPlatformName(method.rnTags.platform)}
-        : {}),
-    },
-  ]);
+  if (method?.docblock) {
+    let dblock = method.docblock
+      .split('\n')
+      .map(line => {
+        return line.replace(/  /, '');
+      })
+      .join('\n');
+    const docblockTokenized = tokenizeComment(dblock);
+    dblock = dblock.replace(/@platform .*/g, '');
+    method.rnTags = {};
+    const platformTag = docblockTokenized.tags.find(
+      ({key}) => key === 'platform'
+    );
+
+    if (platformTag) {
+      method.rnTags.platform = platformTag.value.split(',');
+    }
+  }
 
   return (
     '### `' +
     method.name +
     '()`' +
+    (method.rnTags && method.rnTags.platform
+      ? formatMultiplePlatform(method.rnTags.platform)
+      : '') +
     '\n' +
     '\n' +
     // generateMethodSignatureBlock(method, component) +
     (method.description ? method.description + '\n\n' : '') +
     generateMethodSignatureTable(method, component) +
-    infoTable +
+    // infoTable +
     (mdPoints && header + '\n' + mdPoints)
   ).trim();
 }
@@ -150,15 +169,20 @@ function generateMethodSignatureTable(method, component) {
   if (!method.params.length) {
     return '';
   }
+
   return (
     '**Parameters:**\n\n' +
     generateTable(
-      method.params.map(param => ({
-        Name: param.name,
-        Type: param.type ? param.type.type : '',
-        Required: param.optional ? 'No' : 'Yes',
-        ...(param.description && {Description: param.description}),
-      }))
+      method.params.map(param => {
+        return {
+          Name: formatMethodName(param),
+          Type: formatMethodType(param),
+          Required: param.optional ? 'No' : 'Yes',
+          ...(param.description && {
+            Description: formatMethodDescription(param),
+          }),
+        };
+      })
     )
   );
 }

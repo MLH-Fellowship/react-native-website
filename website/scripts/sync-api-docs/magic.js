@@ -29,6 +29,14 @@ module.exports = {
       text: 'RefreshControl.SIZE',
       url: 'refreshcontrol.md#refreshlayoutconstssize',
     },
+    StatusBarAnimation: {
+      text: 'StatusBarAnimation',
+      url: 'statusbar#statusbaranimation',
+    },
+    StatusBarStyle: {
+      text: 'StatusBarStyle',
+      url: 'statusbar#statusbarstyle',
+    },
     ReactNode: {
       text: 'React.Node',
       url: 'react-node.md',

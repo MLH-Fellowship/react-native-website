@@ -795,11 +795,11 @@ Note: The weird function signature is due to the fact that, for historical reaso
 
 **Parameters:**
 
-| Name               | Type | Required |
-| ------------------ | ---- | -------- |
-| options            |      | No       |
-| deprecatedX        |      | No       |
-| deprecatedAnimated |      | No       |
+| Name               | Type    | Required |
+| ------------------ | ------- | -------- |
+| options            | union   | No       |
+| deprecatedX        | number  | No       |
+| deprecatedAnimated | boolean | No       |
 
 ---
 
