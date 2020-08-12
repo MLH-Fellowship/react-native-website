@@ -105,8 +105,6 @@ function generateMethod(method, component) {
           }`;
         else mdPoints += `- '${item.key}' (${item.value.name})`;
       });
-
-      method.params[0]['description'] = 'See below';
     }
   }
 
