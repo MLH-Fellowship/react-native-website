@@ -2,8 +2,8 @@
 title: Using Native Driver for Animated
 author: Janic Duplessis
 authorTitle: Software Engineer at App & Flow
-authorURL: https://twitter.com/janicduplessis
-authorImageURL: https://secure.gravatar.com/avatar/8d6b6c0f5b228b0a8566a69de448b9dd?s=128
+authorURL: 'https://twitter.com/janicduplessis'
+authorImageURL: 'https://secure.gravatar.com/avatar/8d6b6c0f5b228b0a8566a69de448b9dd?s=128'
 authorTwitter: janicduplessis
 category: engineering
 ---
@@ -22,7 +22,7 @@ This project started about a year ago, when Expo built the li.st app on Android.
 
 First, let's check out how animations currently work using Animated with the JS driver. When using Animated, you declare a graph of nodes that represent the animations that you want to perform, and then use a driver to update an Animated value using a predefined curve. You may also update an Animated value by connecting it to an event of a `View` using `Animated.event`.
 
-![](/blog/assets/animated-diagram.png)
+![](./assets/animated-diagram.png)
 
 Here's a breakdown of the steps for an animation and where it happens:
 

@@ -2,8 +2,8 @@
 title: Introducing Button, Faster Installs with Yarn, and a Public Roadmap
 author: Héctor Ramos
 authorTitle: Developer Advocate at Facebook
-authorURL: https://twitter.com/hectorramos
-authorImageURL: https://s.gravatar.com/avatar/f2223874e66e884c99087e452501f2da?s=128
+authorURL: 'https://twitter.com/hectorramos'
+authorImageURL: 'https://s.gravatar.com/avatar/f2223874e66e884c99087e452501f2da?s=128'
 authorTwitter: hectorramos
 category: announcements
 ---
@@ -24,7 +24,7 @@ If you have suggestions for features that you think would be valuable on the roa
 
 Today we're introducing a basic `<Button />` component that looks great on every platform. This addresses one of the most common pieces of feedback we get: React Native is one of the only mobile development toolkits without a button ready to use out of the box.
 
-![Simple Button on Android, iOS](/blog/assets/button-android-ios.png)
+![Simple Button on Android, iOS](./assets/button-android-ios.png)
 
 ```
 <Button
@@ -48,7 +48,7 @@ $ npm install -g react-native-cli
 
 You should now see “Using yarn” when setting up new apps:
 
-![Using yarn](/blog/assets/yarn-rncli.png)
+![Using yarn](./assets/yarn-rncli.png)
 
 In simple local testing `react-native init` finished in **about 1 minute on a good network** (vs around 3 minutes when using npm 3.10.8). Installing yarn is optional but highly recommended.
 

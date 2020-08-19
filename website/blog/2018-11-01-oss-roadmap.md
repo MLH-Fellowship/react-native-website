@@ -2,13 +2,13 @@
 title: Open Source Roadmap
 author: Héctor Ramos
 authorTitle: Engineer at Facebook
-authorURL: https://hectorramos.com/about
-authorImageURL: https://s.gravatar.com/avatar/f2223874e66e884c99087e452501f2da?s=128
+authorURL: 'https://hectorramos.com/about'
+authorImageURL: 'https://s.gravatar.com/avatar/f2223874e66e884c99087e452501f2da?s=128'
 authorTwitter: hectorramos
 category: announcements
 ---
 
-![](/blog/assets/oss-roadmap-hero.jpg)
+![](./assets/oss-roadmap-hero.jpg)
 
 This year, the React Native team has focused on a large scale [re-architecture of React Native](https://github.com/react-native-community/discussions-and-proposals/issues/4). As Sophie mentioned in her [State of React Native post,](/blog/2018/06/14/state-of-react-native-2018) we've sketched out a plan to better support the thriving population of React Native users and collaborators outside of Facebook. It's now time to share more details about what we've been working on. Before I do so, I'd like to lay out our long-term vision for React Native in open source.
 

@@ -2,7 +2,7 @@
 title: React Native Performance in Marketplace
 author: Aaron Chiu
 authorTitle: Software Engineer at Facebook
-authorURL: https://www.facebook.com/aaronechiu
+authorURL: 'https://www.facebook.com/aaronechiu'
 authorFBID: 1057500063
 authorTwitter: AaaChiuuu
 category: engineering
@@ -14,7 +14,7 @@ In the first half of 2017, through the joint effort of the Relay Team, the Marke
 
 A typical React Native startup looks something like this:
 
-![](/blog/assets/RNPerformanceStartup.png)
+![](./assets/RNPerformanceStartup.png)
 
 > Disclaimer: ratios aren't representative and will vary depending on how React Native is configured and used.
 

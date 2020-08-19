@@ -2,8 +2,8 @@
 title: Releasing React Native 0.59
 author: Ryan Turner
 authorTitle: Core Maintainer & React Native Developer
-authorURL: https://twitter.com/turnrye
-authorImageURL: https://avatars0.githubusercontent.com/u/701035?s=460&v=4
+authorURL: 'https://twitter.com/turnrye'
+authorImageURL: 'https://avatars0.githubusercontent.com/u/701035?s=460&v=4'
 authorTwitter: turnrye
 category: announcements
 ---
@@ -32,7 +32,7 @@ Thanks to some awesome work by [@DanielZlotin](https://github.com/danielzlotin),
 
 We want to help people have performant React Native apps by default and are working to bring Facebook's optimizations to the community. Applications load resources as needed rather than slowing down launch. This feature is called "inline requires", as it lets Metro identify components to be lazy loaded. Apps with a deep and varied component architecture will see the most improvement.
 
-![source of the `metro.config.js` file in the 0.59 template, demonstrating where to enable `inlineRequires`](/blog/assets/inline-requires.png)
+![source of the `metro.config.js` file in the 0.59 template, demonstrating where to enable `inlineRequires`](./assets/inline-requires.png)
 
 We need the community to let us know how it works before we turn it on by default. When you upgrade to 0.59, there will be a new `metro.config.js` file; flip the options to true and give us [your feedback](https://twitter.com/hashtag/inline-requires)! Read more about inline requires [in the performance docs](/docs/0.56/performance#inline-requires) to benchmark your app.
 
@@ -59,7 +59,7 @@ React Native's command line tools are developer's entry point to the ecosystem, 
 
 Logs are formatted much better now. Commands now run nearly instantly &mdash; you'll immediately notice a difference:
 
-![0.58's CLI is slow to start](/blog/assets/0.58-cli-speed.png)![0.58's CLI is nearly instantaneous](/blog/assets/0.59-cli-speed.png)
+![0.58's CLI is slow to start](./assets/0.58-cli-speed.png)![0.58's CLI is nearly instantaneous](./assets/0.59-cli-speed.png)
 
 ## 🚀 Upgrading to 0.59
 
