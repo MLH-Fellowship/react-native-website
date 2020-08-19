@@ -1,7 +1,6 @@
 ---
-id: version-0.61-datepickerios
-title: 🚧 DatePickerIOS
-original_id: datepickerios
+id: datepickerios
+title: '🚧 DatePickerIOS'
 ---
 
 > **Deprecated.** Use [@react-native-community/datetimepicker](https://github.com/react-native-community/react-native-datetimepicker) instead.
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-<center><img src="/docs/assets/DatePickerIOS/example.gif" width="360"></img></center>
+<center><img src="/img/docs/DatePickerIOS/example.gif" width="360"></img></center>
 
 ---
 
@@ -104,7 +103,7 @@ Restricts the range of possible date/time values.
 
 Example with `maximumDate` set to December 31, 2017:
 
-<center><img src="/docs/assets/DatePickerIOS/maximumDate.gif" width="360"></img></center>
+<center><img src="/img/docs/DatePickerIOS/maximumDate.gif" width="360"></img></center>
 
 ---
 
@@ -132,7 +131,7 @@ The interval at which minutes can be selected.
 
 Example with `minuteInterval` set to `10`:
 
-<center><img src="/docs/assets/DatePickerIOS/minuteInterval.png" width="360"></img></center>
+<center><img src="/img/docs/DatePickerIOS/minuteInterval.png" width="360"></img></center>
 
 ---
 
@@ -144,7 +143,7 @@ The date picker mode.
 | --------------------------------------------- | -------- |
 | enum('date', 'time', 'datetime', 'countdown') | No       |
 
-Example with `mode` set to `date`, `time`, and `datetime`: ![](/docs/assets/DatePickerIOS/mode.png)
+Example with `mode` set to `date`, `time`, and `datetime`: ![](/img/docs/DatePickerIOS/mode.png)
 
 ---
 
