@@ -7,7 +7,7 @@ title: Debugging
 
 You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the `⌘D` keyboard shortcut when your app is running in the iOS Simulator, or `⌘M` when running in an Android emulator on Mac OS and `Ctrl+M` on Windows and Linux. Alternatively for Android, you can run the command `adb shell input keyevent 82` to open the dev menu (82 being the Menu key code).
 
-![](/docs/assets/DeveloperMenu.png)
+![](/img/docs/DeveloperMenu.png)
 
 > The Developer Menu is disabled in release (production) builds.
 
@@ -95,7 +95,7 @@ Now run `react-devtools` from the terminal to launch the standalone DevTools app
 react-devtools
 ```
 
-![React DevTools](/docs/assets/ReactDevTools.png)
+![React DevTools](/img/docs/ReactDevTools.png)
 
 It should connect to your simulator within a few seconds.
 
@@ -105,11 +105,11 @@ It should connect to your simulator within a few seconds.
 
 Open the in-app developer menu and choose "Toggle Inspector". It will bring up an overlay that lets you tap on any UI element and see information about it:
 
-![React Native Inspector](/docs/assets/Inspector.gif)
+![React Native Inspector](/img/docs/Inspector.gif)
 
 However, when `react-devtools` is running, Inspector will enter a collapsed mode, and instead use the DevTools as primary UI. In this mode, clicking on something in the simulator will bring up the relevant components in the DevTools:
 
-![React DevTools Inspector Integration](/docs/assets/ReactDevToolsInspector.gif)
+![React DevTools Inspector Integration](/img/docs/ReactDevToolsInspector.gif)
 
 You can choose "Toggle Inspector" in the same menu to exit this mode.
 
@@ -123,13 +123,13 @@ Make sure that the dropdown in the top left corner of the Chrome console says `d
 
 Then select a React component in React DevTools. There is a search box at the top that helps you find one by name. As soon as you select it, it will be available as `$r` in the Chrome console, letting you inspect its props, state, and instance properties.
 
-![React DevTools Chrome Console Integration](/docs/assets/ReactDevToolsDollarR.gif)
+![React DevTools Chrome Console Integration](/img/docs/ReactDevToolsDollarR.gif)
 
 ## Performance Monitor
 
 You can enable a performance overlay to help you debug performance problems by selecting "Perf Monitor" in the Developer Menu.
 
-<hr style="margin-top:25px; margin-bottom:25px;"/>
+<hr style={{marginTop: 25, marginBottom: 25}} />
 
 ## Debugging Application State
 

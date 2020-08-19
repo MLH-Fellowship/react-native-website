@@ -13,7 +13,7 @@ Your grandparents' generation called movies ["moving pictures"](https://www.yout
 
 Now to confuse the matter a little bit, open up the developer menu in your app and toggle `Show Perf Monitor`. You will notice that there are two different frame rates.
 
-![](/docs/assets/PerfUtil.png)
+![](/img/docs/PerfUtil.png)
 
 ### JS frame rate (JavaScript thread)
 
