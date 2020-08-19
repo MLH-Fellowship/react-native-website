@@ -1,17 +1,16 @@
 ---
-id: version-0.63-testing-overview
+id: testing-overview
 title: Testing
 author: Vojtech Novak
-authorURL: https://twitter.com/vonovak
+authorURL: 'https://twitter.com/vonovak'
 description: This guide introduces React Native developers to the key concepts behind testing, how to write good tests, and what kinds of tests you can incorporate into your workflow.
-original_id: testing-overview
 ---
 
 As your codebase expands, small errors and edge cases you don’t expect can cascade into larger failures. Bugs lead to bad user experience and ultimately, business losses. One way to prevent fragile programming is to test your code before releasing it into the wild.
 
 In this guide, we will cover different, automated ways to ensure your app works as expected, ranging from static analysis to end-to-end tests.
 
-<img src="/docs/assets/diagram_testing.svg" alt="Testing is a cycle of fixing, testing, and either passing to release or failing back into testing." />
+<img src="/img/docs/diagram_testing.svg" alt="Testing is a cycle of fixing, testing, and either passing to release or failing back into testing." />
 
 ## Why Test
 
@@ -82,7 +81,7 @@ When the object being tested has any dependencies, you’ll often need to mock t
 
 The great thing about unit tests is that they are quick to write and run. Therefore, as you work, you get fast feedback about whether your tests are passing. Jest even has an option to continuously run tests that are related to code you’re editing: [Watch mode](https://jestjs.io/docs/en/cli#watch).
 
-<img src="/docs/assets/p_tests-unit.svg" alt=" " />
+<img src="/img/docs/p_tests-unit.svg" alt=" " />
 
 ### Mocking
 
@@ -113,7 +112,7 @@ In integration testing, real individual units are combined (same as in your app)
 > - Makes a network call to other application (such as the weather service API)
 > - Does any kind of file or database <abbr title="Input/Output">I/O</abbr>
 
-<img src="/docs/assets/p_tests-integration.svg" alt=" " />
+<img src="/img/docs/p_tests-integration.svg" alt=" " />
 
 ## Component Tests
 
@@ -133,7 +132,7 @@ There are several libraries that can help you testing these:
 
 > Component tests are only JavaScript tests running in Node.js environment. They do _not_ take into account any iOS, Android, or other platform code which is backing the React Native components. It follows that they cannot give you a 100% confidence that everything works for the user. If there is a bug in the iOS or Android code, they will not find it.
 
-<img src="/docs/assets/p_tests-component.svg" alt=" " />
+<img src="/img/docs/p_tests-component.svg" alt=" " />
 
 ### Testing User Interactions
 
@@ -234,7 +233,7 @@ Snapshots themselves do not ensure that your component render logic is correct, 
 
 We recommend that you only use small snapshots (see [`no-large-snapshots` rule](https://github.com/jest-community/eslint-plugin-jest/blob/master/docs/rules/no-large-snapshots.md)). If you want to test a _change_ between two React component states, use [`snapshot-diff`](https://github.com/jest-community/snapshot-diff). When in doubt, prefer explicit expectations as described in the previous paragraph.
 
-<img src="/docs/assets/p_tests-snapshot.svg" alt=" " />
+<img src="/img/docs/p_tests-snapshot.svg" alt=" " />
 
 ## End-to-End Tests
 
@@ -254,7 +253,7 @@ Try to cover the vital parts of your app with E2E tests: authentication flow, co
 
 There are several E2E testing tools available: in the React Native community, [Detox](https://github.com/wix/detox/) is a popular framework because it’s tailored for React Native apps. Another popular library in the space of iOS and Android apps is [Appium](http://appium.io/).
 
-<img src="/docs/assets/p_tests-e2e.svg" alt=" " />
+<img src="/img/docs/p_tests-e2e.svg" alt=" " />
 
 ## Summary
 

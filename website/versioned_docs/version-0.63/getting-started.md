@@ -1,7 +1,6 @@
 ---
-id: version-0.63-environment-setup
+id: environment-setup
 title: Setting up the development environment
-original_id: environment-setup
 ---
 
 This page will help you install and build your first React Native app.
@@ -52,9 +51,9 @@ Now that you have successfully run the app, let's modify it. Open `App.js` in yo
 
 Congratulations! You've successfully run and modified your first React Native app.
 
-<center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
+<center><img src="/img/docs/GettingStartedCongratulations.png" width="150"></img></center>
 
-<h2>Now what?</h3>
+<h2>Now what?</h2>
 
 Expo also has [docs](https://docs.expo.io) you can reference if you have questions specific to the tool. You can also ask for help at [Expo forums](https://forums.expo.io).
 
@@ -207,7 +206,7 @@ If you have already installed Xcode on your system, make sure it is version 9.4 
 
 You will also need to install the Xcode Command Line Tools. Open Xcode, then choose "Preferences..." from the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
 
-![Xcode Command Line Tools](/docs/assets/GettingStartedXcodeCommandLineTools.png)
+![Xcode Command Line Tools](/img/docs/GettingStartedXcodeCommandLineTools.png)
 
 <h4>Installing an iOS Simulator in Xcode</h4>
 
@@ -272,11 +271,11 @@ To do that, open Android Studio, click on "Configure" button and select "SDK Man
 
 <block class="native mac android" />
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeMacOS.png)
+![Android Studio Welcome](/img/docs/GettingStartedAndroidStudioWelcomeMacOS.png)
 
 <block class="native windows android" />
 
-![Android Studio Welcome](/docs/assets/GettingStartedAndroidStudioWelcomeWindows.png)
+![Android Studio Welcome](/img/docs/GettingStartedAndroidStudioWelcomeWindows.png)
 
 <block class="native mac windows linux android" />
 
@@ -334,7 +333,7 @@ Type `source $HOME/.bash_profile` for `bash` or `source $HOME/.zprofile` to load
 3. Click on **Change my environment variables**
 4. Click on **New...** to create a new `ANDROID_HOME` user variable that points to the path to your Android SDK:
 
-![ANDROID_HOME Environment Variable](/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
+![ANDROID_HOME Environment Variable](/img/docs/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
 
 The SDK is installed, by default, at the following location:
 
@@ -453,7 +452,7 @@ If you have a physical Android device, you can use it for development in place o
 
 If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
 
-![Android Studio AVD Manager](/docs/assets/GettingStartedAndroidStudioAVD.png)
+![Android Studio AVD Manager](/img/docs/GettingStartedAndroidStudioAVD.png)
 
 If you have recently installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **Q** API Level 29 image.
 
@@ -503,7 +502,7 @@ npx react-native run-ios
 
 You should see your new app running in the iOS Simulator shortly.
 
-![AwesomeProject on iOS](/docs/assets/GettingStartediOSSuccess.png)
+![AwesomeProject on iOS](/img/docs/GettingStartediOSSuccess.png)
 
 `npx react-native run-ios` is one way to run your app. You can also run it directly from within Xcode.
 
@@ -545,11 +544,11 @@ If everything is set up correctly, you should see your new app running in your A
 
 <block class="native mac android" />
 
-![AwesomeProject on Android](/docs/assets/GettingStartedAndroidSuccessMacOS.png)
+![AwesomeProject on Android](/img/docs/GettingStartedAndroidSuccessMacOS.png)
 
 <block class="native windows android" />
 
-![AwesomeProject on Android](/docs/assets/GettingStartedAndroidSuccessWindows.png)
+![AwesomeProject on Android](/img/docs/GettingStartedAndroidSuccessWindows.png)
 
 <block class="native mac windows linux android" />
 
@@ -588,7 +587,7 @@ Now that you have successfully run the app, let's modify it.
 
 Congratulations! You've successfully run and modified your first React Native app.
 
-<center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
+<center><img src="/img/docs/GettingStartedCongratulations.png" width="150"></img></center>
 
 <block class="native windows linux android" />
 
@@ -596,7 +595,7 @@ Congratulations! You've successfully run and modified your first React Native ap
 
 Congratulations! You've successfully run and modified your first React Native app.
 
-<center><img src="/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
+<center><img src="/img/docs/GettingStartedCongratulations.png" width="150"></img></center>
 
 <block class="native mac ios" />
 

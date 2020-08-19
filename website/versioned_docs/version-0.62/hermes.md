@@ -1,11 +1,10 @@
 ---
-id: version-0.62-hermes
+id: hermes
 title: Using Hermes
-original_id: hermes
 ---
 
 <a href="https://hermesengine.dev">
-  <img width="300" height="300" style="float: right; margin: -30px 4px 0;" src="/docs/assets/HermesLogo.svg"/>
+  <img width="300" height="300" style={{ float: "right", margin: "-30px 4px 0" }} src="/img/docs/HermesLogo.svg"/>
 </a>
 
 [Hermes](https://hermesengine.dev) is an open-source JavaScript engine optimized for running React Native apps on Android. For many apps, enabling Hermes will result in improved start-up time, decreased memory usage, and smaller app size. At this time Hermes is an **opt-in** React Native feature, and this guide explains how to enable it.
@@ -51,7 +50,7 @@ $ npx react-native run-android
 
 If you've recently created a new app from scratch, you should see if Hermes is enabled in the welcome view:
 
-![Where to find JS engine status in AwesomeProject](/docs/assets/HermesApp.jpg)
+![Where to find JS engine status in AwesomeProject](/img/docs/HermesApp.jpg)
 
 A `HermesInternal` global variable will be available in JavaScript that can be used to verify that Hermes is in use:
 
@@ -79,10 +78,10 @@ Once you know where the Metro server is listening, you can connect with Chrome u
 
 2. Use the `Configure...` button to add the Metro server address (typically `localhost:8081` as described above).
 
-![Configure button in Chrome DevTools devices page](/docs/assets/HermesDebugChromeConfig.png)
+![Configure button in Chrome DevTools devices page](/img/docs/HermesDebugChromeConfig.png)
 
-![Dialog for adding Chrome DevTools network targets](/docs/assets/HermesDebugChromeMetroAddress.png)
+![Dialog for adding Chrome DevTools network targets](/img/docs/HermesDebugChromeMetroAddress.png)
 
-3. You should now see a "Hermes React Native" target with an "inspect" link which can be used to bring up debugger. If you don't see the "inspect" link, make sure the Metro server is running. ![Target inspect link](/docs/assets/HermesDebugChromeInspect.png)
+3. You should now see a "Hermes React Native" target with an "inspect" link which can be used to bring up debugger. If you don't see the "inspect" link, make sure the Metro server is running. ![Target inspect link](/img/docs/HermesDebugChromeInspect.png)
 
-4. You can now use the Chrome debug tools. For example, to breakpoint the next time some JavaScript is run, click on the pause button and trigger an action in your app which would cause JavaScript to execute. ![Pause button in debug tools](/docs/assets/HermesDebugChromePause.png)
+4. You can now use the Chrome debug tools. For example, to breakpoint the next time some JavaScript is run, click on the pause button and trigger an action in your app which would cause JavaScript to execute. ![Pause button in debug tools](/img/docs/HermesDebugChromePause.png)

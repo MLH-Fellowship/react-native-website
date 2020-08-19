@@ -1,8 +1,7 @@
 ---
-id: version-0.63-intro-react
+id: intro-react
 title: React Fundamentals
 description: To understand React Native fully, you need a solid foundation in React. This short introduction to React can help you get started or get refreshed.
-original_id: intro-react
 ---
 
 React Native runs on [React](https://reactjs.org/), a popular open source library for building user interfaces with JavaScript. To make the most of React Native, it helps to understand React itself. This section can get you started or can serve as a refresher course.
@@ -301,7 +300,7 @@ const CatApp = () => {
   return (
     <View>
       <Image
-        source={{uri: "https://reactnative.dev/docs/assets/p_cat1.png"}}
+        source={{uri: "https://reactnative.dev/img/docs/p_cat1.png"}}
         style={{width: 200, height: 200}}
       />
       <Text>Hello, I am your cat!</Text>
