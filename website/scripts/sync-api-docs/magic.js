@@ -41,5 +41,13 @@ module.exports = {
       text: 'React.Node',
       url: 'react-node.md',
     },
+    TextStyleProps: {
+      text: 'Text Style Props',
+      url: 'text-style-props',
+    },
+    ViewStyleProps: {
+      text: 'View Style Props',
+      url: 'view-style-props',
+    },
   },
 };

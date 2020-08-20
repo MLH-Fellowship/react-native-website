@@ -41,7 +41,21 @@ function formatTypeColumn(prop) {
         }
         tag = tag + formatMultiplePlatform(platform[0].split(','));
       } else {
-        if (Object.hasOwnProperty.call(magic.linkableTypeAliases, tag)) {
+        // Check if there are multiple comma separated types in a single line
+        if (tag.match(/, /)) {
+          let newTag = '';
+          const tags = tag.split(', ');
+          tags.forEach(item => {
+            if (Object.hasOwnProperty.call(magic.linkableTypeAliases, item)) {
+              ({url, text} = magic.linkableTypeAliases[item]);
+              if (url) newTag += ', ' + `[${text}](${url})`;
+            } else newTag += ', ' + item;
+          });
+          //Trim comma from beginning
+          tag = newTag.replace(/^, /, '');
+        }
+        // If there is no comma separated types in rnTags
+        else if (Object.hasOwnProperty.call(magic.linkableTypeAliases, tag)) {
           ({url, text} = magic.linkableTypeAliases[tag]);
           if (url) tag = `[${text}](${url})`;
         }
@@ -77,6 +91,8 @@ function formatTypeColumn(prop) {
         } else {
           return prop.flowType.type;
         }
+      } else if (prop.flowType.type === 'object') {
+        return prop.flowType.type;
       }
     } else if (prop.flowType.name.includes('$ReadOnlyArray')) {
       prop?.flowType?.elements[0]?.elements &&
