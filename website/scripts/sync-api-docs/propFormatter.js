@@ -69,23 +69,40 @@ function formatTypeColumn(prop) {
             Object.hasOwnProperty.call(magic.linkableTypeAliases, eventType)
           ) {
             ({url, text} = magic.linkableTypeAliases[eventType]);
-            return `${prop.flowType.type}([${text}](${url}))`;
+            if (url) {
+              return `${prop.flowType.type}([${text}](${url}))`;
+            }
           }
           // TODO: Handling unknown function params
           return `${prop.flowType.type}`;
+        } else if (prop.flowType.signature) {
+          return prop.flowType.raw;
         } else {
           return prop.flowType.type;
         }
       }
     } else if (prop.flowType.name.includes('$ReadOnlyArray')) {
-      prop?.flowType?.elements[0]?.elements &&
-        prop?.flowType?.elements[0]?.elements.forEach(elem => {
-          if (
-            Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
-          ) {
-            ({url, text} = magic.linkableTypeAliases[elem.name]);
-          }
-        });
+      if (prop?.flowType?.elements) {
+        if (prop?.flowType?.elements[0]?.name) {
+          prop?.flowType?.elements?.forEach(elem => {
+            if (
+              Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
+            ) {
+              ({url, text} = magic.linkableTypeAliases[elem.name]);
+            }
+          });
+        } else {
+          prop?.flowType?.elements[0]?.elements.forEach(elem => {
+            console.log(elem);
+            if (
+              Object.hasOwnProperty.call(magic.linkableTypeAliases, elem.name)
+            ) {
+              ({url, text} = magic.linkableTypeAliases[elem.name]);
+            }
+          });
+        }
+      }
+
       if (url) return `array of [${text}](${url})`;
       else if (prop?.flowType?.elements[0].name === 'union') {
         const unionTypes = prop?.flowType?.elements[0]?.elements.reduce(

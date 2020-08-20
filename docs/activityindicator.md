@@ -8,17 +8,17 @@ Displays a circular loading indicator.
 ## Example
 
 <div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-      Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>
 
-<block class="functional syntax" />
+<block class='functional syntax' />
 
 ```SnackPlayer name=ActivityIndicator%20Function%20Component%20Example
 import React from "react";
@@ -44,11 +44,10 @@ const styles = StyleSheet.create({
     padding: 10
   }
 });
-
 export default App;
 ```
 
-<block class="classical syntax" />
+<block class='classical syntax' />
 
 ```SnackPlayer name=ActivityIndicator%20Class%20Component%20Example
 import React, { Component } from "react";
@@ -58,10 +57,10 @@ class App extends Component {
   render() {
     return (
       <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator />
-      <ActivityIndicator size="large" />
-      <ActivityIndicator size="small" color="#0000ff" />
-      <ActivityIndicator size="large" color="#00ff00" />
+        <ActivityIndicator />
+        <ActivityIndicator size="large" />
+        <ActivityIndicator size="small" color="#0000ff" />
+        <ActivityIndicator size="large" color="#00ff00" />
       </View>
     );
   }
@@ -78,19 +77,18 @@ const styles = StyleSheet.create({
     padding: 10
   }
 });
-
 export default App;
 ```
 
-<block class="endBlock syntax" />
+<block class='endBlock syntax' />
+
+---
 
 # Reference
 
 ## Props
 
-Inherits [View Props](view#props).
-
----
+Inherits [View Props](view.md#props).
 
 ### `animating`
 
@@ -106,13 +104,13 @@ Whether to show the indicator (`true`) or hide it (`false`).
 
 The foreground color of the spinner.
 
-| Type            | Default                                                                                                                                                                             |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [color](colors) | `null` (system accent default color)<div class="label android">Android</div><hr/><ins style="background: #999" class="color-box"></ins>`'#999999'` <div class="label ios">iOS</div> |
+| Type               | Default                                                                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [color](colors.md) | `null` (system accent default color)<div class="label android">Android</div><hr/>`'#999999'`<ins style="background: #999999" class="color-box"></ins><div class="label ios">iOS</div> |
 
 ---
 
-### `hidesWhenStopped` <div class="label ios">iOS</div>
+### `hidesWhenStopped`<div class="label ios">iOS</div>
 
 Whether the indicator should hide when not animating.
 
@@ -128,4 +126,4 @@ Size of the indicator.
 
 | Type                                                                           | Default   |
 | ------------------------------------------------------------------------------ | --------- |
-| enum(`'small'`, `'large'`)<hr/>number <div class="label android">Android</div> | `'small'` |
+| enum(`'small'`, `'large'`)<hr/> number<div class="label android">Android</div> | `'small'` |

@@ -41,5 +41,17 @@ module.exports = {
       text: 'React.Node',
       url: 'react-node.md',
     },
+    SectionT: {
+      text: 'Section',
+      url: 'sectionlist#section',
+    },
+    ViewStyleProp: {
+      text: 'view styles',
+      url: 'view-style-props',
+    },
+    Text: {
+      text: 'Text',
+      url: 'text#style',
+    },
   },
 };
