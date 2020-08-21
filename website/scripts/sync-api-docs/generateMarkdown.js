@@ -136,10 +136,8 @@ function generateMethod(method, component) {
       : '') +
     '\n' +
     '\n' +
-    // generateMethodSignatureBlock(method, component) +
     (method.description ? method.description + '\n\n' : '') +
     generateMethodSignatureTable(method, component) +
-    // infoTable +
     (mdPoints && header + '\n' + mdPoints)
   ).trim();
 }
