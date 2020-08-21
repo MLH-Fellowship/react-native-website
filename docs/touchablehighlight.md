@@ -31,17 +31,17 @@ function MyComponent(props) {
 ## Example
 
 <div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-      Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>
 
-<block class="functional syntax" />
+<block class='functional syntax' />
 
 ```SnackPlayer name=TouchableHighlight%20Function%20Component%20Example
 import React, { useState } from "react";
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 export default TouchableHighlightExample;
 ```
 
-<block class="classical syntax" />
+<block class='classical syntax' />
 
 ```SnackPlayer name=TouchableHighlight%20Class%20Component%20Example
 import React, { Component } from "react";
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-<block class="endBlock syntax" />
+<block class='endBlock syntax' />
 
 ---
 
@@ -157,15 +157,81 @@ export default App;
 
 ## Props
 
-Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
+### <div class="label required basic">Required</div>`hostRef`
+
+| Type                     |
+| ------------------------ |
+| `React.Ref<typeof View>` |
+
+---
 
 ### `activeOpacity`
 
-Determines what the opacity of the wrapped view should be when touch is active. The value should be between 0 and 1. Defaults to 0.85. Requires `underlayColor` to be set.
+Determines what the opacity of the wrapped view should be when touch is active. The value should be between 0 and 1. Requires `underlayColor` to be set.
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
+| Type   | Default |
+| ------ | ------- |
+| number | `0.85`  |
+
+---
+
+### `hasTVPreferredFocus`<div class="label ios">iOS</div>
+
+_(Apple TV only)_ TV preferred focus (see documentation for the View component).
+
+| Type |
+| ---- |
+| bool |
+
+---
+
+### `nextFocusDown`<div class="label android">Android</div>
+
+TV next focus down (see documentation for the View component).
+
+| Type   |
+| ------ |
+| number |
+
+---
+
+### `nextFocusForward`<div class="label android">Android</div>
+
+TV next focus forward (see documentation for the View component).
+
+| Type   |
+| ------ |
+| number |
+
+---
+
+### `nextFocusLeft`<div class="label android">Android</div>
+
+TV next focus left (see documentation for the View component).
+
+| Type   |
+| ------ |
+| number |
+
+---
+
+### `nextFocusRight`<div class="label android">Android</div>
+
+TV next focus left (see documentation for the View component).
+
+| Type   |
+| ------ |
+| number |
+
+---
+
+### `nextFocusUp`<div class="label android">Android</div>
+
+TV next focus up (see documentation for the View component).
+
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -173,9 +239,9 @@ Determines what the opacity of the wrapped view should be when touch is active. 
 
 Called immediately after the underlay is hidden.
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -183,87 +249,17 @@ Called immediately after the underlay is hidden.
 
 Called immediately after the underlay is shown.
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
 ### `style`
 
-| Type       | Required |
-| ---------- | -------- |
-| View.style | No       |
-
----
-
-### `underlayColor`
-
-The color of the underlay that will show through when the touch is active.
-
-| Type               | Required |
-| ------------------ | -------- |
-| [color](colors.md) | No       |
-
----
-
-### `hasTVPreferredFocus`
-
-_(Apple TV only)_ TV preferred focus (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | iOS      |
-
----
-
-### `nextFocusDown`
-
-TV next focus down (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
-
----
-
-### `nextFocusForward`
-
-TV next focus forward (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
-
----
-
-### `nextFocusLeft`
-
-TV next focus left (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
-
----
-
-### `nextFocusRight`
-
-TV next focus right (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
-
----
-
-### `nextFocusUp`
-
-TV next focus up (see documentation for the View component).
-
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type       |
+| ---------- |
+| View.style |
 
 ---
 
@@ -271,6 +267,16 @@ TV next focus up (see documentation for the View component).
 
 Handy for snapshot tests.
 
-| Type | Required |
-| ---- | -------- |
-| bool | No       |
+| Type |
+| ---- |
+| bool |
+
+---
+
+### `underlayColor`
+
+The color of the underlay that will show through when the touch is active.
+
+| Type               |
+| ------------------ |
+| [color](colors.md) |

@@ -8,7 +8,6 @@
 'use strict';
 
 const {typeOf} = require('tokenize-comment/lib/utils');
-const he = require('he');
 const magic = require('./magic');
 const {formatMultiplePlatform} = require('./utils');
 
