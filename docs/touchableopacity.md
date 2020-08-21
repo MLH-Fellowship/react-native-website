@@ -12,17 +12,17 @@ Opacity is controlled by wrapping the children in an `Animated.View`, which is a
 ## Example
 
 <div class="toggler">
-  <ul role="tablist" class="toggle-syntax">
-    <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
-      Function Component Example
-    </li>
-    <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
-      Class Component Example
-    </li>
-  </ul>
-</div>
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>
 
-<block class="functional syntax" />
+<block class='functional syntax' />
 
 ```SnackPlayer name=TouchableOpacity%20Function%20Component%20Example
 import React, { useState } from "react";
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-<block class="classical syntax" />
+<block class='classical syntax' />
 
 ```SnackPlayer name=TouchableOpacity%20Class%20Component%20Example
 import React, { Component } from "react";
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 export default App;
 ```
 
-<block class="endBlock syntax" />
+<block class='endBlock syntax' />
 
 ---
 
@@ -131,109 +131,86 @@ export default App;
 
 ## Props
 
-Inherits [TouchableWithoutFeedback Props](touchablewithoutfeedback.md#props).
+### <div class="label required basic">Required</div>`hostRef`
 
-### `style`
-
-| Type       | Required |
-| ---------- | -------- |
-| View.style | No       |
+| Type                              |
+| --------------------------------- |
+| `React.Ref<typeof Animated.View>` |
 
 ---
 
 ### `activeOpacity`
 
-Determines what the opacity of the wrapped view should be when touch is active. Defaults to `0.2`.
+Determines what the opacity of the wrapped view should be when touch is active.
 
-| Type   | Required |
-| ------ | -------- |
-| number | No       |
-
----
-
-### `tvParallaxProperties`
-
-_(Apple TV only)_ Object with properties to control Apple TV parallax effects.
-
-- `enabled`: If `true`, parallax effects are enabled. Defaults to `true`.
-- `shiftDistanceX`: Defaults to `2.0`.
-- `shiftDistanceY`: Defaults to `2.0`.
-- `tiltAngle`: Defaults to `0.05`.
-- `magnification`: Defaults to `1.0`.
-- `pressMagnification`: Defaults to `1.0`.
-- `pressDuration`: Defaults to `0.3`.
-- `pressDelay`: Defaults to `0.0`.
-
-| Type   | Required | Platform |
-| ------ | -------- | -------- |
-| object | No       | iOS      |
+| Type   | Default |
+| ------ | ------- |
+| number | `0.2`   |
 
 ---
 
-### `hasTVPreferredFocus`
+### `hasTVPreferredFocus`<div class="label ios">iOS</div>
 
-_(Apple TV only)_ TV preferred focus (see documentation for the View component).
+(Apple TV only) TV preferred focus (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | iOS      |
+| Type |
+| ---- |
+| bool |
 
 ---
 
-### `nextFocusDown`
+### `nextFocusDown`<div class="label android">Android</div>
 
 TV next focus down (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusForward`
+### `nextFocusForward`<div class="label android">Android</div>
 
 TV next focus forward (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusLeft`
+### `nextFocusLeft`<div class="label android">Android</div>
 
 TV next focus left (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusRight`
+### `nextFocusRight`<div class="label android">Android</div>
 
 TV next focus right (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
 ---
 
-### `nextFocusUp`
+### `nextFocusUp`<div class="label android">Android</div>
 
 TV next focus up (see documentation for the View component).
 
-| Type | Required | Platform |
-| ---- | -------- | -------- |
-| bool | No       | Android  |
+| Type   |
+| ------ |
+| number |
 
-## Methods
+---
 
-### `setOpacityTo()`
+### `style`
 
-```jsx
-setOpacityTo((value: number), (duration: number));
-```
-
-Animate the touchable to a new opacity.
+| Type       |
+| ---------- |
+| View.style |

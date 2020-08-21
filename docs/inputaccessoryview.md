@@ -7,6 +7,8 @@ A component which enables customization of the keyboard input accessory view on 
 
 To use this component wrap your custom toolbar with the InputAccessoryView component, and set a `nativeID`. Then, pass that `nativeID` as the `inputAccessoryViewID` of whatever `TextInput` you desire. A basic example:
 
+## Example
+
 ```SnackPlayer name=InputAccessoryView&supportedPlatforms=ios
 import React, { useState } from 'react';
 import { Button, InputAccessoryView, ScrollView, TextInput } from 'react-native';
@@ -40,7 +42,9 @@ export default App = () => {
 }
 ```
 
-This component can also be used to create sticky text inputs (text inputs which are anchored to the top of the keyboard). To do this, wrap a `TextInput` with the `InputAccessoryView` component, and don't set a `nativeID`. For an example, look at [InputAccessoryViewExample.js](https://github.com/facebook/react-native/blob/master/RNTester/js/examples/InputAccessoryView/InputAccessoryViewExample.js).
+This component can also be used to create sticky text inputs (text inputs which are anchored to the top of the keyboard). To do this, wrap a `TextInput` with the `InputAccessoryView` component, and don't set a `nativeID`. For an example, look at [InputAccessoryViewExample.js](react-native:InputAccessoryView).
+
+[react-native:inputaccessoryview]: https://github.com/facebook/react-native/blob/master/RNTester/js/examples/InputAccessoryView/InputAccessoryViewExample.js
 
 ---
 
@@ -48,11 +52,19 @@ This component can also be used to create sticky text inputs (text inputs which 
 
 ## Props
 
+### <div class="label required basic">Required</div>`children`
+
+| Type         |
+| ------------ |
+| `React.Node` |
+
+---
+
 ### `backgroundColor`
 
-| Type               | Required |
-| ------------------ | -------- |
-| [color](colors.md) | No       |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
@@ -60,19 +72,14 @@ This component can also be used to create sticky text inputs (text inputs which 
 
 An ID which is used to associate this `InputAccessoryView` to specified TextInput(s).
 
-| Type   | Required |
-| ------ | -------- |
-| string | No       |
+| Type   |
+| ------ |
+| string |
 
 ---
 
 ### `style`
 
-| Type                         | Required |
-| ---------------------------- | -------- |
-| [style](view-style-props.md) | No       |
-
-# Known issues
-
-- [react-native#18997](https://github.com/facebook/react-native/issues/18997): Doesn't support multiline `TextInput`
-- [react-native#20157](https://github.com/facebook/react-native/issues/20157): Can't use with a bottom tab bar
+| Type                                 |
+| ------------------------------------ |
+| [View Style Props](view-style-props) |

@@ -75,11 +75,37 @@ export default App;
 
 ## Props
 
+### <div class="label required basic">Required</div>`drawerPosition`
+
+Specifies the side of the screen from which the drawer will slide in.
+
+| Type                  | Default |
+| --------------------- | ------- |
+| enum('left', 'right') | `left`  |
+
+---
+
+### <div class="label required basic">Required</div>`renderNavigationView`
+
+The navigation view that will be rendered to the side of the screen and can be pulled in.
+
+| Type     |
+| -------- |
+| function |
+
+---
+
 ### `children`
+
+| Type         |
+| ------------ |
+| `React.Node` |
+
+---
 
 ### `drawerBackgroundColor`
 
-Specifies the background color of the drawer. The default value is `white`. If you want to set the opacity of the drawer, use rgba. Example:
+Specifies the background color of the drawer. If you want to set the opacity of the drawer, use rgba. Example:
 
 ```jsx
 return (
@@ -87,9 +113,9 @@ return (
 );
 ```
 
-| Type               | Required |
-| ------------------ | -------- |
-| [color](colors.md) | No       |
+| Type               | Default |
+| ------------------ | ------- |
+| [color](colors.md) | `white` |
 
 ---
 
@@ -101,19 +127,9 @@ Specifies the lock mode of the drawer. The drawer can be locked in 3 states:
 - locked-closed, meaning that the drawer will stay closed and not respond to gestures.
 - locked-open, meaning that the drawer will stay opened and not respond to gestures. The drawer may still be opened and closed programmatically (`openDrawer`/`closeDrawer`).
 
-| Type                                             | Required |
-| ------------------------------------------------ | -------- |
-| enum('unlocked', 'locked-closed', 'locked-open') | No       |
-
----
-
-### `drawerPosition`
-
-Specifies the side of the screen from which the drawer will slide in. By default it is set to `left`.
-
-| Type                  | Required |
-| --------------------- | -------- |
-| enum('left', 'right') | No       |
+| Type                                             |
+| ------------------------------------------------ |
+| enum('unlocked', 'locked-closed', 'locked-open') |
 
 ---
 
@@ -121,9 +137,9 @@ Specifies the side of the screen from which the drawer will slide in. By default
 
 Specifies the width of the drawer, more precisely the width of the view that be pulled in from the edge of the window.
 
-| Type     | Required |
-| -------- | -------- |
-| `number` | No       |
+| Type   |
+| ------ |
+| number |
 
 ---
 
@@ -134,9 +150,9 @@ Determines whether the keyboard gets dismissed in response to a drag.
 - 'none' (the default), drags do not dismiss the keyboard.
 - 'on-drag', the keyboard is dismissed when a drag begins.
 
-| Type                                                     | Required |
-| -------------------------------------------------------- | -------- |
-| <code>&#x27;none&#x27; &#124; &#x27;on-drag&#x27;</code> | No       |
+| Type                    |
+| ----------------------- |
+| enum('none', 'on-drag') |
 
 ---
 
@@ -144,9 +160,9 @@ Determines whether the keyboard gets dismissed in response to a drag.
 
 Function called whenever the navigation view has been closed.
 
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -154,9 +170,9 @@ Function called whenever the navigation view has been closed.
 
 Function called whenever the navigation view has been opened.
 
-| Type          | Required |
-| ------------- | -------- |
-| `() => mixed` | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -164,9 +180,9 @@ Function called whenever the navigation view has been opened.
 
 Function called whenever there is an interaction with the navigation view.
 
-| Type                                                                                          | Required |
-| --------------------------------------------------------------------------------------------- | -------- |
-| <code>(event: SyntheticEvent&#x3C;T&#x3E;) =&#x3E; void &#124; Promise&#x3C;void&#x3E;</code> | No       |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -174,23 +190,13 @@ Function called whenever there is an interaction with the navigation view.
 
 Function called when the drawer state has changed. The drawer can be in 3 states:
 
-- Idle, meaning there is no interaction with the navigation view happening at the time
-- Dragging, meaning there is currently an interaction with the navigation view
-- Settling, meaning that there was an interaction with the navigation view, and the navigation view is now finishing its closing or opening animation
+- idle, meaning there is no interaction with the navigation view happening at the time
+- dragging, meaning there is currently an interaction with the navigation view
+- settling, meaning that there was an interaction with the navigation view, and the navigation view is now finishing its closing or opening animation
 
-| Type                             | Required |
-| -------------------------------- | -------- |
-| `(state: DrawerStates) => mixed` | No       |
-
----
-
-### `renderNavigationView`
-
-The navigation view that will be rendered to the side of the screen and can be pulled in.
-
-| Type     | Required |
-| -------- | -------- |
-| function | Yes      |
+| Type     |
+| -------- |
+| function |
 
 ---
 
@@ -198,19 +204,25 @@ The navigation view that will be rendered to the side of the screen and can be p
 
 Make the drawer take the entire screen and draw the background of the status bar to allow it to open over the status bar. It will only have an effect on API 21+.
 
-| Type                            | Required |
-| ------------------------------- | -------- |
-| <code>null &#124; string</code> | No       |
+| Type               |
+| ------------------ |
+| [color](colors.md) |
 
 ---
 
 ### `style`
 
-| Type                                                                                                                                           | Required |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| <code>&#124; null &#124; void &#124; T &#124; false &#124; &#x27;&#x27; &#124; \$ReadOnlyArray&#x3C;GenericStyleProp&#x3C;T&#x3E;&#x3E;</code> | No       |
+| Type                                 |
+| ------------------------------------ |
+| [View Style Props](view-style-props) |
 
 ## Methods
+
+### `blur()`
+
+Native methods
+
+---
 
 ### `closeDrawer()`
 
@@ -222,6 +234,42 @@ Closes the drawer.
 
 ---
 
+### `focus()`
+
+---
+
+### `measure()`
+
+**Parameters:**
+
+| Name     | Type     | Required |
+| -------- | -------- | -------- |
+| callback | function | Yes      |
+
+---
+
+### `measureInWindow()`
+
+**Parameters:**
+
+| Name     | Type     | Required |
+| -------- | -------- | -------- |
+| callback | function | Yes      |
+
+---
+
+### `measureLayout()`
+
+**Parameters:**
+
+| Name                 | Type     | Required |
+| -------------------- | -------- | -------- |
+| relativeToNativeNode | number   | Yes      |
+| onSuccess            | function | Yes      |
+| onFail               | function | No       |
+
+---
+
 ### `openDrawer()`
 
 ```jsx
@@ -229,3 +277,17 @@ openDrawer();
 ```
 
 Opens the drawer.
+
+---
+
+### `positions()`
+
+---
+
+### `setNativeProps()`
+
+**Parameters:**
+
+| Name        | Type   | Required |
+| ----------- | ------ | -------- |
+| nativeProps | Object | Yes      |
