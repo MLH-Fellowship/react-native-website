@@ -3,9 +3,84 @@ id: view
 title: View
 ---
 
+The most fundamental component for building a UI, `View` is a container that supports layout with [flexbox](flexbox.md), [style](style.md), [some touch handling](handling-touches.md), and [accessibility](accessibility.md) controls. `View` maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a `UIView`, `<div>`, `android.view`, etc.
+
+`View` is designed to be nested inside other views and can have 0 to many children of any type.
+
+This example creates a `View` that wraps two boxes with color and a text component in a row with padding.
+
 ## Example
 
-l
+<div class="toggler">
+    <ul role="tablist" class="toggle-syntax">
+      <li id="functional" class="button-functional" aria-selected="false" role="tab" tabindex="0" aria-controls="functionaltab" onclick="displayTabs('syntax', 'functional')">
+        Function Component Example
+      </li>
+      <li id="classical" class="button-classical" aria-selected="false" role="tab" tabindex="0" aria-controls="classicaltab" onclick="displayTabs('syntax', 'classical')">
+        Class Component Example
+      </li>
+    </ul>
+  </div>
+
+<block class='functional syntax' />
+
+```SnackPlayer name=View%20Function%20Component%20Example
+import React from "react";
+import { View, Text } from "react-native";
+
+const ViewBoxesWithColorAndText = () => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        height: 100,
+        padding: 20
+      }}
+    >
+      <View style={{ backgroundColor: "blue", flex: 0.3 }} />
+      <View style={{ backgroundColor: "red", flex: 0.5 }} />
+      <Text>Hello World!</Text>
+    </View>
+  );
+};
+
+export default ViewBoxesWithColorAndText;
+```
+
+<block class='classical syntax' />
+
+```SnackPlayer name=View%20Class%20Component%20Example
+import React, { Component } from "react";
+import { View, Text } from "react-native";
+
+class App extends Component {
+  render() {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          height: 100,
+          padding: 20
+        }}
+      >
+        <View style={{ backgroundColor: "blue", flex: 0.3 }} />
+        <View style={{ backgroundColor: "red", flex: 0.5 }} />
+        <Text>Hello World!</Text>
+      </View>
+    );
+  }
+}
+
+export default App;
+```
+
+<block class='endBlock syntax' />
+
+> `View`s are designed to be used with [`StyleSheet`](style.md) for clarity and performance, although inline styles are also supported.
+
+### Synthetic Touch Events
+
+For `View` responder props (e.g., `onResponderMove`), the synthetic touch event passed to them are in form of [PressEvent](pressevent).
 
 ---
 
@@ -15,31 +90,31 @@ l
 
 ### `accessibilityActions`
 
-Provides an array of custom actions available for accessibility.
+Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. The `accessibilityActions` property should contain a list of action objects. Each action object should contain the field name and label.
 
-| Type                                      |
-| ----------------------------------------- |
-| `$ReadOnlyArray<AccessibilityActionInfo>` |
+See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
+
+| Type  |
+| ----- |
+| array |
 
 ---
 
-### `accessibilityElementsHidden`
+### `accessibilityElementsHidden`<div class="label ios">iOS</div>
 
 A value indicating whether the accessibility elements contained within this accessibility element are hidden.
 
-See https://reactnative.dev/docs/view.html#accessibilityElementsHidden
+See the [Accessibility guide](accessibility.md#accessibilityelementshidden-ios) for more information.
 
-| Type |
-| ---- |
-| bool |
+| Type | Default |
+| ---- | ------- |
+| bool | `false` |
 
 ---
 
 ### `accessibilityHint`
 
 An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
-
-See https://reactnative.dev/docs/view.html#accessibilityHint
 
 | Type   |
 | ------ |
@@ -49,7 +124,9 @@ See https://reactnative.dev/docs/view.html#accessibilityHint
 
 ### `accessibilityIgnoresInvertColors`<div class="label ios">iOS</div>
 
-Prevents view from being inverted if set to true and color inversion is turned on.
+A value indicating this view should or should not be inverted when color inversion is turned on. A value of `true` will tell the view to not be inverted even if color inversion is turned on.
+
+See the [Accessibility guide](accessibility.md#accessibilityignoresinvertcolors) for more information.
 
 | Type |
 | ---- |
@@ -61,19 +138,25 @@ Prevents view from being inverted if set to true and color inversion is turned o
 
 Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the `Text` nodes separated by space.
 
-See https://reactnative.dev/docs/view.html#accessibilitylabel
-
 | Type   |
 | ------ |
 | string |
 
 ---
 
-### `accessibilityLiveRegion`
+### `accessibilityLiveRegion`<div class="label android">Android</div>
 
-Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only.
+Indicates to accessibility services whether the user should be notified when this view changes. Works for Android API >= 19 only. Possible values:
 
-See https://reactnative.dev/docs/view.html#accessibilityliveregion
+- `'none'` - Accessibility services should not announce changes to this view.
+- `'polite'`- Accessibility services should announce changes to this view.
+- `'assertive'` - Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+
+See the [Android `View` docs][attr_android:accessibilityliveregion].
+
+[attr_android:accessibilityliveregion]: http://developer.android.com/reference/android/view/View.html#attr_android:accessibilityLiveRegion
+
+for reference.
 
 | Type                                |
 | ----------------------------------- |
@@ -83,49 +166,83 @@ See https://reactnative.dev/docs/view.html#accessibilityliveregion
 
 ### `accessibilityRole`
 
-Indicates to accessibility services to treat UI component like a specific role.
+`accessibilityRole` communicates the purpose of a component to the user of an assistive technology.
 
-| Type                                                                                                                                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enum('none', 'button', 'link', 'search', 'image', 'keyboardkey', 'text', 'adjustable', 'imagebutton', 'header', 'summary', 'alert', 'checkbox', 'combobox', 'menu', 'menubar', 'menuitem', 'progressbar', 'radio', 'radiogroup', 'scrollbar', 'spinbutton', 'switch', 'tab', 'tablist', 'timer', 'toolbar') |
+`accessibilityRole` can be one of the following:
+
+- `'none'` - Used when the element has no role.
+- `'button'` - Used when the element should be treated as a button.
+- `'link'` - Used when the element should be treated as a link.
+- `'search'` - Used when the text field element should also be treated as a search field.
+- `'image'` - Used when the element should be treated as an image. Can be combined with button or link, for example.
+- `'keyboardkey'` - Used when the element acts as a keyboard key.
+- `'text'` - Used when the element should be treated as static text that cannot change.
+- `'adjustable'` - Used when an element can be "adjusted" (e.g. a slider).
+- `'imagebutton'` - Used when the element should be treated as a button and is also an image.
+- `'header'` - Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
+- `'summary'` - Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
+- `'alert'` - Used when an element contains important text to be presented to the user.
+- `'checkbox'` - Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.
+- `'combobox'` - Used when an element represents a combo box, which allows the user to select among several choices.
+- `'menu'` - Used when the component is a menu of choices.
+- `'menubar'` - Used when a component is a container of multiple menus.
+- `'menuitem'` - Used to represent an item within a menu.
+- `'progressbar'` - Used to represent a component which indicates progress of a task.
+- `'radio'` - Used to represent a radio button.
+- `'radiogroup'` - Used to represent a group of radio buttons.
+- `'scrollbar'` - Used to represent a scroll bar.
+- `'spinbutton'` - Used to represent a button which opens a list of choices.
+- `'switch'` - Used to represent a switch which can be turned on and off.
+- `'tab'` - Used to represent a tab.
+- `'tablist'` - Used to represent a list of tabs.
+- `'timer'` - Used to represent a timer.
+- `'toolbar'` - Used to represent a tool bar (a container of action buttons or components).
+
+| Type   |
+| ------ |
+| string |
 
 ---
 
 ### `accessibilityState`
 
-Indicates to accessibility services that UI Component is in a specific State.
+Describes the current state of a component to the user of an assistive technology.
 
-| Type                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------------------------------------- |
-| <code>{ disabled?: boolean, selected?: boolean, checked?: ?boolean &#124; &#x27;mixed&#x27;, busy?: boolean, expanded?: boolean, ... }</code> |
+See the [Accessibility guide](accessibility.md#accessibilitystate-ios-android) for more information.
+
+| Type   |
+| ------ |
+| object |
 
 ---
 
 ### `accessibilityValue`
 
-| Type       |
-| ---------- |
-| object: {} |
+Represents the current value of a component. It can be a textual description of a component's value, or for range-based components, such as sliders and progress bars, it contains range information (minimum, current, and maximum).
+
+See the [Accessibility guide](accessibility.md#accessibilityvalue-ios-android) for more information.
+
+| Type                                                          |
+| ------------------------------------------------------------- |
+| object: {min: number, max: number, now: number, text: string} |
 
 ---
 
-### `accessibilityViewIsModal`
+### `accessibilityViewIsModal`<div class="label ios">iOS</div>
 
 A value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver. Default is `false`.
 
-See https://reactnative.dev/docs/view.html#accessibilityviewismodal
+See the [Accessibility guide](accessibility.md#accessibilityviewismodal-ios) for more information.
 
-| Type |
-| ---- |
-| bool |
+| Type | Default |
+| ---- | ------- |
+| bool | `false` |
 
 ---
 
 ### `accessible`
 
 When `true`, indicates that the view is an accessibility element. By default, all the touchable elements are accessible.
-
-See https://reactnative.dev/docs/view.html#accessible
 
 | Type |
 | ---- |
@@ -141,13 +258,9 @@ See https://reactnative.dev/docs/view.html#accessible
 
 ---
 
-### `collapsable`
+### `collapsable`<div class="label android">Android</div>
 
 Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization. Set this property to `false` to disable this optimization and ensure that this `View` exists in the native view hierarchy.
-
-In Fabric, this prop is used in ios as well.
-
-See https://reactnative.dev/docs/view.html#collapsable
 
 | Type |
 | ---- |
@@ -179,21 +292,30 @@ Whether to force the Android TV focus engine to move focus to this view.
 
 This defines how far a touch event can start away from the view. Typical interface guidelines recommend touch targets that are at least 30 - 40 points/density-independent pixels.
 
+For example, if a touchable view has a height of 20 the touchable height can be extended to 40 with `hitSlop={{top: 10, bottom: 10, left: 0, right: 0}}`
+
 > The touch area never extends past the parent view bounds and the Z-index of sibling views always takes precedence if a touch hits two overlapping views.
 
-See https://reactnative.dev/docs/view.html#hitslop
-
-| Type       |
-| ---------- |
-| object: {} |
+| Type                                                               |
+| ------------------------------------------------------------------ |
+| object: {bottom: number, left: number, right: number, top: number} |
 
 ---
 
-### `importantForAccessibility`
+### `importantForAccessibility`<div class="label android">Android</div>
 
 Controls how view is important for accessibility which is if it fires accessibility events and if it is reported to accessibility services that query the screen. Works for Android only.
 
-See https://reactnative.dev/docs/view.html#importantforaccessibility
+Possible values:
+
+- `'auto'` - The system determines whether the view is important for accessibility - default (recommended).
+- `'yes'` - The view is important for accessibility.
+- `'no'` - The view is not important for accessibility.
+- `'no-hide-descendants'` - The view is not important for accessibility, nor are any of its descendant views.
+
+See the [Android `importantForAccessibility` docs][importantforaccessibility] for reference.
+
+[importantforaccessibility]: http://developer.android.com/reference/android/R.attr.html#importantForAccessibility
 
 | Type                                             |
 | ------------------------------------------------ |
@@ -223,19 +345,17 @@ Used to locate this view from native classes.
 
 > This disables the 'layout-only view removal' optimization for this view!
 
-See https://reactnative.dev/docs/view.html#nativeid
-
 | Type   |
 | ------ |
 | string |
 
 ---
 
-### `needsOffscreenAlphaCompositing`
+### `needsOffscreenAlphaCompositing`<div class="label android">Android</div>
 
-Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior.
+Whether this `View` needs to rendered offscreen and composited with an alpha in order to preserve 100% correct colors and blending behavior. The default (`false`) falls back to drawing the component and its children with an alpha applied to the paint used to draw each element instead of rendering the full component offscreen and compositing it back with an alpha value. This default may be noticeable and undesired in the case where the `View` you are setting an opacity on has multiple overlapping elements (e.g. multiple overlapping `View`s, or text and a background).
 
-See https://reactnative.dev/docs/view.html#needsoffscreenalphacompositing
+Rendering offscreen to preserve correct alpha behavior is extremely expensive and hard to debug for non-native developers, which is why it is not turned on by default. If you do need to enable this property for an animation, consider combining it with renderToHardwareTextureAndroid if the view **contents** are static (i.e. it doesn't need to be redrawn each frame). If that property is enabled, this View will be rendered off-screen once, saved in a hardware texture, and then composited onto the screen with an alpha each frame without having to switch rendering targets on the GPU.
 
 | Type |
 | ---- |
@@ -245,7 +365,9 @@ See https://reactnative.dev/docs/view.html#needsoffscreenalphacompositing
 
 ### `nextFocusDown`<div class="label android">Android</div>
 
-TV next focus down (see documentation for the View component).
+Designates the next view to receive focus when the user navigates down. See the [Android documentation][attr_android:nextfocusdown].
+
+[attr_android:nextfocusdown]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusDown
 
 | Type   |
 | ------ |
@@ -255,7 +377,9 @@ TV next focus down (see documentation for the View component).
 
 ### `nextFocusForward`<div class="label android">Android</div>
 
-TV next focus forward (see documentation for the View component).
+Designates the next view to receive focus when the user navigates forward. See the [Android documentation][attr_android:nextfocusforward].
+
+[attr_android:nextfocusforward]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusForward
 
 | Type   |
 | ------ |
@@ -265,7 +389,9 @@ TV next focus forward (see documentation for the View component).
 
 ### `nextFocusLeft`<div class="label android">Android</div>
 
-TV next focus left (see documentation for the View component).
+Designates the next view to receive focus when the user navigates left. See the [Android documentation][attr_android:nextfocusleft].
+
+[attr_android:nextfocusleft]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusLeft
 
 | Type   |
 | ------ |
@@ -275,7 +401,9 @@ TV next focus left (see documentation for the View component).
 
 ### `nextFocusRight`<div class="label android">Android</div>
 
-TV next focus right (see documentation for the View component).
+Designates the next view to receive focus when the user navigates right. See the [Android documentation][attr_android:nextfocusright].
+
+[attr_android:nextfocusright]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusRight
 
 | Type   |
 | ------ |
@@ -285,7 +413,9 @@ TV next focus right (see documentation for the View component).
 
 ### `nextFocusUp`<div class="label android">Android</div>
 
-TV next focus up (see documentation for the View component).
+Designates the next view to receive focus when the user navigates up. See the [Android documentation][attr_android:nextfocusup].
+
+[attr_android:nextfocusup]: https://developer.android.com/reference/android/view/View.html#attr_android:nextFocusUp
 
 | Type   |
 | ------ |
@@ -295,7 +425,9 @@ TV next focus up (see documentation for the View component).
 
 ### `onAccessibilityAction`
 
-When `accessible` is true, the system will try to invoke this function when the user performs an accessibility custom action.
+Invoked when the user performs the accessibility actions. The only argument to this function is an event containing the name of the action to perform.
+
+See the [Accessibility guide](accessibility.md#accessibility-actions) for more information.
 
 | Type     |
 | -------- |
@@ -303,11 +435,9 @@ When `accessible` is true, the system will try to invoke this function when the 
 
 ---
 
-### `onAccessibilityEscape`
+### `onAccessibilityEscape`<div class="label ios">iOS</div>
 
 When `accessible` is `true`, the system will invoke this function when the user performs the escape gesture.
-
-See https://reactnative.dev/docs/view.html#onaccessibilityescape
 
 | Type     |
 | -------- |
@@ -318,8 +448,6 @@ See https://reactnative.dev/docs/view.html#onaccessibilityescape
 ### `onAccessibilityTap`
 
 When `accessible` is true, the system will try to invoke this function when the user performs accessibility tap gesture.
-
-See https://reactnative.dev/docs/view.html#onaccessibilitytap
 
 | Type     |
 | -------- |
@@ -361,19 +489,15 @@ Invoked on mount and layout changes with:
 
 This event is fired immediately once the layout has been calculated, but the new layout may not yet be reflected on the screen at the time the event is received, especially if a layout animation is in progress.
 
-See https://reactnative.dev/docs/view.html#onlayout
-
 | Type     |
 | -------- |
 | function |
 
 ---
 
-### `onMagicTap`
+### `onMagicTap`<div class="label ios">iOS</div>
 
 When `accessible` is `true`, the system will invoke this function when the user performs the magic tap gesture.
-
-See https://reactnative.dev/docs/view.html#onmagictap
 
 | Type     |
 | -------- |
@@ -401,9 +525,7 @@ See https://reactnative.dev/docs/view.html#onmagictap
 
 Does this view want to "claim" touch responsiveness? This is called for every touch move on the `View` when it is not the responder.
 
-`View.props.onMoveShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onmoveshouldsetresponder
+`View.props.onMoveShouldSetResponder: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -415,9 +537,7 @@ See https://reactnative.dev/docs/view.html#onmoveshouldsetresponder
 
 If a parent `View` wants to prevent a child `View` from becoming responder on a move, it should have this handler which returns `true`.
 
-`View.props.onMoveShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onMoveShouldsetrespondercapture
+`View.props.onMoveShouldSetResponderCapture: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -437,11 +557,7 @@ See https://reactnative.dev/docs/view.html#onMoveShouldsetrespondercapture
 
 The View is now responding for touch events. This is the time to highlight and show the user what is happening.
 
-`View.props.onResponderGrant: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-PanResponder includes a note `// TODO: t7467124 investigate if this can be removed` that should help fixing this return type.
-
-See https://reactnative.dev/docs/view.html#onrespondergrant
+`View.props.onResponderGrant: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -453,9 +569,7 @@ See https://reactnative.dev/docs/view.html#onrespondergrant
 
 The user is moving their finger.
 
-`View.props.onResponderMove: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onrespondermove
+`View.props.onResponderMove: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -467,9 +581,7 @@ See https://reactnative.dev/docs/view.html#onrespondermove
 
 Another responder is already active and will not release it to that `View` asking to be the responder.
 
-`View.props.onResponderReject: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onresponderreject
+`View.props.onResponderReject: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -481,9 +593,7 @@ See https://reactnative.dev/docs/view.html#onresponderreject
 
 Fired at the end of the touch.
 
-`View.props.onResponderRelease: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onresponderrelease
+`View.props.onResponderRelease: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -503,9 +613,7 @@ See https://reactnative.dev/docs/view.html#onresponderrelease
 
 The responder has been taken from the `View`. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (e.g., happens with control center/ notification center on iOS)
 
-`View.props.onResponderTerminate: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onresponderterminate
+`View.props.onResponderTerminate: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -517,9 +625,7 @@ See https://reactnative.dev/docs/view.html#onresponderterminate
 
 Some other `View` wants to become responder and is asking this `View` to release its responder. Returning `true` allows its release.
 
-`View.props.onResponderTerminationRequest: (event) => {}`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onresponderterminationrequest
+`View.props.onResponderTerminationRequest: (event) => {}`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -531,9 +637,7 @@ See https://reactnative.dev/docs/view.html#onresponderterminationrequest
 
 Does this view want to become responder on the start of a touch?
 
-`View.props.onStartShouldSetResponder: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onstartshouldsetresponder
+`View.props.onStartShouldSetResponder: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -545,9 +649,7 @@ See https://reactnative.dev/docs/view.html#onstartshouldsetresponder
 
 If a parent `View` wants to prevent a child `View` from becoming responder on a touch start, it should have this handler which returns `true`.
 
-`View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a synthetic touch event as described above.
-
-See https://reactnative.dev/docs/view.html#onstartshouldsetrespondercapture
+`View.props.onStartShouldSetResponderCapture: (event) => [true | false]`, where `event` is a [PressEvent](pressevent).
 
 | Type                                  |
 | ------------------------------------- |
@@ -623,7 +725,31 @@ See https://reactnative.dev/docs/view.html#onstartshouldsetrespondercapture
 
 Controls whether the `View` can be the target of touch events.
 
-See https://reactnative.dev/docs/view.html#pointerevents
+- `'auto'`: The View can be the target of touch events.
+- `'none'`: The View is never the target of touch events.
+- `'box-none'`: The View is never the target of touch events but its subviews can be. It behaves like if the view had the following classes in CSS:
+
+```
+.box-none {
+    pointer-events: none;
+}
+.box-none * {
+    pointer-events: auto;
+}
+```
+
+- `'box-only'`: The view can be the target of touch events but its subviews cannot be. It behaves like if the view had the following classes in CSS:
+
+```
+.box-only {
+    pointer-events: auto;
+}
+.box-only * {
+    pointer-events: none;
+}
+```
+
+> Since `pointerEvents` does not affect layout/appearance, and we are already deviating from the spec by adding additional modes, we opt to not include `pointerEvents` on `style`. On some platforms, we would need to implement it as a `className` anyways. Using `style` or not is an implementation detail of the platform.
 
 | Type                                         |
 | -------------------------------------------- |
@@ -635,19 +761,17 @@ See https://reactnative.dev/docs/view.html#pointerevents
 
 This is a special performance property exposed by `RCTView` and is useful for scrolling content when there are many subviews, most of which are offscreen. For this property to be effective, it must be applied to a view that contains many subviews that extend outside its bound. The subviews must also have `overflow: hidden`, as should the containing view (or one of its superviews).
 
-See https://reactnative.dev/docs/view.html#removeclippedsubviews
-
 | Type |
 | ---- |
 | bool |
 
 ---
 
-### `renderToHardwareTextureAndroid`
+### `renderToHardwareTextureAndroid`<div class="label android">Android</div>
 
 Whether this `View` should render itself (and all of its children) into a single hardware texture on the GPU.
 
-See https://reactnative.dev/docs/view.html#rendertohardwaretextureandroid
+On Android, this is useful for animations and interactions that only modify opacity, rotation, translation, and/or scale: in those cases, the view doesn't have to be redrawn and display lists don't need to be re-executed. The texture can be re-used and re-composited with different parameters. The downside is that this can use up limited video memory, so this prop should be set back to false at the end of the interaction/animation.
 
 | Type |
 | ---- |
@@ -655,11 +779,13 @@ See https://reactnative.dev/docs/view.html#rendertohardwaretextureandroid
 
 ---
 
-### `shouldRasterizeIOS`
+### `shouldRasterizeIOS`<div class="label ios">iOS</div>
 
 Whether this `View` should be rendered as a bitmap before compositing.
 
-See https://reactnative.dev/docs/view.html#shouldrasterizeios
+On iOS, this is useful for animations and interactions that do not modify this component's dimensions nor its children; for example, when translating the position of a static view, rasterization allows the renderer to reuse a cached bitmap of a static view and quickly composite it during each frame.
+
+Rasterization incurs an off-screen drawing pass and the bitmap consumes memory. Test and measure when using this property.
 
 | Type |
 | ---- |
@@ -669,9 +795,9 @@ See https://reactnative.dev/docs/view.html#shouldrasterizeios
 
 ### `style`
 
-| Type                                                                 |
-| -------------------------------------------------------------------- |
-| enum(null, void, T, false, '', \$ReadOnlyArray<GenericStyleProp<T>>) |
+| Type                                 |
+| ------------------------------------ |
+| [View Style Props](view-style-props) |
 
 ---
 
@@ -680,8 +806,6 @@ See https://reactnative.dev/docs/view.html#shouldrasterizeios
 Used to locate this view in end-to-end tests.
 
 > This disables the 'layout-only view removal' optimization for this view!
-
-See https://reactnative.dev/docs/view.html#testid
 
 | Type   |
 | ------ |
